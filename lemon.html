@@ -1,0 +1,863 @@
+﻿<!DOCTYPE html>
+
+<head>
+
+<title>{Title}</title>
+
+<link href='https://fonts.googleapis.com/css?family=Inconsolata' rel='stylesheet' type='text/css'>
+<meta charset="utf-8">
+
+{block:Description}
+<meta name="description" content="{MetaDescription}" />
+{/block:Description}
+
+<link rel="shortcut icon" href="{Favicon}">
+<link rel="alternate" type="application/rss+xml" href="{RSS}">
+
+<meta name="color:Background" content="#fff">
+<meta name="color:Text" content="#666114">
+<meta name="color:Link" content="#ccad00">
+<meta name="color:Accent" content="#fff231">
+<meta name="color:Post Background" content="#fff">
+
+<meta name="image:Background">
+<meta name="image:Header Image">
+<meta name="image:Sidebar Image">
+
+<meta name='if:Repeat Background' content="1">
+<meta name="if:Borders" content="1">
+<meta name="if:Transparent Post Background" content="0">
+<meta name="if:Show Sidebar" content="1">
+<meta name="if:Show Header Image" content="0">
+<meta name="if:Show Sidebar Image" content="0">
+
+<meta name="text:Sidebar Text">
+
+<meta name="select:Border Width" content="1px" title="1px">
+<meta name="select:Border Width" content="2px" title="2px">
+
+</head>
+
+<style type="text/css">
+
+/* general */
+
+::-webkit-scrollbar {
+    width:10px; 
+    height:4px; 
+    background:{color:Accent};
+}
+::-webkit-scrollbar-thumb {
+    background-color:{color:Accent};
+    border:3px solid {color:Text};
+}
+
+body {
+    background:{color:Background} url('{image:Background}');
+    background-attachment:fixed;
+{block:IfRepeatBackground}
+    background-repeat:repeat;
+{/block:IfRepeatBackground} 
+{block:IfNotRepeatBackground}
+    background-repeat:no-repeat;
+    background-size:cover;
+{/block:IfNotRepeatBackground}
+    color:{color:Text};
+    font-family:Inconsolata, lucida, courier, monospace;
+    font-size:12px;
+    word-wrap:break-word;
+}
+
+a {
+    color:{color:Link};
+    text-decoration:none;
+}
+
+a:hover {
+    text-decoration:line-through;
+}
+
+blockquote {
+    margin-left:10px;
+    padding-left:10px;
+    border-left:{select:Border Width} solid {color:Accent};
+}
+
+ol, ul {
+    margin-left:10px;
+    padding-left:10px;
+}
+
+img, iframe {
+    max-width:100%;
+}
+
+p:first-child {
+    margin-top:10px;
+}
+
+p:last-of-type, iframe#ask_form, iframe#submit_form {
+    margin-bottom:10px;
+}
+
+::selection {
+    background:{color:Text};
+    color:{color:Background};
+}
+
+/* wrappers */
+
+#wrapper {
+    margin-top:30px;
+    margin-bottom:30px;
+    margin-left:calc(50vw - 261px);
+    width:644px;
+}
+
+/* header */
+
+#header {
+{block:IfTransparentPostBackground}
+    background:transparent;
+{/block:IfTransparentPostBackground}
+{block:IfNotTransparentPostBackground}
+    background:{color:Post Background};
+{/block:IfNotTransparentPostBackground}
+    width:500px;
+    padding:10px;
+    margin-bottom:30px;
+{block:IfBorders}
+    border:{select:Border Width} solid {color:Accent};
+{/block:IfBorders}
+{block:IfNotBorders}
+    border:1px solid transparent;
+{/block:IfNotBorders}
+}
+
+#header h1#title, #header h1#title a, #header h1#title a:hover {
+    margin:0;
+    font-size:16px;
+    color:{color:Text};
+    text-decoration:none;
+}
+
+#desc {
+    margin:5px 0 10px 0;
+}
+
+#headerimg {
+{block:IfTransparentPostBackground}
+    background:transparent;
+{/block:IfTransparentPostBackground}
+{block:IfNotTransparentPostBackground}
+    background:{color:Post Background};
+{/block:IfNotTransparentPostBackground}
+    float:right;
+    line-height:0;
+}
+
+#headerimg img {
+    margin:0;
+    padding:0;
+    height:78px;
+{block:IfBorders}
+    border:{select:Border Width} solid {color:Accent}; 
+{/block:IfBorders}
+{block:IfNotBorders}
+    border:1px solid transparent;
+{/block:IfNotBorders}
+}
+
+ul#pages {
+    margin:0;
+    padding:0;
+}
+
+ul#pages li {
+    list-style-type:none;
+    display:inline;
+}
+
+/* sidebar */
+
+#sidebar {
+    cursor:pointer;
+    display:none;
+    width:120px;
+{block:IfTransparentPostBackground}
+    background:transparent;
+{/block:IfTransparentPostBackground}
+{block:IfNotTransparentPostBackground}
+    background:{color:Post Background};
+{/block:IfNotTransparentPostBackground}
+    position:fixed;
+    bottom:12vh;
+    left:12vw;
+    z-index:1;
+{block:IfBorders}
+    border:{select:Border Width} solid {color:Accent}; 
+{/block:IfBorders}
+{block:IfNotBorders}
+    border:1px solid transparent;
+{/block:IfNotBorders}
+}
+
+#sidebar ul#sidepages {
+    display:none;
+    list-style-type:none;
+    margin:0;
+    padding:0;
+{block:IfShowSidebarImage}
+{block:IfBorders}
+    border-bottom:{select:Border Width} solid {color:Accent}; 
+{/block:IfBorders}
+{block:IfNotBorders}
+    border:1px solid transparent;
+{/block:IfNotBorders}
+{/block:IfShowSidebarImage}
+}
+
+#sidebar ul#sidepages li {
+    padding:5px 10px;
+{block:IfBorders}
+    border-bottom:{select:Border Width} solid {color:Accent}; 
+{/block:IfBorders}
+{block:IfNotBorders}
+    border:1px solid transparent;
+{/block:IfNotBorders}
+}
+
+#sidebar ul#sidepages li:last-of-type {
+    border-bottom:none;
+}
+
+#sidebarimg {
+    width:150px;
+    margin-bottom:-2px;
+}
+
+#sidebar #sidetext {
+{block:IfShowSidebarImage}
+{block:IfBorders}
+    border-top:{select:Border Width} solid {color:Accent}; 
+{/block:IfBorders}
+{block:IfNotBorders}
+    border:1px solid transparent;
+{/block:IfNotBorders}
+{/block:IfShowSidebarImage}
+    margin:0;
+    padding:10px;
+}
+
+/* posts */
+
+.post {
+    position:relative;
+    margin-bottom:10px;
+    width:500px;
+    padding:0 10px;
+{block:IfTransparentPostBackground}
+    background:transparent;
+{/block:IfTransparentPostBackground}
+{block:IfNotTransparentPostBackground}
+    background:{color:Post Background};
+{/block:IfNotTransparentPostBackground}
+{block:IfBorders}
+    border:{select:Border Width} solid {color:Accent};
+{/block:IfBorders}
+{block:IfNotBorders}
+    border:1px solid transparent;
+{/block:IfNotBorders}
+}
+
+.bigpost .postinfo {
+{block:IfTransparentPostBackground}
+    background:transparent;
+{/block:IfTransparentPostBackground}
+{block:IfNotTransparentPostBackground}
+    background:{color:Post Background};
+{/block:IfNotTransparentPostBackground}    
+    width:100px;
+    padding-left:10px;
+    float:right;
+{block:IfBorders}
+    border:{select:Border Width} solid {color:Accent}; 
+{/block:IfBorders}
+{block:IfNotBorders}
+    border:1px solid transparent;
+{/block:IfNotBorders}
+    display:none;
+}
+
+.bigpost .postinfo p {
+    margin:2px 0;
+}
+
+.bigpost:hover .postinfo {
+    display:block;
+}
+
+h2.title {
+    font-size:13px;
+    margin:15px 0;
+    text-align:center;
+}
+
+h2.title a {
+    padding:5px;
+    background:{color:Accent};
+    color:{color:Text};
+}
+
+.media img {
+    width:500px;
+}
+
+.media {
+    margin:10px 0 9px 0;
+}
+
+p.quote {
+    margin-bottom:10px;
+    font-size:20px;
+    font-style:italic;
+}
+
+p.source {
+    margin-top:0;
+}
+
+.link {
+    background:{color:Accent};
+    width:500px;
+    padding:10px;
+{block:IfBorders}
+    border:{select:Border Width} solid {color:Accent}; 
+{/block:IfBorders}
+{block:IfNotBorders}
+    border:1px solid transparent;
+{/block:IfNotBorders}
+}
+
+.link a {
+    color:{color:Text};
+}
+
+p.chat {
+    margin:0;
+}
+
+p.chat:first-child {
+    margin-top:8px;
+}
+
+p.chat:last-of-type {
+    margin-bottom:8px;
+}
+
+span.name {
+    padding:3px 6px;
+    font-weight:bold;
+    background:{color:Accent};
+{block:IfBorders}
+    border:{select:Border Width} solid {color:Accent}; 
+{/block:IfBorders}
+{block:IfNotBorders}
+    border:1px solid transparent;
+{/block:IfNotBorders}
+}
+
+span.line {
+    padding:3px 6px;
+{block:IfBorders}
+    border:{select:Border Width} solid {color:Accent}; 
+{/block:IfBorders}
+{block:IfNotBorders}
+    border:1px solid transparent;
+{/block:IfNotBorders}
+    line-height:26px;
+}
+
+.audio {
+    margin:10px 0;
+}
+
+.cover {
+    width:78px;
+}
+
+.playbutton {
+    width:20px; 
+	overflow:hidden; 
+	position:relative;
+    z-index:1;
+    margin:6.5px 10px;
+    opacity:0.8;
+}
+    
+.playbox {
+    width:40px;
+    height:40px;
+    background-color:white; 
+    position:absolute; 
+    z-index:1;
+    margin-top:19px; 
+    margin-left:19px; 
+    opacity:0.8;
+    border-radius:50%;
+}
+
+.audioinfo {
+    max-height:100px;
+    overflow-y:scroll;
+    position:absolute;
+    top:10px;
+    left:98px;
+}
+
+p.asker {
+{block:IfTransparentPostBackground}
+    background:transparent;
+{/block:IfTransparentPostBackground}
+{block:IfNotTransparentPostBackground}
+    background:{color:Post Background};
+{/block:IfNotTransparentPostBackground}
+    width:500px;
+    margin:0;
+    padding:10px;
+{block:IfBorders}
+    border:{select:Border Width} solid {color:Accent}; 
+{/block:IfBorders}
+{block:IfNotBorders}
+    border:1px solid transparent;
+{/block:IfNotBorders}
+}
+
+.question {
+    background:{color:Accent};
+    width:500px;
+    padding:10px;
+{block:IfBorders}
+    border:{select:Border Width} solid {color:Accent}; 
+{/block:IfBorders}
+{block:IfNotBorders}
+    border:1px solid transparent;
+{/block:IfNotBorders}
+}
+
+/* permalink page */
+
+.notecon {
+    position:relative;
+    margin-bottom:10px;
+    width:510px;
+    padding:0 0 0 10px;
+{block:IfTransparentPostBackground}
+    background:transparent;
+{/block:IfTransparentPostBackground}
+{block:IfNotTransparentPostBackground}
+    background:{color:Post Background};
+{/block:IfNotTransparentPostBackground}
+{block:IfBorders}
+    border:{select:Border Width} solid {color:Accent}; 
+{/block:IfBorders}
+{block:IfNotBorders}
+    border:1px solid transparent;
+{/block:IfNotBorders}
+}
+
+ol.notes {
+{block:IfTransparentPostBackground}
+    background:transparent;
+{/block:IfTransparentPostBackground}
+{block:IfNotTransparentPostBackground}
+    background:{color:Post Background};
+{/block:IfNotTransparentPostBackground}
+    list-style-type:none;
+    margin:10px 0 9px 0;
+    padding:0;
+    max-height:500px;
+    overflow-y:scroll;
+    text-transform:lowercase;
+}
+
+ol.notes li img {
+{block:IfBorders}
+    border:{select:Border Width} solid {color:Accent}; 
+{/block:IfBorders}
+{block:IfNotBorders}
+    border:1px solid transparent;
+{/block:IfNotBorders}
+    margin-right:4px;
+}
+
+ol.notes li span {
+    position:relative;
+    bottom:3px;
+}
+
+.tagcon {
+{block:IfTransparentPostBackground}
+    background:transparent;
+{/block:IfTransparentPostBackground}
+{block:IfNotTransparentPostBackground}
+    background:{color:Post Background};
+{/block:IfNotTransparentPostBackground}
+    position:relative;
+    width:500px;
+    margin-bottom:10px;
+    padding:10px;
+{block:IfBorders}
+    border:{select:Border Width} solid {color:Accent}; 
+{/block:IfBorders}
+{block:IfNotBorders}
+    border:1px solid transparent;
+{/block:IfNotBorders}
+}
+
+/* pagination */
+
+#pagination {
+    width:520px;
+    text-align:center;
+}
+
+span.current {
+    font-weight:bold;
+}
+
+#next, #back, span.current, a.jump {
+{block:IfTransparentPostBackground}
+    background:transparent;
+{/block:IfTransparentPostBackground}
+{block:IfNotTransparentPostBackground}
+    background:{color:Post Background};
+{/block:IfNotTransparentPostBackground}
+    color:{color:Text};
+{block:IfBorders}
+    border:{select:Border Width} solid {color:Accent}; 
+{/block:IfBorders}
+{block:IfNotBorders}
+    border:1px solid transparent;
+{/block:IfNotBorders}
+    padding:3px;
+    position:relative;
+    top:3px;
+}
+
+@media only screen and (max-width: 780px) {
+    #wrapper {
+        width:520px;
+    }
+    
+    .bigpost .postinfo {
+        width:auto;
+        padding:10px;
+        margin-bottom:10px;
+        float:none;
+{block:IfBorders}
+    border:{select:Border Width} solid {color:Accent}; 
+{/block:IfBorders}
+{block:IfNotBorders}
+    border:1px solid transparent;
+{/block:IfNotBorders}
+        display:block;
+    }
+        
+    .bigpost .postinfo p {
+        display:inline;
+        margin-right:10px;
+    }
+}
+
+</style>
+
+<body>
+<div id="wrapper">
+
+<div id="header">
+
+    {block:IfShowHeaderImage}
+    <div id="headerimg"><a href="/"><img src={image:Header Image} /></a></div>
+    {/block:IfShowHeaderImage}
+    
+    <h1 id="title"><a href="/">{Title}</a></h1>
+    <div id="desc">{Description}</div>
+    
+    <ul id="pages">
+    <li><a href="/">{lang:Home}</a></li>
+    <li><a href="/archive">{lang:Archive}</a></li>
+    {block:AskEnabled}
+    <li><a href="/ask">Ask</a></li>
+    {/block:AskEnabled}
+    {block:SubmissionsEnabled}
+    <li><a href="/submit">{SubmitLabel}</a></li>
+    {/block:SubmissionsEnabled}
+    {block:HasPages}
+    {block:Pages}
+    <li><a href="{URL}">{Label}</a></li>
+    {/block:Pages}
+    {/block:HasPages}
+    {block:IfLink1}
+    <li><a href="{text:Link1}">{text:Link1 Title}</a></li>
+    {/block:IfLink1}
+    {block:IfLink2}
+    <li><a href="{text:Link2}">{text:Link2 Title}</a></li>
+    {/block:IfLink2}
+    {block:IfLink3}
+    <li><a href="{text:Link3}">{text:Link3 Title}</a></li>
+    {/block:IfLink3}
+    <li><a href="http://spacetchi.tumblr.com/">Theme</a></li>
+    </ul>
+    
+</div><!-- header -->
+
+{block:IfShowSidebar}
+
+<div id="sidebar">
+
+    <ul id="sidepages">
+    <li><a href="/">{lang:Home}</a></li>
+    {block:AskEnabled}
+    <li><a href="/ask">Ask</a></li>
+    {/block:AskEnabled}
+    {block:SubmissionsEnabled}
+    <li><a href="/submit">{SubmitLabel}</a></li>
+    {/block:SubmissionsEnabled}
+    {block:HasPages}
+    {block:Pages}
+    <li><a href="{URL}">{Label}</a></li>
+    {/block:Pages}
+    {/block:HasPages}
+    {block:IfLink1}
+    <li><a href="{text:Link1}">{text:Link1 Title}</a></li>
+    {/block:IfLink1}
+    {block:IfLink2}
+    <li><a href="{text:Link2}">{text:Link2 Title}</a></li>
+    {/block:IfLink2}
+    {block:IfLink3}
+    <li><a href="{text:Link3}">{text:Link3 Title}</a></li>
+    {/block:IfLink3}
+    <li><a href="/archive">{lang:Archive}</a></li>
+    </ul>
+    
+    {block:IfShowSidebarImage}
+    <img src={image:Sidebar Image} id="sidebarimg" />
+    {/block:IfShowSidebarImage}
+    <p id="sidetext">{text:Sidebar Text}</p>
+    
+</div><!-- sidebar -->
+
+{/block:IfShowSidebar}
+
+{block:Posts}
+
+<div class="bigpost">
+
+    {block:Date}
+    <div class="postinfo">
+    <p><a href="{Permalink}">{ShortMonth}. {DayOfMonth}{DayOfMonthSuffix}, {Year}</a></p>
+    {/block:Date}
+    
+    {block:RebloggedFrom}
+    <p><a href="{ReblogParentURL}" title="{ReblogParentName}">Via</a>
+    {/block:RebloggedFrom}</p>
+    
+    {block:ContentSource}
+    <p><a href="{SourceURL}">Source</a></p>
+    {/block:ContentSource}
+    
+    {block:NoteCount}
+    <p><a href="{Permalink}">{NoteCountWithLabel}</a></p>
+    {/block:NoteCount}
+    </div><!-- postinfo-->
+
+    {block:Link}
+    <div class="link"><a href="{URL}">{Name} (link)</a></div>
+    {/block:Link}
+    
+    {block:Answer}
+    <p class="asker">from {Asker}</p>
+    <div class="question">
+    <b>{Question}</b>
+    </div>
+    {/block:Answer}
+
+<div class="post">
+    
+    {block:Text}
+    {block:Title}
+    <h2 class="title"><a href="{Permalink}">{Title}</a></h2>
+    {/block:Title}
+    {Body}
+    {/block:Text}
+    
+    {block:Photo}
+    <div class="media">
+    {LinkOpenTag}
+    <img src="{PhotoURL-HighRes}" alt="{PhotoAlt}"  class="photoset-img"/>
+    {LinkCloseTag}
+    </div>
+    {block:Caption}
+    <div class="caption">{Caption}</div>
+    {/block:Caption}
+    {/block:Photo}
+    
+    {block:Photoset}
+    <div class="media">{Photoset-500}</div>
+    {block:Caption}
+    <div class="caption">{Caption}</div>
+    {/block:Caption}
+    {/block:Photoset}
+    
+    {block:Quote}
+    <p class="quote">“{Quote}”</p>
+    {block:Source}
+    <p class="source">&mdash;{Source}</p>
+    {/block:Source}
+    {/block:Quote}
+    
+    {block:Link}
+    {block:Description}
+    <div class="caption">{Description}</div>
+    {/block:Description}
+    {/block:Link}
+    
+    {block:Chat}
+    {block:Title}
+    <h2 class="title"><a href="{Permalink}">{Title}</a></h2>
+    {/block:Title}
+    <div class="chat"> 
+    {block:Lines}
+    <p class="{Alt} user_{UserNumber} chat">
+    {block:Label}
+    <span class="name">{Label}</span>
+    {/block:Label}
+    <span class="line">{Line}</span>
+    </p>
+    {/block:Lines}
+    </div>
+    {/block:Chat}
+    
+    {block:Video}
+    <div class="media">{Video-500}</div>
+    {block:Caption}
+    <div class="caption">{Caption}</div>
+    {/block:Caption}
+    {/block:Video}
+    
+    {block:Audio}
+    <div class="audio">
+    
+    <div class="playbox">
+    <div class="playbutton">
+    {block:AudioPlayer}{AudioPlayerWhite}{/block:AudioPlayer}
+    </div>
+    </div>
+    
+    {block:AlbumArt}
+    <img src="{AlbumArtURL}" class="cover">
+    {/block:AlbumArt}
+    <div class="audioinfo">
+    {block:TrackName}<b>{TrackName}</b>{/block:TrackName}
+    {block:Artist}by <b>{Artist}</b><br>{/block:Artist}
+    {block:Album}From <b>{Album}</b>{/block:Album}
+    </div><!-- audioinfo -->
+    
+    </div><!-- audio -->
+    
+    {block:Caption}
+    <div class="caption">{Caption}</div>
+    {/block:Caption}
+    
+    {/block:Audio}
+    
+    {block:Answer}
+    <div class="q">
+    <div class="answer">{Answer}</div></div>
+    {/block:Answer}
+    
+</div><!-- post -->
+
+</div><!-- bigpost -->
+
+{block:PermalinkPage}
+
+    {block:HasTags}
+    <div class="tagcon">
+    {block:Tags}
+    <a href="{TagUrl}">#{Tag}</a>
+    {/block:Tags}
+    </div>
+    {/block:HasTags}
+
+    {block:PostNotes}
+    <div class="notecon">
+    {PostNotes}
+    </div>
+    {/block:PostNotes}
+
+{/block:PermalinkPage}
+
+{/block:Posts}
+
+{block:Pagination}
+
+    <div id="pagination">
+    {block:PreviousPage}
+    <a href="{PreviousPage}" id="back">back</a>
+    {/block:PreviousPage}
+    
+    {block:JumpPagination length="5"}
+    {block:CurrentPage}
+    <span class="current">{PageNumber}</span>
+    {/block:CurrentPage}{block:JumpPage}
+    <a class="jump" href="{URL}">{PageNumber}</a>
+    {/block:JumpPage}
+    {/block:JumpPagination}
+    
+    {block:NextPage}
+    <a href="{NextPage}" id="next">next</a>
+    {/block:NextPage}
+    </div><!-- pagination -->
+
+{/block:Pagination}
+
+</div><!-- wrapper -->
+
+<div id="footer"></div>
+
+</body>
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
+
+<script src="http://static.tumblr.com/cqfswrg/Mn4o1lj00/jquery.style-my-tooltips.js"></script>
+
+<script>
+$(document).ready(function(){
+
+	$(window).scroll(function(){
+		if ($(this).scrollTop() > 200 && $(this).width() > 1000) {
+			$("#sidebar").fadeIn();
+		} else {
+			$("#sidebar").fadeOut();
+		}
+	});
+	
+    $("#sidebar").click(function(){
+        $("#sidetext, #sidepages").toggle();
+    });
+    
+});
+
+//i'll kill you if you delete this
+document.getElementById("footer").innerHTML='<a href="http://spacetchi.tumblr.com/" title="theme">&#60;&#47;&#62;</a>';
+document.getElementById("footer").style.position="fixed";
+document.getElementById("footer").style.bottom="7px";
+document.getElementById("footer").style.right="7px";
+document.getElementById("footer").style.fontWeight="bold";
+//seriously
+    
+</script>
+
+</html>

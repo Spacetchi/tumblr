@@ -1,0 +1,730 @@
+<!DOCTYPE html>
+<head>
+
+<!-- theme by spacetchi, Medusa Moxie 
+
+http://spacetchi.tumblr.com/
+
+http://fiveppi.tumblr.com/
+
+http://spacetchi.net/
+
+Do not steal! 
+
+-->
+
+<link href='https://fonts.googleapis.com/css?family=Source+Sans+Pro' rel='stylesheet' type='text/css'>
+
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+{block:Description}
+<meta name="description" content="{MetaDescription}" />
+{/block:Description}
+
+<title>{Title}</title>
+       
+<link rel="shortcut icon" href="{Favicon}">
+<link rel="alternate" type="application/rss+xml" href="{RSS}">
+ 
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
+<script src ="//static.tumblr.com/fwgzvyf/Oj1o08f6h/shythemes.vr.js"></script>
+
+<meta name="color:Background" content="#78c9a1">
+<meta name="color:Wrapper" content="#fcf2f0">
+<meta name="color:Text" content="#222">
+<meta name="color:Link" content="#bbe4d0">
+
+<meta name="if:Rounded Images" content="1">
+
+<meta name="text:Font Size" content="15">
+
+</head>
+
+<!-- photoset stylesheet -->
+
+<link href="https://static.tumblr.com/qudkd6d/OcDnl99gb/style.css" rel="stylesheet" type="text/css"/>
+
+<style>
+    
+/* general */
+
+::selection {
+    background:{color:Link};
+    color:{color:Text};
+}
+
+::-moz-selection {
+    background:{color:Link};
+    color:{color:Text};
+}
+
+body {
+    background:{color:Background};
+    color:{color:Text};
+    font-family:'Source Sans Pro', Helvetica, Arial, sans-serif;
+    font-size:{text:Font Size}px;
+    box-sizing:border-box;
+}
+
+a {
+    color:{color:Text};
+    text-decoration:none;
+    background:{color:Link};
+}
+
+a:hover {
+    color:{color:Text};
+    background:none;
+}
+
+blockquote {
+    margin:0;
+    padding-left:15px;
+    border-left:2px solid {color:Text};
+    transition:.5s;
+}
+
+ol, ul {
+    margin:0;
+    padding-left:15px;
+}
+
+img, iframe {
+    display:block;
+}
+
+.post img {
+    width:100%;
+    height:auto;
+}
+
+p:last-child, blockquote:last-child {
+    margin-bottom:0;
+}
+
+p:first-child, blockquote:first-child {
+    margin-top:0;
+}
+
+/* wrappers */
+
+#wrapper {
+    margin:5vh auto;
+    width:910px;
+}
+
+#content {
+    background:{color:Wrapper};
+    padding:30px;
+    -webkit-box-shadow:0px 0px 24px 5px rgba(70,70,70,0.5);
+    -moz-box-shadow:0px 0px 24px 5px rgba(70,70,70,0.5);
+    box-shadow:0px 0px 24px 5px rgba(70,70,70,0.5);
+}
+
+/* title */
+
+h1#title {
+    text-align:center;
+    margin:0 0 5vh 0;
+}
+
+h1#title a {
+    background:{color:Link};
+    padding:10px;
+    border-radius:20px;
+}
+
+/* sidebar */
+
+#sidebar {
+    width:220px;
+    margin-left:630px;
+    position:fixed;
+    
+}
+
+ul#links {
+    font-size:14px;
+    list-style-type:none;
+    padding:0;
+}
+
+ul#links li a {
+    display:block;
+    padding:4px 12px;
+    margin:8px 0;
+    border-radius:6px;
+    background:{color:Link};
+    color:{color:Text};
+}
+
+#nav-one a {
+    font-size:14px;
+    padding:4px 12px;
+    border-radius:6px;
+    background:{color:Link};
+    color:{color:Text};
+}
+
+#nav-one a:hover {
+    color:{color:Text};
+}
+
+#nav-one a#next {
+    margin:0;
+    display:inline-block;
+    float:right;
+}
+
+#nav-one a#back {
+    float:left;
+}
+
+#nav-two {
+    display:none;
+}
+
+/* posts */
+
+.post {
+    width:600px;
+    position:relative;
+    margin-bottom:30px;
+}
+
+.post:nth-last-child(2) {
+    margin-bottom:0;
+}
+
+.media img {
+    width:100%;
+    display:block;
+    cursor:pointer;
+    {block:IfRoundedImages}
+    border-radius:8px;
+    {/block:IfRoundedImages}
+}
+
+.media a {
+    background:none;
+}
+
+.caption {
+    margin-top:10px;
+}
+
+h2.title {
+    margin-top:0;
+    margin-bottom:10px;
+}
+
+h2.title a:hover {
+    background:{color:Link};
+}
+
+.question {
+    font-size:15px;
+    font-weight:bold;
+}
+
+.answer {
+    margin-top:10px;
+}
+
+.quote {
+    font-size:18px;
+    font-weight:bold;
+}
+
+.name {
+    font-weight:bold;
+}
+
+/* audio posts */
+
+.audio {
+    margin:0 0 10px 0;
+}
+ 
+.cover {
+    background:{color:Link};
+    width:78px;
+    transition:.5s;
+    line-height:0;
+}
+ 
+.playbutton {
+    width:20px;
+    overflow:hidden;
+    position:relative;
+    z-index:1;
+    margin:6.5px 0 6.5px 8px;
+    opacity:0.8;
+}
+   
+.playbox {
+    width:40px;
+    height:40px;
+    background-color:white;
+    position:absolute;
+    z-index:1;
+    margin-top:19px;
+    margin-left:19px;
+    opacity:0.8;
+    border-radius:50%;
+}
+ 
+.audioinfo {
+    max-height:78px;
+    overflow-y:scroll;
+    position:absolute;
+    top:0;
+    left:98px;
+}
+
+/* post footer */
+
+.postfooter {
+    font-size:11.5px;
+    margin-top:10px;
+    {block:PermalinkPage}
+    margin-bottom:30px;
+    {/block:PermalinkPage}
+}
+
+.postfooter a {
+    background:none;
+    margin:0;
+}
+
+/* tags */
+
+.tags {
+    margin-bottom:30px;
+}
+
+/* post notes */
+
+ol.notes {
+    margin:0;
+    padding:0;
+    list-style-type:none;
+    width:600px;
+}
+
+ol.notes li {
+    margin-bottom:5px;
+}
+
+ol.notes a {
+    background:none;
+}
+
+ol.notes a:not(.more_notes_link) {
+    font-style:italic;
+}
+
+ol.notes img {
+    display:none;
+}
+
+/* responsive */
+
+@media (max-width:910px) {
+    
+    #wrapper {
+        width:90vw;
+    }
+    
+    .post {
+        width:calc(90vw - 60px);
+    }
+    
+    .media {
+        width:100%;
+    }
+    
+    .post img {
+        max-width:100%;
+    }
+    
+    #sidebar {
+        display:block;
+        position:static;
+        margin:0;
+        width:100%;
+        margin-bottom:30px;
+    }
+    
+    ul#links {
+        text-align:center;
+    }
+    
+    ul#links li {
+        display:inline-block;
+        width:auto;
+        margin:0 4px;
+    }
+    
+    #nav-one {
+        display:none;
+    }
+    
+    #nav-two {
+        font-size:14px;
+        display:block;
+        color:transparent;
+        text-align:center;
+        margin:25px 0;
+    }
+    
+    #nav-two a {
+        padding:4px 12px;
+        margin:0 4px;
+        border-radius:6px;
+        background:{color:Link};
+        color:{color:Text};
+    }
+    
+    #nav-left {
+        width:;
+    }
+    
+}
+
+</style>
+
+<body>
+
+<div id="wrapper">
+
+<h1 id="title"><a href="{BlogURL}">{Title}</a></h1>
+
+<div id="content">
+
+<div id="sidebar">
+
+    <p id="desc">{Description}</p>
+    
+    <ul id="links">
+
+    <li><a href="/">{lang:Home}</a></li>
+    <li><a href="/archive">{lang:Archive}</a></li>
+    {block:HasPages}
+    {block:Pages}
+    <li><a href="{URL}">{Label}</a></li>
+    {/block:Pages}
+    {/block:HasPages}
+    {block:AskEnabled}
+    <li><a href="/ask">Ask</a></li>
+    {/block:AskEnabled}
+    {block:SubmissionsEnabled}
+    <li><a href="/submit">{SubmitLabel}</a></li>
+    {/block:SubmissionsEnabled}
+    <li><a href="http://fiveppi.tumblr.com/">Theme</a></li>
+    
+    
+    </ul>
+    
+    {block:Pagination}
+    <div id="nav-one">
+    
+    {block:PreviousPage}
+    <a href="{PreviousPage}" id="back">Back</a>
+    {/block:PreviousPage}
+    
+    {block:NextPage}
+    <a href="{NextPage}" id="next">Next</a>
+    {/block:NextPage}
+    
+    </div><!-- nav-one -->
+    {/block:Pagination}
+    
+    {block:PermalinkPagination}
+    <div id="nav-one">
+    {block:PreviousPost}
+    <a id="back" href="{PreviousPost}">Previous Post</a>
+    {/block:PreviousPost}
+
+    {block:NextPost}
+    <a id="next" href="{NextPost}">Next Post</a>
+    {/block:NextPost}
+    </div><!-- nav-one -->
+    {/block:PermalinkPagination}
+
+</div><!-- sidebar -->
+
+{block:Posts}
+ 
+<div class="post">
+ 
+    {block:Text}
+    
+    {block:Title}
+    <h2 class="title"><a href="{Permalink}">{Title}</a></h2>
+    {/block:Title}
+    
+    {Body}
+    
+    {/block:Text}
+ 
+    {block:Photo}
+    
+    <div class="make_lightbox media" 
+    data-width="{PhotoWidth-HighRes}" 
+    data-height="{PhotoHeight-HighRes}" 
+    data-lowres="{PhotoURL-500}" data-highres="{PhotoURL-HighRes}">
+    <img src="{PhotoURL-HighRes}" alt="{PhotoAlt}"  class="photoset-img"/>
+    </div>
+    
+    {block:Caption}
+    <div class="caption">{Caption}</div>
+    {/block:Caption}
+    
+    {/block:Photo}
+ 
+    {block:Photoset}
+     
+
+    <div class="photo-slideshow" id="photoset_{PostID}" data-layout="{PhotosetLayout}">
+
+    {block:Photos}
+    
+    <div class="media photo-data">
+    
+    <div class="pxu-photo">
+    <img alt="{PhotoAlt}" 
+    src="{PhotoURL-500}" 
+    width="{PhotoWidth-500}" 
+    height="{PhotoHeight-500}" 
+    data-highres="{PhotoURL-HighRes}" 
+    data-width="{PhotoWidth-HighRes}" 
+    data-height="{PhotoHeight-HighRes}" 
+    class="{block:Exif}exif-yes{/block:Exif} {block:Caption}caption-yes{/block:Caption}"{block:Exif}
+    data-camera="{block:Camera}{Camera}{/block:Camera}" 
+    data-iso="{block:ISO}{ISO}{/block:ISO}" 
+    data-aperture="{block:Aperture}{Aperture}{/block:Aperture}" 
+    data-exposure="{block:Exposure}{Exposure}{/block:Exposure}" 
+    data-focal="{block:FocalLength}{FocalLength}{/block:FocalLength}"{/block:Exif} {block:Caption}
+    data-caption="{Caption}"{/block:Caption} />
+    </div><!-- pxu-photo -->
+    
+    <div class="icons">
+    <a class="tumblr-box" rel="post-{PostID}" href="{PhotoURL-HighRes}">
+    <span class="zoom"></span>
+    </a>
+    </div><!-- icons -->
+     
+    </div><!-- photo-data -->
+    
+    {/block:Photos}
+
+    </div><!-- photo-slidshow -->
+
+    {block:Caption}
+    <div class="caption">{Caption}</div>
+    {/block:Caption}
+
+    {/block:Photoset}
+ 
+    {block:Quote}
+     
+    <div class="quote">“{Quote}”</div>
+    {block:Source}
+    <div class="source">&mdash;{Source}</div>
+    {/block:Source}
+    
+    {/block:Quote}
+    
+    {block:Link}
+    
+    <h2 class="title"><a href="{URL}">{Name} (link)</a></h2>
+    
+    {block:Description}
+    <div class="link-desc">{Description}</div>
+    {/block:Description}
+    
+    {/block:Link}
+ 
+    {block:Chat}
+    
+    {block:Title}
+    <h2 class="title"><a href="{Permalink}">{Title}</a></h2>
+    {/block:Title}
+    
+    <div class="chat"> 
+    {block:Lines}
+    <div class="{Alt} user_{UserNumber}">
+    {block:Label}
+    <span class="name">{Label}</span>{/block:Label}
+    &nbsp;{Line}
+    </div>
+    {/block:Lines}
+    </div>
+    
+    {/block:Chat}
+ 
+    {block:Video}
+    
+    <div class="media video">{Video-700}</div>
+    {block:Caption}
+    <div class="caption">{Caption}</div>
+    {/block:Caption}
+    
+    {/block:Video}
+
+    {block:Audio}
+    
+    <div class="audio">
+   
+    <div class="playbox">
+    <div class="playbutton">
+    {block:AudioPlayer}{AudioPlayerWhite}{/block:AudioPlayer}
+    </div>
+    </div>
+    <div class="cover">
+    {block:AlbumArt}
+    <img src="{AlbumArtURL}">
+    {/block:AlbumArt}
+    </div>
+    <div class="audioinfo">
+    {block:TrackName}<b>{TrackName}</b>{/block:TrackName}
+    {block:Artist}by <b>{Artist}</b><br>{/block:Artist}
+    {block:Album}From <b>{Album}</b>{/block:Album}
+    </div><!-- audioinfo -->
+   
+    </div><!-- audio -->
+   
+    {block:Caption}
+    <div class="caption">{Caption}</div>
+    {/block:Caption}
+    
+    {/block:Audio}
+               
+    {block:Answer}
+    
+    <div class="q">
+    <span class="asker">{Asker} says:</span><br> <span class="question">{Question}</span>
+    </div><!-- q -->
+    <div class="answer">{Answer}</div>
+    
+    {/block:Answer}
+    
+    {block:Date}
+    <div class="postfooter">
+    <a href="{Permalink}">{TimeAgo}</a>
+    {block:NoteCount}
+    with <a href="{Permalink}">{NoteCountWithLabel}</a>
+    {/block:NoteCount}
+    </div>
+    {/block:Date}
+ 
+</div><!-- post -->
+
+{block:PermalinkPage}
+
+{block:HasTags}
+<div class="tags">
+    {block:Tags}
+    <a href="{TagURL}">#{Tag}</a> 
+    {/block:Tags}
+</div><!-- tags -->
+    {/block:HasTags}
+
+    {block:NoteCount}
+    {block:PostNotes}{PostNotes}{/block:PostNotes}
+    {/block:NoteCount}
+    
+{/block:PermalinkPage}
+
+{/block:Posts}
+
+{block:Pagination}
+    <div id="nav-two">
+
+    {block:PreviousPage}
+    <a href="{PreviousPage}" id="back">Back</a>
+    {/block:PreviousPage}
+
+    {block:NextPage}
+    <a href="{NextPage}" id="next">Next</a>
+    {/block:NextPage}
+    
+    </div><!-- nav -->
+{/block:Pagination}
+
+{block:PermalinkPagination}
+    <div id="nav-two">
+    {block:PreviousPost}
+    <a id="back" href="{PreviousPost}">Previous Post</a>
+    {/block:PreviousPost}
+
+    {block:NextPost}
+    <a id="next" href="{NextPost}">Next Post</a>
+    {/block:NextPost}
+    </div><!-- nav-two -->
+{/block:PermalinkPagination}
+
+</div><!-- content -->
+    
+</div><!-- wrapper -->
+
+</body>
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
+
+<script type="text/javascript" src="http://static.tumblr.com/cqfswrg/1xXo902k0/jquery_photoset.js"></script>
+
+<script>
+
+$(document).ready(function() {
+    var $child = $("#sidebar");
+    $child.parent().css("min-height", $child.outerHeight());
+});
+    
+</script>
+
+<script type="text/javascript">
+
+    $(document).ready(function() {
+        $('.photo-slideshow').pxuPhotoset({
+            'gutter' : '10px',
+            {block:IfRoundedImages}
+            'rounded' : 'all', // corners, all or false
+            {/block:IfRoundedImages}
+            {block:IfNotRoundedImages}
+            'rounded' : 'false',
+            {/block:IfNotRoundedImages}
+        }, function() {
+        // callback
+        });
+    });
+    
+</script>
+
+<script>
+    
+    $(function(){ // shorthand document.ready()
+        $('.make_lightbox').each(function(){ 
+            // this is just an element I let them click, it carries a series of data- attributes.
+            $(this).on('click',function(){  
+                // when clicked. this is the newer jQuery click() handler that's only in v1.8+ so that may be something to note.
+                var lbArray = []; // create blank array.
+                var arrayContents = {
+                    "width":$(this).data('width'), 
+                    "height":$(this).data('height'), 
+                    "low_res":$(this).data("lowres"), 
+                    "high_res":$(this).data('highres')
+                }; 
+                // make set of the data- attributes. 
+                lbArray.push(arrayContents); 
+                // push the set into the array.
+                Tumblr.Lightbox.init(lbArray,1); 
+                // trigger Tumblr lightbox. the '1' is the number of photos it expects. specific to how tumblr has things set up.
+                $('body').toggleClass('tumblr_lightbox_active'); 
+                // use this to prevent the user from scrolling.
+            });
+        });
+    });       
+    
+</script>
