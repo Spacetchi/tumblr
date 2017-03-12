@@ -25,8 +25,6 @@ Do not steal!
 <link rel="shortcut icon" href="{Favicon}">
 
 <link rel="alternate" type="application/rss+xml" href="{RSS}">
-
-<link href="https://fonts.googleapis.com/css?family={select:Font}:400,400i,700,700i" rel="stylesheet">
  
 <script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
 
@@ -34,6 +32,8 @@ Do not steal!
 
 <!-- photoset stylesheet by pixelunion! -->
 <link href="https://static.tumblr.com/qudkd6d/OcDnl99gb/style.css" rel="stylesheet" type="text/css"/>
+<!-- normalize -->
+<link href="https://raw.githubusercontent.com/necolas/normalize.css/master/normalize.css" rel="stylesheet" type="text/css">
 
 <meta name="color:Background" content="#000">
 <meta name="color:Reply" content="#333">
@@ -55,9 +55,17 @@ Do not steal!
 <meta name="if:Borders" content="1">
 <meta name="if:Infinite Scroll" content="1">
 
-<meta name="select:Font" content='"Open+Sans"' title="Open Sans">
-<meta name="select:Font" content='"Times New Roman", times, georgia, garamond, serif' title="Serif">
-<meta name="select:Font" content="helvetica, arial, tahoma, verdana, sans-serif" title="Sans Serif">
+<meta name="font:Font">
+
+<meta name="select:Font Size" content="11px" title="11px">
+<meta name="select:Font Size" content="12px" title="12px">
+<meta name="select:Font Size" content="13px" title="13px">
+<meta name="select:Font Size" content="14px" title="14px">
+<meta name="select:Font Size" content="15px" title="15px">
+<meta name="select:Font Size" content="16px" title="16px">
+<meta name="select:Font Size" content="17px" title="17px">
+<meta name="select:Font Size" content="18px" title="18px">
+<meta name="select:Font Size" content="19px" title="19px">
 
 <style>
 
@@ -80,8 +88,9 @@ body {
     {/block:IfGradientBackground}
     
     color:{color:Text};
-    font-size:14px;
-    font-family:{select:Font};
+    font-size:{select:Font Size};
+    font-family:{font:Font};
+    word-wrap:break-word;
 }
 
 a {
@@ -153,7 +162,7 @@ del:hover {
     text-transform:lowercase;
 }
 
-header {
+header.top {
     text-align:center;
     width:84vw;
     margin:0 auto;
@@ -188,6 +197,50 @@ article {
 
 .post-info {
     margin:10px 0;
+}
+
+.post-info.closed {
+    opacity:0.5;
+}
+
+button::-moz-focus-inner {
+    border:0;
+    padding:0;
+}
+
+span.button {
+    display:inline-block;
+    height:{select:Font Size};
+    width:{select:Font Size};
+    position:relative;
+    border-radius:3px;
+    border:1px solid {color:Lines};
+    background:{color:Reply};
+    background-repeat:no-repeat;
+
+    -webkit-background-size:cover;
+    -moz-background-size:cover;
+    -o-background-size:cover;
+    background-size:cover;
+}
+
+span.button.open {
+    background-image:url("https://cdn.rawgit.com/Spacetchi/tumblr/2d8ccc324e998316338001ee848720cb7177f72d/4chan/assets/minus.svg");
+}
+
+span.button.closed {
+    background-image:url("https://cdn.rawgit.com/Spacetchi/tumblr/2d8ccc324e998316338001ee848720cb7177f72d/4chan/assets/plus.svg");
+}
+
+span.button button {
+    width:100%;
+    height:100%;
+    background:none;
+    border:none;
+    position:absolute;
+    top:0;
+    left:0;
+    cursor:pointer;
 }
 
 article .title {
@@ -318,7 +371,8 @@ nav.pagination {
     padding:0;
     color:{color:Link};
     text-decoration:underline;
-    font-family:{select:Font};
+    font-family:{font:Font};
+    font-size:{select:Font Size};
     cursor:pointer;
 }
 
@@ -351,7 +405,7 @@ nav.pagination {
     [ <a href="{BlogURL}/archive" title="Archive">Archive</a> ]
     </nav>
     
-<header>
+<header class="top">
     
     <img src="{image:Banner}" class="banner" />
     
@@ -367,7 +421,9 @@ nav.pagination {
  
 <article class="post clearfix">
 
-    <div class="post-info">
+    <header class="post-info open">
+    
+    {block:IndexPage}<span class="button open"><button class="hide-post"></button></span>{/block:IndexPage}
 
     {block:Text}
     {block:Title}<span class="title">{Title}</span>{/block:Title}
@@ -401,7 +457,9 @@ nav.pagination {
 
     {/block:Date}
     
-    </div><!-- post-info -->
+    </header><!-- post-info -->
+    
+    <div class="post-content">
  
     {block:Photo}
     
@@ -532,6 +590,8 @@ nav.pagination {
     </div><!-- caption -->
     
     {/block:Answer}
+    
+    </div><!-- post-content -->
  
 </article>
 
@@ -632,7 +692,7 @@ nav.pagination {
 //unnests blockquotes
 var blockquotes = function() {
 
-    $('article').unNest({ 
+    $('.post-content').unNest({ 
         yourCaption: ".caption", //your caption selector
         wrapName: ".reply", //the name of the captions’ new wrapper
         newCaptionUsername: false, //if the user adds a new caption, following a series of captions, show their username above the caption
@@ -644,7 +704,8 @@ var blockquotes = function() {
 
 //takes all replys out of caption and appends them to post
 var moveReply = function() {
-    $('article').each(function(){
+    $('.post-content').each(function(){
+        console.log("start");
         var post = this;
         $(post).children('.caption').children('.reply').each(function() {
             if ($(this).is(':first-of-type')) {
@@ -681,12 +742,31 @@ var appendTumblr = function() {
     });
 }
 
-$(document).ready(function() {
+//toggle posts on button click
+var togglePosts = function() {
+
+    $('main').on('click', '.hide-post', function() {
+        console.log("clicked");
+        $(this).parents('.post').children('.post-content').toggle();
+        $(this).parents('.post-info').toggleClass('open');
+        $(this).parents('.post-info').toggleClass('closed');
+        $(this).parents('.button').toggleClass('open');
+        $(this).parents('.button').toggleClass('closed');
+    });
+    
+}
+
+var callbacks = function() {
     callLightbox();
     blockquotes();
     moveReply();
     removeUnnecessary();
     appendTumblr();
+}
+
+$(document).ready(function() {
+    callbacks();
+    togglePosts();
 });
 
 </script>
@@ -720,17 +800,12 @@ var infinite = function() {
                 photo:'.pxu-photo'
             });
             
-            callLightbox();
-            blockquotes();
-            moveReply();
-            removeUnnecessary();
-            appendTumblr();
+            callbacks();
             
         });
 }
 
 $('#infinite').click(function() {
-    console.log("clicked");
     infinite();
     $('main#content').infinitescroll('retrieve');
 });
