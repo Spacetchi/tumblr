@@ -1,0 +1,756 @@
+<!DOCTYPE html>
+<head>
+
+<!-- theme by spacetchi, Medusa Moxie 
+
+http://spacetchi.tumblr.com/
+
+http://fiveppi.tumblr.com/
+
+http://spacetchi.net/
+
+Do not steal! 
+
+-->
+
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+{block:Description}
+<meta name="description" content="{MetaDescription}" />
+{/block:Description}
+
+<title>{Title}</title>
+       
+<link rel="shortcut icon" href="{Favicon}">
+
+<link rel="alternate" type="application/rss+xml" href="{RSS}">
+
+<link href="https://fonts.googleapis.com/css?family={select:Font}:400,400i,700,700i" rel="stylesheet">
+ 
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
+
+</head>
+
+<!-- photoset stylesheet by pixelunion! -->
+<link href="https://static.tumblr.com/qudkd6d/OcDnl99gb/style.css" rel="stylesheet" type="text/css"/>
+
+<meta name="color:Background" content="#000">
+<meta name="color:Reply" content="#333">
+<meta name="color:Text" content="#fff">
+<meta name="color:Link" content="#aaa">
+<meta name="color:Link Hover" content="#ccc">
+<meta name="color:Post Title" content="#000">
+<meta name="color:Names" content="#000">
+<meta name="color:Line" content="#000">
+<meta name="color:Meme Arrows" content="#789922">
+<meta name="color:Gradient Top" content="#fff">
+<meta name="color:Gradient Bottom" content="#000">
+
+<meta name="image:Banner">
+
+<meta name="if:Gradient Background" content="1">
+<meta name="if:Anonymous" content="1">
+<meta name="if:Spoiler Text" content="1">
+<meta name="if:Borders" content="1">
+<meta name="if:Infinite Scroll" content="1">
+
+<meta name="select:Font" content='"Open+Sans"' title="Open Sans">
+<meta name="select:Font" content='"Times New Roman", times, georgia, garamond, serif' title="Serif">
+<meta name="select:Font" content="helvetica, arial, tahoma, verdana, sans-serif" title="Sans Serif">
+
+<style>
+
+html {
+    min-height:100%;
+}
+
+body {
+    margin:0;
+    padding:0;
+    min-height:100%;
+    background:{color:Background};
+    
+    {block:IfGradientBackground}
+    background:{color:Gradient Bottom};
+    background:-webkit-linear-gradient(to top, {color:Gradient Bottom} 95%, {color:Gradient Top});
+    background:-o-linear-gradient(to top, {color:Gradient Bottom} 95%, {color:Gradient Top});
+    background:-moz-linear-gradient(to top, {color:Gradient Bottom} 95%, {color:Gradient Top});
+    background:linear-gradient(to top, {color:Gradient Bottom} 95%, {color:Gradient Top});
+    {/block:IfGradientBackground}
+    
+    color:{color:Text};
+    font-size:14px;
+    font-family:{select:Font};
+}
+
+a {
+    color:{color:Link};
+}
+
+a:hover {
+    color:{color:Link Hover};
+}
+
+.media img {
+    display:block;
+}
+
+img:not(.lightbox-image) {
+    max-width:100%;
+    height:auto;
+}
+
+blockquote:not(.reply) {
+    margin-left:0;
+    margin-right:0;
+    padding:0;
+    color:{color:Meme Arrows};
+}
+
+blockquote:not(.reply) > *:before {
+    content:'>';
+    display:inline;
+}
+
+* > *:first-child {
+    margin-top:0;
+}
+
+* > *:last-child {
+    margin-bottom:0;
+}
+
+{block:IfSpoilerText}
+s,
+strike,
+del {
+    background:black;
+    text-decoration:none;
+    color:black;
+}
+
+s:hover,
+strike:hover, 
+del:hover {
+    color:white;
+}
+{/block:IfSpoilerText}
+
+.wrapper {
+    padding:10px;
+    min-height:100%;
+}
+
+.clearfix {
+    overflow:auto;
+    zoom:1;
+}
+
+/* top */
+
+.links {
+    text-transform:lowercase;
+}
+
+header {
+    text-align:center;
+    width:84vw;
+    margin:0 auto;
+    padding:10px 0;
+}
+
+h1.title {
+    margin:10px 0;
+}
+
+.banner {
+    border:1px solid black;
+}
+
+.desc {
+    margin:0;
+    text-align:left;
+    max-width:400px;
+    margin:0 auto;
+}
+
+main {
+    border-bottom:1px solid {color:Line};
+    margin:10px 0;
+}
+
+/* posts */
+
+article {
+    border-top:1px solid {color:Line};
+}
+
+.post-info {
+    margin:10px 0;
+}
+
+article .title {
+    font-weight:bold;
+    color:{color:Post Title};
+}
+
+.name {
+    font-weight:bold;
+    color:{color:Names};
+}
+
+.post-id {
+    text-decoration:none;
+    color:{color:Text};
+}
+
+article:nth-of-type(n) .media {
+    width:320px;
+}
+
+article:nth-of-type(2n) .media {
+    width:370px;
+}
+
+article:nth-of-type(3n) .media {
+    width:420px;
+}
+
+article:nth-of-type(4n) .media {
+    width:470px;
+}
+
+.media, 
+.audio,
+.video {
+    float:left;
+    margin:0 10px 10px 0;
+    max-width:100%;
+}
+
+.media img {
+    cursor:pointer;
+}
+
+.question {
+    font-weight:bold;
+}
+
+a.tumblr_blog {
+    font-weight:bold;
+    text-decoration:none;
+    display:inline;
+}
+
+blockquote.reply:first-of-type {
+    max-width:700px;
+}
+
+blockquote.reply {
+    background:{color:Reply};
+    padding:10px;
+    {block:IfBorders}
+    border:1px solid {color:Line};
+    {/block:IfBorders}
+}
+
+blockquote.reply {
+    margin:0 0 10px 0;
+    display:table;
+}
+
+*:not(.reply) > a.tumblr_blog:after {
+    content:':';
+    display:inline;
+}
+
+.post > *:last-child {
+    margin-bottom:10px;
+}
+
+.notes {
+    display:block;
+    border-top:1px solid {color:Line};
+    margin:0;
+    padding:10px 0;
+    list-style-type:none;
+}
+
+.notes li {
+    background:{color:Reply};
+    padding:10px;
+    margin:0;
+    max-width:500px;
+    display:table;
+    {block:IfBorders}
+    border:1px solid {color:Line};
+    {/block:IfBorders}
+}
+
+.notes li:not(:last-of-type) {
+    margin-bottom:10px;
+}
+
+.notes img {
+    display:none;
+}
+
+/* pagination */
+
+nav.pagination {
+    margin:10px 0;
+    padding:10px;
+    {block:IfBorders}
+    border:1px solid {color:Line};
+    {/block:IfBorders}
+    display:table;
+    background:{color:Reply};
+}
+
+.current {
+    font-weight:bold;
+}
+
+#infinite {
+    background:none;
+    border:none;
+    padding:0;
+    color:{color:Link};
+    text-decoration:underline;
+    font-family:{select:Font};
+    cursor:pointer;
+}
+
+#infinite:hover {
+    color:{color:Link Hover};
+}
+
+</style>
+
+<body>
+
+<div class="wrapper">
+
+    <nav class="links">
+    [
+    <a href="{BlogURL}" title="Home">hm</a> /
+    {block:HasPages}
+    {block:Pages}
+    <a href="{URL}" title="{Label}">{Label}</a> /
+    {/block:Pages}
+    {/block:HasPages}
+    {block:AskEnabled}
+    <a href="/ask" title="Ask">qa</a> /
+    {/block:AskEnabled}
+    {block:SubmissionsEnabled}
+    <a href="/submit" title="Submit">sm</a> /
+    {/block:SubmissionsEnabled}
+    <a href="http://fiveppi.tumblr.com/" title="Credit">thm</a>
+    ]
+    [ <a href="{BlogURL}/archive" title="Archive">Archive</a> ]
+    </nav>
+    
+<header>
+    
+    <img src="{image:Banner}" class="banner" />
+    
+    <h1 class="title">/{Name}/ - {Title}</h1>
+
+    <p class="desc">{Description}</p>
+
+</header>
+
+<main id="content">
+
+{block:Posts}
+ 
+<article class="post clearfix">
+
+    <div class="post-info">
+
+    {block:Text}
+    {block:Title}<span class="title">{Title}</span>{/block:Title}
+    {/block:Text}
+    
+    {block:Chat}
+    {block:Title}<span class="title">{Title}</span>{/block:Title}
+    {/block:Chat}
+    
+    {block:Link}
+    <a href="{URL}" class="title">{Name}</a>
+    {/block:Link}
+
+    {block:Date}
+    
+    <span class="name">{block:IfNotAnonymous}{block:RebloggedFrom}{ReblogRootName}{/block:RebloggedFrom}{block:NotReblog}{Name}{/block:NotReblog}{/block:IfNotAnonymous}{block:IfAnonymous}Anonymous{/block:IfAnonymous}</span> {DayOfMonthWithZero}/{MonthNumberWithZero}/{ShortYear}({ShortDayOfWeek}){24HourWithZero}:{Minutes}:{Seconds}
+    {block:NoteCount}
+    with {NoteCountWithLabel}
+    {/block:NoteCount}
+    <a href="{Permalink}" class="post-id">No.</a><a href="{Permalink}" class="post-id">{PostID}</a>{block:IndexPage} [<a href="{Permalink}">Reply</a>]{/block:IndexPage}
+    
+    {block:PermalinkPage}
+    {block:HasTags}
+    <span class="tags">
+    {block:Tags}
+    <a href="{TagURL}">#{Tag}</a> 
+    {/block:Tags}
+    </span><!-- tags -->
+    {/block:HasTags}
+    {/block:PermalinkPage}
+
+    {/block:Date}
+    
+    </div><!-- post-info -->
+ 
+    {block:Photo}
+    
+    <div class="media make_lightbox" 
+    data-width="{PhotoWidth-HighRes}" 
+    data-height="{PhotoHeight-HighRes}" 
+    data-lowres="{PhotoURL-500}" data-highres="{PhotoURL-HighRes}">
+    <img src="{PhotoURL-HighRes}" alt="{PhotoAlt}"  class="photoset-img"/>
+    </div>
+    
+    {block:Caption}
+    <div class="caption">{Caption}</div>
+    {/block:Caption}
+    
+    {/block:Photo}
+ 
+    {block:Photoset}
+
+    <div class="media photo-slideshow" id="photoset_{PostID}" data-layout="{PhotosetLayout}">
+
+    {block:Photos}
+    
+    <div class="photo-data">
+    
+    <div class="pxu-photo">
+    <img alt="{PhotoAlt}" 
+    src="{PhotoURL-500}" 
+    width="{PhotoWidth-500}" 
+    height="{PhotoHeight-500}" 
+    data-highres="{PhotoURL-HighRes}" 
+    data-width="{PhotoWidth-HighRes}" 
+    data-height="{PhotoHeight-HighRes}" 
+    class="{block:Exif}exif-yes{/block:Exif} {block:Caption}caption-yes{/block:Caption}"{block:Exif}
+    data-camera="{block:Camera}{Camera}{/block:Camera}" 
+    data-iso="{block:ISO}{ISO}{/block:ISO}" 
+    data-aperture="{block:Aperture}{Aperture}{/block:Aperture}" 
+    data-exposure="{block:Exposure}{Exposure}{/block:Exposure}" 
+    data-focal="{block:FocalLength}{FocalLength}{/block:FocalLength}"{/block:Exif} {block:Caption}
+    data-caption="{Caption}"{/block:Caption} />
+    </div><!-- pxu-photo -->
+    
+    <div class="icons">
+    <a class="tumblr-box" rel="post-{PostID}" href="{PhotoURL-HighRes}">
+    <span class="zoom"></span>
+    </a>
+    </div><!-- icons -->
+     
+    </div><!-- photo-data -->
+    
+    {/block:Photos}
+
+    </div><!-- photo-slideshow -->
+
+    {block:Caption}
+    <div class="caption">{Caption}</div>
+    {/block:Caption}
+
+    {/block:Photoset}
+    
+    {block:Text}
+    
+    <div class="caption">{Body}</div>
+    
+    {/block:Text}
+ 
+    {block:Quote}
+    
+    <div class="caption"> 
+    <p>“{Quote}”
+    {block:Source}
+    <span class="source">&mdash;{Source}</span>
+    {/block:Source}
+    </p>
+    </div>
+    
+    {/block:Quote}
+    
+    {block:Link}
+    
+    {block:Description}
+    <div class="caption">{Description}</div>
+    {/block:Description}
+    
+    {/block:Link}
+ 
+    {block:Chat}
+    
+    <div class="caption"> 
+    {block:Lines}
+    <div class="{Alt} user_{UserNumber}">
+    {block:Label}
+    <span class="name">{Label}</span>{/block:Label}
+    &nbsp;{Line}
+    </div>
+    {/block:Lines}
+    </div><!-- caption -->
+    
+    {/block:Chat}
+ 
+    {block:Video}
+    
+    <div class="video">{Video-400}</div>
+    {block:Caption}
+    <div class="caption">{Caption}</div>
+    {/block:Caption}
+    
+    {/block:Video}
+
+    {block:Audio}
+    
+    <div class="audio">
+    {block:AudioEmbed}
+    {AudioEmbed-400 color="white"}
+    {/block:AudioEmbed}
+    </div><!-- audio -->
+   
+    {block:Caption}
+    <div class="caption">{Caption}</div>
+    {/block:Caption}
+    
+    {/block:Audio}
+               
+    {block:Answer}
+    
+    <div class="caption">
+    <span class="asker">{Asker} says: </span><span class="question">{Question}</span>
+    {block:Answerer}<p>{Answerer} answers: {/block:Answerer}</p><p class="answer">{Answer}</p>
+    </div><!-- caption -->
+    
+    {/block:Answer}
+ 
+</article>
+
+{block:PermalinkPage}
+
+    {block:NoteCount}
+    {block:PostNotes}{PostNotes}{/block:PostNotes}
+    {/block:NoteCount}
+    
+{/block:PermalinkPage}
+
+{/block:Posts}
+
+</main>
+
+{block:Pagination}
+    <nav class="pagination" id="pagination">
+
+    {block:IfInfiniteScroll}[<button id="infinite">All</button>]{/block:IfInfiniteScroll}
+    
+    {block:PreviousPage}[<a href="{PreviousPage}" class="back">Back</a>]{/block:PreviousPage}<!-- google chrome does weird whitespace collapsing here	
+
+    -->{block:JumpPagination length="10"}
+    {block:CurrentPage}[<span class="current">{PageNumber}</span>]{/block:CurrentPage}
+    {block:JumpPage}[<span class="jump"><a href="{URL}">{PageNumber}</a></span>]{/block:JumpPage}
+    {/block:JumpPagination}<!-- google chrome does weird whitespace collapsing here	
+
+    -->{block:NextPage}[<a href="{NextPage}" class="next" id="next">Next</a>]{/block:NextPage}
+    
+    </nav>
+{/block:Pagination}
+
+    <nav class="links">
+    [
+    <a href="{BlogURL}" title="Home">hm</a> /
+    {block:HasPages}
+    {block:Pages}
+    <a href="{URL}" title="{Label}">{Label}</a> /
+    {/block:Pages}
+    {/block:HasPages}
+    {block:AskEnabled}
+    <a href="/ask" title="Ask">qa</a> /
+    {/block:AskEnabled}
+    {block:SubmissionsEnabled}
+    <a href="/submit" title="Submit">sm</a> /
+    {/block:SubmissionsEnabled}
+    <a href="http://fiveppi.tumblr.com/" title="Credit">thm</a>
+    ]
+    [ <a href="{BlogURL}/archive" title="Archive">Archive</a> ]
+    </nav>
+    
+</div><!-- wrapper -->
+
+</body>
+
+<script type="text/javascript" src="http://static.tumblr.com/cqfswrg/1xXo902k0/jquery_photoset.js"></script>
+
+<script type="text/javascript">
+    $(document).ready(function() {
+        $('.photo-slideshow').pxuPhotoset({
+            'gutter' : '8px',
+            'rounded' : 'false',
+        }, function() {
+        // callback
+        });
+    });
+</script>
+
+<script src="http://static.tumblr.com/wgg6svp/jeWobvfj7/unnest.min.js" type="text/javascript"></script>
+
+<script>
+    var callLightbox = function() {
+        $('.make_lightbox').each(function(){ 
+            // this is just an element I let them click, it carries a series of data- attributes.
+            $(this).on('click',function(){  
+                // when clicked. this is the newer jQuery click() handler that's only in v1.8+ so that may be something to note.
+                var lbArray = []; // create blank array.
+                var arrayContents = {
+                    "width":$(this).data('width'), 
+                    "height":$(this).data('height'), 
+                    "low_res":$(this).data("lowres"), 
+                    "high_res":$(this).data('highres')
+                }; 
+                // make set of the data- attributes. 
+                lbArray.push(arrayContents); 
+                // push the set into the array.
+                Tumblr.Lightbox.init(lbArray,1); 
+                // trigger Tumblr lightbox. the '1' is the number of photos it expects. specific to how tumblr has things set up.
+                $('body').toggleClass('tumblr_lightbox_active'); 
+                // use this to prevent the user from scrolling.
+            });
+        });
+    }
+</script>
+
+<script>
+
+//unnests blockquotes
+var blockquotes = function() {
+
+    $('article').unNest({ 
+        yourCaption: ".caption", //your caption selector
+        wrapName: ".reply", //the name of the captions’ new wrapper
+        newCaptionUsername: false, //if the user adds a new caption, following a series of captions, show their username above the caption
+        originalPostCaptionUsername: false, //for the original captions, or a user-added caption that previously didn’t have any, have their username on it
+        tumblrAvatars: false, //”dashboard style” caption, have the avatar of the blog next to the username
+        usernameColon: false //if turned to false, removes the colon at the end of usernames bc :) seriously :) hwy :)
+    });
+}
+
+//takes all replys out of caption and appends them to post
+var moveReply = function() {
+    $('article').each(function(){
+        var post = this;
+        $(post).children('.caption').children('.reply').each(function() {
+            if ($(this).is(':first-of-type')) {
+                $(this).children('*').appendTo(post);
+            }
+            else { 
+                $(this).appendTo(post);
+            }
+        });
+        $(post).children('.caption').detach();
+        console.log("deleted");
+    });
+}
+
+//removes all empty paragraphs
+var removeUnnecessary = function() {
+    $('p').each(function() {
+        if (this.innerHTML == '') {
+            $(this).detach();
+        }
+    });
+}
+
+//adds tumblr username to the last reply
+var appendTumblr = function() {
+    $('article').each(function(){
+        var post = this;
+        $(post).children('.reply').each(function() {
+            if ((this.innerHTML.indexOf('class="tumblr_blog"') == -1)) {
+                $(this).prepend('<a class="tumblr_blog" href="{BlogURL}">{Name}</a>');
+            }
+            
+        });
+    });
+}
+
+$(document).ready(function() {
+    callLightbox();
+    blockquotes();
+    moveReply();
+    removeUnnecessary();
+    appendTumblr();
+});
+
+</script>
+
+{block:IfInfiniteScroll}
+<script type="text/javascript" src="http://static.tumblr.com/cqfswrg/k0bodz8wo/jquery_infinite-scroll.js"></script><!-- infinite scroll script -->
+
+{block:IndexPage}
+<script type="text/javascript">
+
+var infinite = function() {
+    
+    $('main#content').infinitescroll({
+ 
+        navSelector  : "nav#pagination",            
+                   // selector for the paged navigation (it will be hidden)
+        nextSelector : "a#next",    
+                   // selector for the NEXT link (to page 2)
+        itemSelector : "article"          
+                   // selector for all items you'll retrieve
+      
+    }, function( newElements ) {
+            //photoset callback
+            $( newElements ).find('.photo-slideshow').pxuPhotoset({
+                lightbox:"true",
+                rounded:"false",
+                borderRadius: '0px',
+                gutter:'8px',
+                photoset:'.photo-slideshow',
+                photoWrap:'.photo-data',
+                photo:'.pxu-photo'
+            });
+            
+            callLightbox();
+            blockquotes();
+            moveReply();
+            removeUnnecessary();
+            appendTumblr();
+            
+        });
+}
+
+$('#infinite').click(function() {
+    console.log("clicked");
+    infinite();
+    $('main#content').infinitescroll('retrieve');
+});
+    
+</script>
+{/block:IndexPage}
+
+{/block:IfInfiniteScroll}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
