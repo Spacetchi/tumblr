@@ -18,14 +18,6 @@ Additionally, this information is usually mirrored on [tumblr](https://fiveppi.t
 - Lemon
 - Very Boring Theme
 
-If you see a theme in the repository that is not in this list, DO NOT install it. It is in development. Wait for the release post on tumblr.# Released Themes
-
-- 404
-- Facebook
-- Hypertext Markup Language
-- Lemon
-- Very Boring Theme
-
 If you see a theme in the repository that is not in this list, DO NOT install it. It is in development. Wait for the release post on tumblr.
 
 ## Terms of Use
