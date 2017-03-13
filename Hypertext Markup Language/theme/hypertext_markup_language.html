@@ -1,4 +1,6 @@
 <!DOCTYPE html>
+<html>
+
 <head>
 
 <!-- theme by spacetchi, Medusa Moxie 
@@ -7,7 +9,7 @@ http://spacetchi.tumblr.com/
 
 http://fiveppi.tumblr.com/
 
-http://spacetchi.net/
+http://tchi.space/
 
 Do not steal! 
 
@@ -18,6 +20,7 @@ Do not steal!
 {block:Description}
 <meta name="description" content="{MetaDescription}" />
 {/block:Description}
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <title>{Title}</title>
        
@@ -26,8 +29,7 @@ Do not steal!
  
 <script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
 
-<!-- video script by shythemes! -->
-<script src ="//static.tumblr.com/fwgzvyf/Oj1o08f6h/shythemes.vr.js"></script>
+<script src="https://cdn.rawgit.com/leafo/sticky-kit/v1.1.2/jquery.sticky-kit.min.js" type="text/javascript"></script>
 
 </head>
 
@@ -39,90 +41,161 @@ Do not steal!
     
 /* general */
 
-img {
-    display:block;
+* {
+    box-sizing:border-box;
+}
+
+html {
+    font-size:16px + 0.1vw;
+}
+
+body {
+    font-family:'Times New Roman', georgia, palatino, serif;
+    color:black;
+    background:white;
+}
+
+a {
+    color:blue;
+    text-decoration:underline;
+}
+
+a:active {
+    color:red;
 }
 
 blockquote {
-    margin:0 0 0 35px;
+    margin:0 0 0 1em;
+    padding:0 0 0 1em;
+    border-left:1px solid black;
 }
 
-img, iframe {
+* > *:first-child {
+    margin-top:0;
+}
+
+* > *:last-child {
+    margin-bottom:0;
+}
+
+img:not(.lightbox-image), 
+iframe {
     max-width:100%;
+    height:auto;
 }
 
 .media img {
     cursor:pointer;
+    display:block;
+}
+
+.clearfix {
+    overflow:auto;
+    zoom:1
 }
 
 /* wrappers */
 
-#wrapper {
-    margin:10vh auto;
-    width:700px;
+.wrapper {
+    margin:5rem auto;
+    max-width:100%;
+    width:60%;
+    width:calc(25vw + 350px);
+    position:relative;
 }
 
-#content {
-    margin-left:150px;
+.columns {
+    position:relative;
 }
 
-/* header */
+header {
+    margin-bottom:5rem;
+}
 
-#header {
-    margin-bottom:100px;
+main {
+    width:80%;
+    float:right;
 }
 
 /* sidebar */
 
-#sidebar {
-    width:150px;
-    float:left;
-    position:fixed;
+.sidebar {
+    width:20%;
+    position:absolute;
+    top:0;
+    bottom:0;
 }
 
-ul#links {
+.sidebar ul {
     margin:0;
-    padding:0 20px;
+    padding:2em 1em;
 }
 
 /* post */
 
 .post-info {
-    margin-bottom:100px;
+    margin-bottom:5rem;
 }
 
 .post {
-    width:550px;
-    margin-bottom:100px;
+    margin-bottom:5rem;
 }
 
-.media img {
-    width:550px;
+.caption {
+    margin-top:1em;
+}
+
+.permalink {
+    display:block;
+    margin-top:1rem;
 }
 
 /* post notes */
 
 ol.notes {
-    margin:0 0 100px 0;
-    padding:0 0 0 20px;
+    margin:0 0 5rem 0;
 }
 
-ol.notes img {
+.notes img {
     display:inline;
     margin-right:5px;
 }
 
-ol.notes li.more_notes_link_container {
+.notes li.more_notes_link_container {
     text-align:left !important; /* must use this due to tumblr code */
     text-transform:lowercase;
-    
 }
 
 /* pagination */
 
-#nav {
+.pagination {
     text-align:center;
     text-transform:lowercase;
+}
+
+.pagination > * {
+    padding:0 0.5em;
+}
+
+@media (max-width: 800px) {
+    .sidebar {
+        display:block;
+        height:auto;
+        position:relative;
+        width:100%;
+        text-align:center;
+        margin-bottom:5em;
+    }
+    
+    nav ul li {
+        display:inline;
+        padding:0 0.5em;
+    }
+    
+    main {
+        width:100%;
+        float:none;
+    }
 }
 
 
@@ -130,23 +203,26 @@ ol.notes li.more_notes_link_container {
 
 <body>
 
-<div id="wrapper">
+<div class="wrapper clearfix">
 
 {block:IndexPage}
 
-<div id="header">
+<header>
 
-    <h1 id="title"><a href="{BlogURL}">{Title}</a></h1>
+    <h1 class="title"><a href="{BlogURL}">{Title}</a></h1>
 
     <p id="desc">{Description}</p>
 
-</div>
+</header>
 
 {/block:IndexPage}
 
-<div id="sidebar">
-    
-    <ul id="links">
+<div class="columns clearfix">
+
+<aside class="sidebar">
+
+    <nav class="links" id="links">
+    <ul>
 
     <li><a href="/">{lang:Home}</a></li>
     <li><a href="/archive">{lang:Archive}</a></li>
@@ -162,16 +238,16 @@ ol.notes li.more_notes_link_container {
     <li><a href="/submit">{SubmitLabel}</a></li>
     {/block:SubmissionsEnabled}
     <li><a href="http://fiveppi.tumblr.com/">Theme</a></li>
-    
     </ul>
+    </nav>
 
-</div><!-- sidebar -->
+</aside>
 
-<div id="content">
+<main>
 
 {block:Posts}
  
-<div class="post">
+<article class="post">
 
     {block:PermalinkPage}
     
@@ -329,10 +405,10 @@ ol.notes li.more_notes_link_container {
                
     {block:Answer}
     
-    <div class="q">
-    <span class="asker">{Asker} says:</span><br> <span class="question">{Question}</span>
-    </div><!-- q -->
-    <div class="answer">{Answer}</div>
+    <p>
+    <span class="asker">{Asker} says:</span><br> <em class="question">{Question}</em>
+    </p>
+    <p class="answer">{Answer}</p>
     
     {/block:Answer}
     
@@ -342,7 +418,7 @@ ol.notes li.more_notes_link_container {
     {/block:Date}
     {/block:IndexPage}
  
-</div><!-- post -->
+</article><!-- post -->
 
 {block:PermalinkPage}
 
@@ -355,49 +431,48 @@ ol.notes li.more_notes_link_container {
 {/block:Posts}
 
 {block:Pagination}
-    <div id="nav">
+    <nav class="pagination">
 
     {block:PreviousPage}
-    <a href="{PreviousPage}" id="back">Back</a>
+    <a href="{PreviousPage}" class="back">Back</a>
     {/block:PreviousPage}
 
     {block:NextPage}
-    <a href="{NextPage}" id="next">Next</a>
+    <a href="{NextPage}" class="next">Next</a>
     {/block:NextPage}
     
-    </div><!-- nav -->
+    </nav>
 {/block:Pagination}
 
 {block:PermalinkPagination}
-    <div id="nav">
+    <nav class="pagination">
     {block:PreviousPost}
-    <a id="back" href="{PreviousPost}">Previous Post</a>
+    <a class="back" href="{PreviousPost}">Previous Post</a>
     {/block:PreviousPost}
 
     {block:NextPost}
-    <a id="next" href="{NextPost}">Next Post</a>
+    <a class="next" href="{NextPost}">Next Post</a>
     {/block:NextPost}
-    </div><!-- nav -->
+    </nav><!-- nav -->
 {/block:PermalinkPagination}
 
-</div><!-- content -->
-    
+</main>
+
+</div><!-- columns -->
+
 </div><!-- wrapper -->
 
-</body>
-
-<script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
-
-<script type="text/javascript" src="http://static.tumblr.com/cqfswrg/1xXo902k0/jquery_photoset.js"></script>
-
-<script>
+<script type="text/javascript">
 
 $(document).ready(function() {
     var $child = $("#sidebar");
     $child.parent().css("min-height", $child.outerHeight());
+    $("#links").stick_in_parent({'recalc_every':2});
 });
     
 </script>
+
+<script type="text/javascript" src="http://static.tumblr.com/cqfswrg/1xXo902k0/jquery_photoset.js"></script>
 
 <script type="text/javascript">
 
@@ -412,7 +487,7 @@ $(document).ready(function() {
     
 </script>
 
-<script>
+<script type="text/javascript">
     
     $(function(){
         $('.make_lightbox').each(function(){ 
@@ -432,3 +507,5 @@ $(document).ready(function() {
     });       
     
 </script>
+
+</body>
