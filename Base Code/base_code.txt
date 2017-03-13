@@ -1,0 +1,358 @@
+<!DOCTYPE html>
+<head>
+
+<!-- theme by spacetchi, Medusa Moxie 
+
+http://spacetchi.tumblr.com/
+
+http://fiveppi.tumblr.com/
+
+http://tchi.space/
+
+Do not steal! 
+
+-->
+
+<meta charset="utf-8">
+{block:Description}
+<meta name="description" content="{MetaDescription}" />
+{/block:Description}
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>{Title}</title>
+       
+<link rel="shortcut icon" href="{Favicon}">
+<link rel="alternate" type="application/rss+xml" href="{RSS}">
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
+<!-- video script by shythemes! -->
+<script src ="//static.tumblr.com/fwgzvyf/Oj1o08f6h/shythemes.vr.js"></script>
+
+<!-- photoset stylesheet by pixelunion! -->
+<link href="https://static.tumblr.com/qudkd6d/OcDnl99gb/style.css" rel="stylesheet" type="text/css"/>
+
+<meta name="color:Background" content="#000">
+<meta name="color:Text" content="#fff">
+<meta name="color:Link" content="#aaa">
+<meta name="color:Link Hover" content="#ccc">
+
+<style>
+    
+/* general */
+
+body {
+    margin:0;
+    padding:0;
+    background:{color:Background};
+    color:{color:Text};
+}
+
+a {
+    color:{color:Link};
+}
+
+a:hover {
+    color:{color:Link Hover};
+}
+
+img {
+    display:block;
+}
+
+blockquote {
+    margin:0 0 0 10px;
+    padding:0 0 0 10px;
+    border-left:1px solid {color:Text};
+}
+
+img, iframe {
+    max-width:100%;
+}
+
+.media img {
+    cursor:pointer;
+}
+
+</style>
+
+</head>
+
+<body>
+
+<div id="wrapper">
+
+<h1 id="title"><a href="{BlogURL}">{Title}</a></h1>
+
+<p id="desc">{Description}</p>
+
+    <ul id="links">
+
+    <li><a href="/">{lang:Home}</a></li>
+    <li><a href="/archive">{lang:Archive}</a></li>
+    {block:HasPages}
+    {block:Pages}
+    <li><a href="{URL}">{Label}</a></li>
+    {/block:Pages}
+    {/block:HasPages}
+    {block:AskEnabled}
+    <li><a href="/ask">Ask</a></li>
+    {/block:AskEnabled}
+    {block:SubmissionsEnabled}
+    <li><a href="/submit">{SubmitLabel}</a></li>
+    {/block:SubmissionsEnabled}
+    <li><a href="http://fiveppi.tumblr.com/">Theme</a></li>
+    
+    </ul>
+
+<div id="content">
+
+{block:Posts}
+ 
+<article class="post">
+ 
+    {block:Text}
+    
+    {block:Title}
+    <h2 class="title"><a href="{Permalink}">{Title}</a></h2>
+    {/block:Title}
+    
+    {Body}
+    
+    {/block:Text}
+ 
+    {block:Photo}
+    
+    <div class="media make_lightbox" 
+    data-width="{PhotoWidth-HighRes}" 
+    data-height="{PhotoHeight-HighRes}" 
+    data-lowres="{PhotoURL-500}" data-highres="{PhotoURL-HighRes}">
+    <img src="{PhotoURL-HighRes}" alt="{PhotoAlt}"  class="photoset-img"/>
+    </div>
+    
+    {block:Caption}
+    <div class="caption">{Caption}</div>
+    {/block:Caption}
+    
+    {/block:Photo}
+ 
+    {block:Photoset}
+
+    <div class="photo-slideshow" id="photoset_{PostID}" data-layout="{PhotosetLayout}">
+
+    {block:Photos}
+    
+    <div class="media photo-data">
+    
+    <div class="pxu-photo">
+    <img alt="{PhotoAlt}" 
+    src="{PhotoURL-500}" 
+    width="{PhotoWidth-500}" 
+    height="{PhotoHeight-500}" 
+    data-highres="{PhotoURL-HighRes}" 
+    data-width="{PhotoWidth-HighRes}" 
+    data-height="{PhotoHeight-HighRes}" 
+    class="{block:Exif}exif-yes{/block:Exif} {block:Caption}caption-yes{/block:Caption}"{block:Exif}
+    data-camera="{block:Camera}{Camera}{/block:Camera}" 
+    data-iso="{block:ISO}{ISO}{/block:ISO}" 
+    data-aperture="{block:Aperture}{Aperture}{/block:Aperture}" 
+    data-exposure="{block:Exposure}{Exposure}{/block:Exposure}" 
+    data-focal="{block:FocalLength}{FocalLength}{/block:FocalLength}"{/block:Exif} {block:Caption}
+    data-caption="{Caption}"{/block:Caption} />
+    </div><!-- pxu-photo -->
+    
+    <div class="icons">
+    <a class="tumblr-box" rel="post-{PostID}" href="{PhotoURL-HighRes}">
+    <span class="zoom"></span>
+    </a>
+    </div><!-- icons -->
+     
+    </div><!-- photo-data -->
+    
+    {/block:Photos}
+
+    </div><!-- photo-slidshow -->
+
+    {block:Caption}
+    <div class="caption">{Caption}</div>
+    {/block:Caption}
+
+    {/block:Photoset}
+ 
+    {block:Quote}
+     
+    <p class="quote">“{Quote}”</p>
+    {block:Source}
+    <p class="source">&mdash;{Source}</p>
+    {/block:Source}
+    
+    {/block:Quote}
+    
+    {block:Link}
+    
+    <h2 class="title"><a href="{URL}">{Name} (link)</a></h2>
+    
+    {block:Description}
+    <div class="caption">{Description}</caption>
+    {/block:Description}
+    
+    {/block:Link}
+ 
+    {block:Chat}
+    
+    {block:Title}
+    <h2 class="title"><a href="{Permalink}">{Title}</a></h2>
+    {/block:Title}
+    
+    <div class="chat"> 
+    <p>
+    {block:Lines}
+    <div class="{Alt} user_{UserNumber}">
+    {block:Label}
+    <span class="name">{Label}</span>{/block:Label}
+    &nbsp;{Line}
+    </div>
+    {/block:Lines}
+    </p>
+    </div><!-- chat -->
+    
+    {/block:Chat}
+ 
+    {block:Video}
+    
+    <div class="media video">{Video-700}</div>
+    {block:Caption}
+    <div class="caption">{Caption}</div>
+    {/block:Caption}
+    
+    {/block:Video}
+
+    {block:Audio}
+    
+    <div class="audio">
+    {block:AudioEmbed}
+    {AudioEmbed-640 color="white"}
+    {/block:AudioEmbed}
+    </div><!-- audio -->
+   
+    {block:Caption}
+    <div class="caption">{Caption}</div>
+    {/block:Caption}
+    
+    {/block:Audio}
+               
+    {block:Answer}
+    
+    <div class="q">
+    <span class="asker">{Asker} says:</span><br> <span class="question">{Question}</span>
+    </div><!-- q -->
+    <div class="answer">{Answer}</div>
+    
+    {/block:Answer}
+    
+    {block:Date}
+    <div class="post-info">
+    
+    posted {TimeAgo}
+    {block:NoteCount}
+    with {NoteCountWithLabel}
+    {/block:NoteCount}
+
+    </div><!-- post-info -->
+    {/block:Date}
+ 
+</article>
+
+{block:PermalinkPage}
+
+    {block:HasTags}
+    <div class="tags">
+    {block:Tags}
+    <a href="{TagURL}">#{Tag}</a> 
+    {/block:Tags}
+    </div><!-- tags -->
+    {/block:HasTags}
+
+
+    {block:NoteCount}
+    {block:PostNotes}{PostNotes}{/block:PostNotes}
+    {/block:NoteCount}
+    
+{/block:PermalinkPage}
+
+{/block:Posts}
+
+{block:Pagination}
+    <div id="nav">
+
+    {block:PreviousPage}
+    <a href="{PreviousPage}" id="back">Back</a>
+    {/block:PreviousPage}
+
+    {block:NextPage}
+    <a href="{NextPage}" id="next">Next</a>
+    {/block:NextPage}
+    
+    </div><!-- nav -->
+{/block:Pagination}
+
+{block:PermalinkPagination}
+    <div id="nav">
+    {block:PreviousPost}
+    <a id="back" href="{PreviousPost}">Previous Post</a>
+    {/block:PreviousPost}
+
+    {block:NextPost}
+    <a id="next" href="{NextPost}">Next Post</a>
+    {/block:NextPost}
+    </div><!-- nav -->
+{/block:PermalinkPagination}
+
+</div><!-- content -->
+    
+</div><!-- wrapper -->
+
+</body>
+
+<script type="text/javascript" src="http://static.tumblr.com/cqfswrg/1xXo902k0/jquery_photoset.js"></script>
+
+<script>
+
+$(document).ready(function() {
+    var $child = $("#sidebar");
+    $child.parent().css("min-height", $child.outerHeight());
+});
+    
+</script>
+
+<script type="text/javascript">
+
+    $(document).ready(function() {
+        $('.photo-slideshow').pxuPhotoset({
+            'gutter' : '10px',
+            'rounded' : 'false',
+        }, function() {
+        // callback
+        });
+    });
+    
+</script>
+
+<script>
+    
+    $(function(){
+        $('.make_lightbox').each(function(){ 
+            $(this).on('click',function(){  
+                var lbArray = [];
+                var arrayContents = {
+                    "width":$(this).data('width'), 
+                    "height":$(this).data('height'), 
+                    "low_res":$(this).data("lowres"), 
+                    "high_res":$(this).data('highres')
+                }; 
+                lbArray.push(arrayContents); 
+                Tumblr.Lightbox.init(lbArray,1); 
+                $('body').toggleClass('tumblr_lightbox_active'); 
+            });
+        });
+    });       
+    
+</script>
