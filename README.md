@@ -10,7 +10,7 @@ Documentation for each theme is in `[Theme Name] > theme > documentation.md`.
 
 Additionally, this information is usually mirrored on [tumblr](https://fiveppi.tumblr.com) in a more user-friendly manner.
 
-## Released Themes
+## Finished Themes
 
 - 404
 - Facebook
@@ -44,11 +44,13 @@ http://tchi.space/
 
 Because this repository will be updated continuously, your copies of my codes will become outdated. For this reason, I discourage re-hosting without my explicit permission. If you want my themes to be accessible to users who may be unable to access GitHub for some reason, please message me before uploading somewhere else. I will see what I can do.
 
-You MAY distribute a *modified* version of my theme as long as it follows the crediting criteria above, and you ALSO credit me in your release post and documentation (on tumblr, GitHub, etc.).
+You MAY distribute a *modified* version of my theme as long as it follows the crediting criteria above, and you ALSO credit me in your release post and documentation (on tumblr, GitHub, etc.). Please be reasonable; don't just modify one thing and then claim that you made half of it. 
 
-### Base Code
+You CANNOT sell anything using my themes. 
 
-You may use this without any credit whatsoever.
+### Base Code Exception
+
+You may use this without any credit whatsoever, and sell themes based on it.
 
 ## Pull Requests
 
