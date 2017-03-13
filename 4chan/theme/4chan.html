@@ -214,7 +214,7 @@ span.button {
     width:{select:Font Size};
     position:relative;
     border-radius:3px;
-    border:1px solid {color:Lines};
+    border:1px solid {color:Line};
     background:{color:Reply};
     background-repeat:no-repeat;
 
@@ -365,6 +365,10 @@ nav.pagination {
     font-weight:bold;
 }
 
+body:not(.__1) .infinite {
+    display:none;
+}
+
 #infinite {
     background:none;
     border:none;
@@ -382,7 +386,7 @@ nav.pagination {
 
 </style>
 
-<body>
+<body class="__{block:JumpPagination}{block:CurrentPage}{PageNumber}{/block:CurrentPage}{/block:JumpPagination}">
 
 <div class="wrapper">
 
@@ -610,7 +614,7 @@ nav.pagination {
 {block:Pagination}
     <nav class="pagination" id="pagination">
 
-    {block:IfInfiniteScroll}[<button id="infinite">All</button>]{/block:IfInfiniteScroll}
+    {block:IfInfiniteScroll}<span class="infinite">[<button id="infinite">All</button>]</span>{/block:IfInfiniteScroll}
     
     {block:PreviousPage}[<a href="{PreviousPage}" class="back">Back</a>]{/block:PreviousPage}<!-- google chrome does weird whitespace collapsing here	
 
