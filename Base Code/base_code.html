@@ -1,4 +1,6 @@
 <!DOCTYPE html>
+<html>
+
 <head>
 
 <!-- theme by spacetchi, Medusa Moxie 
@@ -24,8 +26,6 @@ Do not steal!
 <link rel="alternate" type="application/rss+xml" href="{RSS}">
 
 <script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
-<!-- video script by shythemes! -->
-<script src ="//static.tumblr.com/fwgzvyf/Oj1o08f6h/shythemes.vr.js"></script>
 
 <!-- photoset stylesheet by pixelunion! -->
 <link href="https://static.tumblr.com/qudkd6d/OcDnl99gb/style.css" rel="stylesheet" type="text/css"/>
@@ -44,6 +44,7 @@ body {
     padding:0;
     background:{color:Background};
     color:{color:Text};
+	word-wrap:break-word;
 }
 
 a {
@@ -54,22 +55,20 @@ a:hover {
     color:{color:Link Hover};
 }
 
-img {
-    display:block;
-}
-
 blockquote {
-    margin:0 0 0 10px;
-    padding:0 0 0 10px;
+    margin:0 0 0 1em;
+    padding:0 0 0 1em;
     border-left:1px solid {color:Text};
 }
 
-img, iframe {
+img:not(.lightbox-img), 
+iframe {
     max-width:100%;
 }
 
 .media img {
     cursor:pointer;
+	display:block;
 }
 
 </style>
@@ -78,14 +77,14 @@ img, iframe {
 
 <body>
 
-<div id="wrapper">
+<div class="wrapper">
 
-<h1 id="title"><a href="{BlogURL}">{Title}</a></h1>
+<h1 class="title"><a href="{BlogURL}">{Title}</a></h1>
 
-<p id="desc">{Description}</p>
+<p class="desc">{Description}</p>
 
-    <ul id="links">
-
+	<nav>
+    <ul>
     <li><a href="/">{lang:Home}</a></li>
     <li><a href="/archive">{lang:Archive}</a></li>
     {block:HasPages}
@@ -99,11 +98,11 @@ img, iframe {
     {block:SubmissionsEnabled}
     <li><a href="/submit">{SubmitLabel}</a></li>
     {/block:SubmissionsEnabled}
-    <li><a href="http://fiveppi.tumblr.com/">Theme</a></li>
-    
+    <li><a href="http://fiveppi.tumblr.com/">Theme</a></li>    
     </ul>
+	</nav>
 
-<div id="content">
+<main>
 
 {block:Posts}
  
@@ -281,32 +280,32 @@ img, iframe {
 {/block:Posts}
 
 {block:Pagination}
-    <div id="nav">
+    <nav class="pagination">
 
     {block:PreviousPage}
-    <a href="{PreviousPage}" id="back">Back</a>
+    <a href="{PreviousPage}" class="back">Back</a>
     {/block:PreviousPage}
 
     {block:NextPage}
-    <a href="{NextPage}" id="next">Next</a>
+    <a href="{NextPage}" class="next">Next</a>
     {/block:NextPage}
     
-    </div><!-- nav -->
+    </nav>
 {/block:Pagination}
 
 {block:PermalinkPagination}
-    <div id="nav">
+    <nav class="pagination">
     {block:PreviousPost}
-    <a id="back" href="{PreviousPost}">Previous Post</a>
+    <a href="{PreviousPost}" class="back">Previous Post</a>
     {/block:PreviousPost}
 
     {block:NextPost}
-    <a id="next" href="{NextPost}">Next Post</a>
+    <a href="{NextPost}" class="next">>Next Post</a>
     {/block:NextPost}
-    </div><!-- nav -->
+    </nav>
 {/block:PermalinkPagination}
 
-</div><!-- content -->
+</main>
     
 </div><!-- wrapper -->
 
@@ -316,15 +315,16 @@ img, iframe {
 
 <script>
 
+//only used if theme has a #sidebar. delete otherwise
 $(document).ready(function() {
     var $child = $("#sidebar");
     $child.parent().css("min-height", $child.outerHeight());
 });
-    
+
 </script>
 
 <script type="text/javascript">
-
+//pxu photosets
     $(document).ready(function() {
         $('.photo-slideshow').pxuPhotoset({
             'gutter' : '10px',
@@ -337,7 +337,7 @@ $(document).ready(function() {
 </script>
 
 <script>
-    
+//calling lightbox on all images
     $(function(){
         $('.make_lightbox').each(function(){ 
             $(this).on('click',function(){  
