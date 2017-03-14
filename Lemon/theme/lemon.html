@@ -1,18 +1,34 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
+<html>
 
 <head>
 
-<title>{Title}</title>
+<!-- theme by spacetchi, Medusa Moxie 
 
-<link href='https://fonts.googleapis.com/css?family=Inconsolata' rel='stylesheet' type='text/css'>
+http://spacetchi.tumblr.com/
+
+http://fiveppi.tumblr.com/
+
+http://tchi.space/
+
+Do not steal! 
+
+-->
+
 <meta charset="utf-8">
-
 {block:Description}
 <meta name="description" content="{MetaDescription}" />
 {/block:Description}
-
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>{Title}</title>
+       
 <link rel="shortcut icon" href="{Favicon}">
 <link rel="alternate" type="application/rss+xml" href="{RSS}">
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
+
+<!-- photoset stylesheet by pixelunion! -->
+<link href="https://static.tumblr.com/qudkd6d/OcDnl99gb/style.css" rel="stylesheet" type="text/css"/>
 
 <meta name="color:Background" content="#fff">
 <meta name="color:Text" content="#666114">
@@ -36,6 +52,14 @@
 <meta name="select:Border Width" content="1px" title="1px">
 <meta name="select:Border Width" content="2px" title="2px">
 
+<meta name="select:Post Size" content="400px" title="400px">
+<meta name="select:Post Size" content="450px" title="400px">
+<meta name="select:Post Size" content="500px" title="500px">
+<meta name="select:Post Size" content="550px" title="550px">
+
+<meta name="select:Font Size" content="12px" title="12px">
+<meta name="select:Font Size" content="13px" title="13px">
+
 </head>
 
 <style type="text/css">
@@ -43,13 +67,20 @@
 /* general */
 
 ::-webkit-scrollbar {
-    width:10px; 
-    height:4px; 
-    background:{color:Accent};
+    width:8px; 
+    background:{color:Text};
 }
 ::-webkit-scrollbar-thumb {
     background-color:{color:Accent};
-    border:3px solid {color:Text};
+}
+
+::selection {
+    background:{color:Text};
+    color:{color:Background};
+}
+
+html {
+    font-size:{select:Font Size};
 }
 
 body {
@@ -63,8 +94,7 @@ body {
     background-size:cover;
 {/block:IfNotRepeatBackground}
     color:{color:Text};
-    font-family:Inconsolata, lucida, courier, monospace;
-    font-size:12px;
+    font-family:'Ubuntu Mono', 'lucida console', courier, monospace;
     word-wrap:break-word;
 }
 
@@ -78,147 +108,124 @@ a:hover {
 }
 
 blockquote {
-    margin-left:10px;
-    padding-left:10px;
+    margin-left:1em;
+    padding-left:1em;
     border-left:{select:Border Width} solid {color:Accent};
 }
 
-ol, ul {
-    margin-left:10px;
-    padding-left:10px;
-}
-
-img, iframe {
+img:not(.lightbox-image),
+iframe {
     max-width:100%;
 }
 
-p:first-child {
-    margin-top:10px;
+img {
+    height:auto;
 }
 
-p:last-of-type, iframe#ask_form, iframe#submit_form {
-    margin-bottom:10px;
+* > *:first-child {
+    margin-top:0;
 }
 
-::selection {
-    background:{color:Text};
-    color:{color:Background};
+* > *:last-child {
+    margin-bottom:0;
+}
+
+ul,
+ol {
+    margin-left:1em;
+    padding-left:1em;
+}
+
+.transparent {
+    background:{color:Post Background};
+{block:IfTransparentPostBackground}
+    background:transparent;
+{/block:IfTransparentPostBackground}
+}
+
+.borders {
+    border:{select:Border Width} solid transparent;
+{block:IfBorders}
+    border:{select:Border Width} solid {color:Accent}; 
+{/block:IfBorders}
 }
 
 /* wrappers */
 
-#wrapper {
-    margin-top:30px;
-    margin-bottom:30px;
-    margin-left:calc(50vw - 261px);
-    width:644px;
+.wrapper {
+    margin:4rem auto;
+    width:calc({select:Post Size} + 2rem + 2 * {select:Border Width});
+    max-width:calc(100% - 2rem);
+    padding:1rem;
 }
 
 /* header */
 
-#header {
-{block:IfTransparentPostBackground}
-    background:transparent;
-{/block:IfTransparentPostBackground}
-{block:IfNotTransparentPostBackground}
-    background:{color:Post Background};
-{/block:IfNotTransparentPostBackground}
-    width:500px;
-    padding:10px;
-    margin-bottom:30px;
-{block:IfBorders}
-    border:{select:Border Width} solid {color:Accent};
-{/block:IfBorders}
-{block:IfNotBorders}
-    border:1px solid transparent;
-{/block:IfNotBorders}
+header {
+    width:{select:Post Width};
+    padding:1em;
+    margin-bottom:4rem;
+    position:relative;
 }
 
-#header h1#title, #header h1#title a, #header h1#title a:hover {
-    margin:0;
-    font-size:16px;
+h1.title,
+h1.title a,
+h1.title a:hover {
+    font-size:1.3em;
     color:{color:Text};
     text-decoration:none;
 }
 
-#desc {
-    margin:5px 0 10px 0;
-}
-
-#headerimg {
-{block:IfTransparentPostBackground}
-    background:transparent;
-{/block:IfTransparentPostBackground}
-{block:IfNotTransparentPostBackground}
-    background:{color:Post Background};
-{/block:IfNotTransparentPostBackground}
-    float:right;
+.header-img {
+    display:inline-block;
     line-height:0;
+    position:absolute;
+    bottom:-1rem;
+    right:1rem;
 }
 
-#headerimg img {
+.header-img img {
     margin:0;
     padding:0;
     height:78px;
-{block:IfBorders}
-    border:{select:Border Width} solid {color:Accent}; 
-{/block:IfBorders}
-{block:IfNotBorders}
-    border:1px solid transparent;
-{/block:IfNotBorders}
 }
 
-ul#pages {
+{block:IfShowHeaderImage}
+p.desc {
+    max-width:calc(100% - 78px - 1em);
+}
+{/block:IfShowHeaderImage}
+
+ul.links {
     margin:0;
     padding:0;
 }
 
-ul#pages li {
+.links li {
     list-style-type:none;
     display:inline;
 }
 
 /* sidebar */
 
-#sidebar {
+.sidebar {
     cursor:pointer;
-    display:none;
     width:120px;
-{block:IfTransparentPostBackground}
-    background:transparent;
-{/block:IfTransparentPostBackground}
-{block:IfNotTransparentPostBackground}
-    background:{color:Post Background};
-{/block:IfNotTransparentPostBackground}
     position:fixed;
     bottom:12vh;
     left:12vw;
     z-index:1;
-{block:IfBorders}
-    border:{select:Border Width} solid {color:Accent}; 
-{/block:IfBorders}
-{block:IfNotBorders}
-    border:1px solid transparent;
-{/block:IfNotBorders}
 }
 
-#sidebar ul#sidepages {
+ul.sidebar-links {
     display:none;
     list-style-type:none;
     margin:0;
     padding:0;
-{block:IfShowSidebarImage}
-{block:IfBorders}
-    border-bottom:{select:Border Width} solid {color:Accent}; 
-{/block:IfBorders}
-{block:IfNotBorders}
-    border:1px solid transparent;
-{/block:IfNotBorders}
-{/block:IfShowSidebarImage}
 }
 
-#sidebar ul#sidepages li {
-    padding:5px 10px;
+.sidebar-links li {
+    padding:0.5em 1em;
 {block:IfBorders}
     border-bottom:{select:Border Width} solid {color:Accent}; 
 {/block:IfBorders}
@@ -227,16 +234,16 @@ ul#pages li {
 {/block:IfNotBorders}
 }
 
-#sidebar ul#sidepages li:last-of-type {
+.sidebar-links ul:not(:last-child) li:last-of-type {
     border-bottom:none;
 }
 
-#sidebarimg {
+.sidebar-img {
     width:150px;
-    margin-bottom:-2px;
+    display:block;
 }
 
-#sidebar #sidetext {
+.sidebar-text {
 {block:IfShowSidebarImage}
 {block:IfBorders}
     border-top:{select:Border Width} solid {color:Accent}; 
@@ -246,377 +253,191 @@ ul#pages li {
 {/block:IfNotBorders}
 {/block:IfShowSidebarImage}
     margin:0;
-    padding:10px;
+    padding:1em;
 }
 
 /* posts */
 
-.post {
+.post-container {
     position:relative;
-    margin-bottom:10px;
-    width:500px;
-    padding:0 10px;
-{block:IfTransparentPostBackground}
-    background:transparent;
-{/block:IfTransparentPostBackground}
-{block:IfNotTransparentPostBackground}
-    background:{color:Post Background};
-{/block:IfNotTransparentPostBackground}
-{block:IfBorders}
-    border:{select:Border Width} solid {color:Accent};
-{/block:IfBorders}
-{block:IfNotBorders}
-    border:1px solid transparent;
-{/block:IfNotBorders}
+    margin-bottom:4rem;
 }
 
-.bigpost .postinfo {
-{block:IfTransparentPostBackground}
-    background:transparent;
-{/block:IfTransparentPostBackground}
-{block:IfNotTransparentPostBackground}
-    background:{color:Post Background};
-{/block:IfNotTransparentPostBackground}    
-    width:100px;
-    padding-left:10px;
-    float:right;
-{block:IfBorders}
-    border:{select:Border Width} solid {color:Accent}; 
-{/block:IfBorders}
-{block:IfNotBorders}
-    border:1px solid transparent;
-{/block:IfNotBorders}
+.post {
+    position:relative;
+}
+
+ul.post-info {
+    width:8em;
+    padding:0 0.5em;
+    list-style-type:none;
+    position:absolute;
+    left:calc({select:Post Size} + 2rem + 1rem + 2 * {select:Border Width});
     display:none;
 }
 
-.bigpost .postinfo p {
+.post-info li {
     margin:2px 0;
 }
 
-.bigpost:hover .postinfo {
+.post-container:hover .post-info {
     display:block;
 }
 
+.post-content {
+    padding:1em;
+}
+
 h2.title {
-    font-size:13px;
-    margin:15px 0;
-    text-align:center;
+    background:{color:Accent};
+    padding:0.5em;
+    margin:0;
+    font-size:1.3em;
 }
 
 h2.title a {
-    padding:5px;
     background:{color:Accent};
     color:{color:Text};
 }
 
 .media img {
-    width:500px;
+    width:{select:Post Size};
+    display:block;
+    cursor:pointer;
 }
 
-.media {
-    margin:10px 0 9px 0;
+.tumblr_video_container {
+    width:{select:Post Size} !important; /* must use this due to tumblr */
 }
 
-p.quote {
-    margin-bottom:10px;
-    font-size:20px;
+.caption {
+    margin-top:1em;
+}
+
+h2.quote {
     font-style:italic;
 }
 
-p.source {
-    margin-top:0;
+p.chat-line {
+    line-height:calc(1em + 2 * 3px);
 }
 
-.link {
-    background:{color:Accent};
-    width:500px;
-    padding:10px;
-{block:IfBorders}
-    border:{select:Border Width} solid {color:Accent}; 
-{/block:IfBorders}
-{block:IfNotBorders}
-    border:1px solid transparent;
-{/block:IfNotBorders}
-}
-
-.link a {
-    color:{color:Text};
-}
-
-p.chat {
-    margin:0;
-}
-
-p.chat:first-child {
-    margin-top:8px;
-}
-
-p.chat:last-of-type {
-    margin-bottom:8px;
+span.name,
+span.line {
+    padding:3px 6px;
 }
 
 span.name {
-    padding:3px 6px;
     font-weight:bold;
     background:{color:Accent};
-{block:IfBorders}
-    border:{select:Border Width} solid {color:Accent}; 
-{/block:IfBorders}
-{block:IfNotBorders}
-    border:1px solid transparent;
-{/block:IfNotBorders}
-}
-
-span.line {
-    padding:3px 6px;
-{block:IfBorders}
-    border:{select:Border Width} solid {color:Accent}; 
-{/block:IfBorders}
-{block:IfNotBorders}
-    border:1px solid transparent;
-{/block:IfNotBorders}
-    line-height:26px;
-}
-
-.audio {
-    margin:10px 0;
-}
-
-.cover {
-    width:78px;
-}
-
-.playbutton {
-    width:20px; 
-	overflow:hidden; 
-	position:relative;
-    z-index:1;
-    margin:6.5px 10px;
-    opacity:0.8;
-}
-    
-.playbox {
-    width:40px;
-    height:40px;
-    background-color:white; 
-    position:absolute; 
-    z-index:1;
-    margin-top:19px; 
-    margin-left:19px; 
-    opacity:0.8;
-    border-radius:50%;
-}
-
-.audioinfo {
-    max-height:100px;
-    overflow-y:scroll;
-    position:absolute;
-    top:10px;
-    left:98px;
 }
 
 p.asker {
-{block:IfTransparentPostBackground}
-    background:transparent;
-{/block:IfTransparentPostBackground}
-{block:IfNotTransparentPostBackground}
-    background:{color:Post Background};
-{/block:IfNotTransparentPostBackground}
-    width:500px;
     margin:0;
-    padding:10px;
-{block:IfBorders}
-    border:{select:Border Width} solid {color:Accent}; 
-{/block:IfBorders}
-{block:IfNotBorders}
-    border:1px solid transparent;
-{/block:IfNotBorders}
+    padding:1em;
 }
 
-.question {
+em.question {
     background:{color:Accent};
-    width:500px;
-    padding:10px;
-{block:IfBorders}
-    border:{select:Border Width} solid {color:Accent}; 
-{/block:IfBorders}
-{block:IfNotBorders}
-    border:1px solid transparent;
-{/block:IfNotBorders}
+    display:block;
+    padding:1em;
 }
 
 /* permalink page */
 
-.notecon {
-    position:relative;
-    margin-bottom:10px;
-    width:510px;
-    padding:0 0 0 10px;
-{block:IfTransparentPostBackground}
-    background:transparent;
-{/block:IfTransparentPostBackground}
-{block:IfNotTransparentPostBackground}
-    background:{color:Post Background};
-{/block:IfNotTransparentPostBackground}
-{block:IfBorders}
-    border:{select:Border Width} solid {color:Accent}; 
-{/block:IfBorders}
-{block:IfNotBorders}
-    border:1px solid transparent;
-{/block:IfNotBorders}
+.notes-container {
+    margin-top:4rem;
 }
 
 ol.notes {
-{block:IfTransparentPostBackground}
-    background:transparent;
-{/block:IfTransparentPostBackground}
-{block:IfNotTransparentPostBackground}
-    background:{color:Post Background};
-{/block:IfNotTransparentPostBackground}
+    margin:0;
+    padding:1em;
     list-style-type:none;
-    margin:10px 0 9px 0;
-    padding:0;
-    max-height:500px;
-    overflow-y:scroll;
-    text-transform:lowercase;
 }
 
-ol.notes li img {
-{block:IfBorders}
-    border:{select:Border Width} solid {color:Accent}; 
-{/block:IfBorders}
-{block:IfNotBorders}
-    border:1px solid transparent;
-{/block:IfNotBorders}
-    margin-right:4px;
+.notes img {
+   display:none;
 }
 
-ol.notes li span {
-    position:relative;
-    bottom:3px;
-}
-
-.tagcon {
-{block:IfTransparentPostBackground}
-    background:transparent;
-{/block:IfTransparentPostBackground}
-{block:IfNotTransparentPostBackground}
-    background:{color:Post Background};
-{/block:IfNotTransparentPostBackground}
-    position:relative;
-    width:500px;
-    margin-bottom:10px;
-    padding:10px;
-{block:IfBorders}
-    border:{select:Border Width} solid {color:Accent}; 
-{/block:IfBorders}
-{block:IfNotBorders}
-    border:1px solid transparent;
-{/block:IfNotBorders}
+.notes li:not(:last-child) {
+    margin-bottom:1em;
 }
 
 /* pagination */
 
-#pagination {
-    width:520px;
+.pagination {
     text-align:center;
 }
 
-span.current {
+.current {
     font-weight:bold;
 }
 
-#next, #back, span.current, a.jump {
-{block:IfTransparentPostBackground}
-    background:transparent;
-{/block:IfTransparentPostBackground}
-{block:IfNotTransparentPostBackground}
-    background:{color:Post Background};
-{/block:IfNotTransparentPostBackground}
+.pagination > * {
     color:{color:Text};
-{block:IfBorders}
-    border:{select:Border Width} solid {color:Accent}; 
-{/block:IfBorders}
-{block:IfNotBorders}
-    border:1px solid transparent;
-{/block:IfNotBorders}
     padding:3px;
-    position:relative;
-    top:3px;
+    margin:0 0.5rem;
 }
 
-@media only screen and (max-width: 780px) {
-    #wrapper {
-        width:520px;
-    }
-    
-    .bigpost .postinfo {
+@media only screen and (max-width: 830px) {
+    ul.post-info,
+    .post-container:hover .post-info {
         width:auto;
-        padding:10px;
-        margin-bottom:10px;
-        float:none;
-{block:IfBorders}
-    border:{select:Border Width} solid {color:Accent}; 
-{/block:IfBorders}
-{block:IfNotBorders}
-    border:1px solid transparent;
-{/block:IfNotBorders}
-        display:block;
+        position:static;
+        padding:0.5em;
+        margin:1em 0 0 0;
+        display:table;
     }
         
-    .bigpost .postinfo p {
+    .post-info li {
         display:inline;
-        margin-right:10px;
+    }
+    
+    .post-info li:not(:last-child) {
+        margin-right:1em;
     }
 }
 
 </style>
 
 <body>
-<div id="wrapper">
 
-<div id="header">
+<div class="wrapper">
 
-    {block:IfShowHeaderImage}
-    <div id="headerimg"><a href="/"><img src={image:Header Image} /></a></div>
-    {/block:IfShowHeaderImage}
+<header class="transparent borders">
     
-    <h1 id="title"><a href="/">{Title}</a></h1>
-    <div id="desc">{Description}</div>
+    <h1 class="title"><a href="/">{Title}</a></h1>
+    <p class="desc">{Description}</p>
     
-    <ul id="pages">
+    <nav>
+    <ul class="links">
     <li><a href="/">{lang:Home}</a></li>
     <li><a href="/archive">{lang:Archive}</a></li>
     {block:AskEnabled}
     <li><a href="/ask">Ask</a></li>
     {/block:AskEnabled}
     {block:SubmissionsEnabled}
-    <li><a href="/submit">{SubmitLabel}</a></li>
+    <li><a href="/submit">Submit</a></li>
     {/block:SubmissionsEnabled}
     {block:HasPages}
     {block:Pages}
     <li><a href="{URL}">{Label}</a></li>
     {/block:Pages}
     {/block:HasPages}
-    {block:IfLink1}
-    <li><a href="{text:Link1}">{text:Link1 Title}</a></li>
-    {/block:IfLink1}
-    {block:IfLink2}
-    <li><a href="{text:Link2}">{text:Link2 Title}</a></li>
-    {/block:IfLink2}
-    {block:IfLink3}
-    <li><a href="{text:Link3}">{text:Link3 Title}</a></li>
-    {/block:IfLink3}
     <li><a href="http://spacetchi.tumblr.com/">Theme</a></li>
-    </ul>
+    </nav>
     
-</div><!-- header -->
+    {block:IfShowHeaderImage}
+    <div class="header-img borders"><a href="/"><img src="{image:Header Image}" /></a></div>
+    {/block:IfShowHeaderImage}
+    
+</header>
 
 {block:IfShowSidebar}
 
-<div id="sidebar">
+<div id="sidebar" class="sidebar transparent borders">
 
-    <ul id="sidepages">
+    <ul id="sidebar-links" class="sidebar-links">
     <li><a href="/">{lang:Home}</a></li>
     {block:AskEnabled}
     <li><a href="/ask">Ask</a></li>
@@ -629,89 +450,121 @@ span.current {
     <li><a href="{URL}">{Label}</a></li>
     {/block:Pages}
     {/block:HasPages}
-    {block:IfLink1}
-    <li><a href="{text:Link1}">{text:Link1 Title}</a></li>
-    {/block:IfLink1}
-    {block:IfLink2}
-    <li><a href="{text:Link2}">{text:Link2 Title}</a></li>
-    {/block:IfLink2}
-    {block:IfLink3}
-    <li><a href="{text:Link3}">{text:Link3 Title}</a></li>
-    {/block:IfLink3}
     <li><a href="/archive">{lang:Archive}</a></li>
     </ul>
     
     {block:IfShowSidebarImage}
-    <img src={image:Sidebar Image} id="sidebarimg" />
+    <img src="{image:Sidebar Image}" id="sidebar-img" class="sidebar-img" />
     {/block:IfShowSidebarImage}
-    <p id="sidetext">{text:Sidebar Text}</p>
+    <p id="sidebar-text" class="sidebar-text">{text:Sidebar Text}</p>
     
 </div><!-- sidebar -->
 
 {/block:IfShowSidebar}
 
+<main class="content">
+
 {block:Posts}
 
-<div class="bigpost">
+<div class="post-container">
+    
+<article class="post transparent borders">
 
-    {block:Date}
-    <div class="postinfo">
-    <p><a href="{Permalink}">{ShortMonth}. {DayOfMonth}{DayOfMonthSuffix}, {Year}</a></p>
-    {/block:Date}
-    
-    {block:RebloggedFrom}
-    <p><a href="{ReblogParentURL}" title="{ReblogParentName}">Via</a>
-    {/block:RebloggedFrom}</p>
-    
-    {block:ContentSource}
-    <p><a href="{SourceURL}">Source</a></p>
-    {/block:ContentSource}
-    
-    {block:NoteCount}
-    <p><a href="{Permalink}">{NoteCountWithLabel}</a></p>
-    {/block:NoteCount}
-    </div><!-- postinfo-->
+<!-- begin top of post stuff -->
 
     {block:Link}
-    <div class="link"><a href="{URL}">{Name} (link)</a></div>
+    <h2 class="title"><a href="{URL}">{Name} (link)</a></h2>
     {/block:Link}
-    
-    {block:Answer}
-    <p class="asker">from {Asker}</p>
-    <div class="question">
-    <b>{Question}</b>
-    </div>
-    {/block:Answer}
-
-<div class="post">
     
     {block:Text}
     {block:Title}
     <h2 class="title"><a href="{Permalink}">{Title}</a></h2>
     {/block:Title}
+    {/block:Text}
+    
+    {block:Chat}
+    {block:Title}
+    <h2 class="title"><a href="{Permalink}">{Title}</a></h2>
+    {/block:Title}
+    {/block:Chat}
+    
+    {block:Answer}
+    <p class="asker">from {Asker}</p>
+    <em class="question">{Question}</em>
+    {/block:Answer}
+    
+<!-- end top of post stuff -->
+
+<div class="post-content">
+    
+    {block:Text}
     {Body}
     {/block:Text}
     
     {block:Photo}
-    <div class="media">
-    {LinkOpenTag}
+    
+    <div class="media make_lightbox" 
+    data-width="{PhotoWidth-HighRes}" 
+    data-height="{PhotoHeight-HighRes}" 
+    data-lowres="{PhotoURL-500}" data-highres="{PhotoURL-HighRes}">
     <img src="{PhotoURL-HighRes}" alt="{PhotoAlt}"  class="photoset-img"/>
-    {LinkCloseTag}
     </div>
+    
     {block:Caption}
-    <div class="caption">{Caption}</div>
+     {Caption}
     {/block:Caption}
+    
     {/block:Photo}
     
+    <!-- BEGIN PXU PHOTOSET REQUIRED HTML -->
+    
     {block:Photoset}
-    <div class="media">{Photoset-500}</div>
+
+    <div class="photo-slideshow" id="photoset_{PostID}" data-layout="{PhotosetLayout}">
+
+    {block:Photos}
+    
+    <div class="media photo-data">
+    
+    <div class="pxu-photo">
+    <img alt="{PhotoAlt}" 
+    src="{PhotoURL-500}" 
+    width="{PhotoWidth-500}" 
+    height="{PhotoHeight-500}" 
+    data-highres="{PhotoURL-HighRes}" 
+    data-width="{PhotoWidth-HighRes}" 
+    data-height="{PhotoHeight-HighRes}" 
+    class="{block:Exif}exif-yes{/block:Exif} {block:Caption}caption-yes{/block:Caption}"{block:Exif}
+    data-camera="{block:Camera}{Camera}{/block:Camera}" 
+    data-iso="{block:ISO}{ISO}{/block:ISO}" 
+    data-aperture="{block:Aperture}{Aperture}{/block:Aperture}" 
+    data-exposure="{block:Exposure}{Exposure}{/block:Exposure}" 
+    data-focal="{block:FocalLength}{FocalLength}{/block:FocalLength}"{/block:Exif} {block:Caption}
+    data-caption="{Caption}"{/block:Caption} />
+    </div><!-- pxu-photo -->
+    
+    <div class="icons">
+    <a class="tumblr-box" rel="post-{PostID}" href="{PhotoURL-HighRes}">
+    <span class="zoom"></span>
+    </a>
+    </div><!-- icons -->
+     
+    </div><!-- photo-data -->
+    
+    {/block:Photos}
+
+    </div><!-- photo-slidshow -->
+
     {block:Caption}
-    <div class="caption">{Caption}</div>
+     {Caption}
     {/block:Caption}
+
     {/block:Photoset}
     
+    <!-- END PSU PHOTOSET REQUIRED HTML -->
+    
     {block:Quote}
-    <p class="quote">“{Quote}”</p>
+    <h2 class="quote">“{Quote}”</h2>
     {block:Source}
     <p class="source">&mdash;{Source}</p>
     {/block:Source}
@@ -719,80 +572,86 @@ span.current {
     
     {block:Link}
     {block:Description}
-    <div class="caption">{Description}</div>
+     {Description}
     {/block:Description}
     {/block:Link}
     
     {block:Chat}
-    {block:Title}
-    <h2 class="title"><a href="{Permalink}">{Title}</a></h2>
-    {/block:Title}
     <div class="chat"> 
     {block:Lines}
-    <p class="{Alt} user_{UserNumber} chat">
+    <p class="{Alt} user_{UserNumber} chat-line">
     {block:Label}
-    <span class="name">{Label}</span>
+    <span class="name borders">{Label}</span>
     {/block:Label}
-    <span class="line">{Line}</span>
+    <span class="line borders">{Line}</span>
     </p>
     {/block:Lines}
     </div>
     {/block:Chat}
     
     {block:Video}
-    <div class="media">{Video-500}</div>
+    <div class="media">{Video-700}</div>
     {block:Caption}
-    <div class="caption">{Caption}</div>
+     {Caption}
     {/block:Caption}
     {/block:Video}
     
     {block:Audio}
-    <div class="audio">
-    
-    <div class="playbox">
-    <div class="playbutton">
-    {block:AudioPlayer}{AudioPlayerWhite}{/block:AudioPlayer}
+    <div class="media">
+    {block:AudioEmbed}
+    {AudioEmbed-640 color="white"}
+    {/block:AudioEmbed}
     </div>
-    </div>
-    
-    {block:AlbumArt}
-    <img src="{AlbumArtURL}" class="cover">
-    {/block:AlbumArt}
-    <div class="audioinfo">
-    {block:TrackName}<b>{TrackName}</b>{/block:TrackName}
-    {block:Artist}by <b>{Artist}</b><br>{/block:Artist}
-    {block:Album}From <b>{Album}</b>{/block:Album}
-    </div><!-- audioinfo -->
-    
-    </div><!-- audio -->
-    
     {block:Caption}
-    <div class="caption">{Caption}</div>
+    {Caption}
     {/block:Caption}
-    
     {/block:Audio}
     
     {block:Answer}
-    <div class="q">
-    <div class="answer">{Answer}</div></div>
+    <div class="answer">
+    {block:Answerer}
+    <p>{Answerer} answers:</p>
+    {/block:Answerer}
+    {Answer}
+    </div>
     {/block:Answer}
     
-</div><!-- post -->
+</div><!-- post-content-->
+    
+</article>
 
-</div><!-- bigpost -->
+    {block:Date}
+    <ul class="post-info transparent borders">
+    <li><a href="{Permalink}" title="{TimeAgo}">{ShortMonth}. {DayOfMonth}{DayOfMonthSuffix}, {Year}</a></li>
+    
+    {block:RebloggedFrom}
+    <li><a href="{ReblogParentURL}" title="{ReblogParentName}">Via</a></li>
+    {/block:RebloggedFrom}
+    
+    {block:ContentSource}
+    <li><a href="{SourceURL}">Source</a></li>
+    {/block:ContentSource}
+    
+    {block:NoteCount}
+    <li><a href="{Permalink}">{NoteCountWithLabel}</a></li>
+    {/block:NoteCount}
+    </ul><!-- post-info-->
+    {/block:Date}
+
+</div><!-- post-container -->
 
 {block:PermalinkPage}
 
     {block:HasTags}
-    <div class="tagcon">
+    <div class="tags">
     {block:Tags}
     <a href="{TagUrl}">#{Tag}</a>
     {/block:Tags}
     </div>
     {/block:HasTags}
-
+    
     {block:PostNotes}
-    <div class="notecon">
+    <div class="notes-container transparent borders">
     {PostNotes}
     </div>
     {/block:PostNotes}
@@ -803,31 +662,31 @@ span.current {
 
 {block:Pagination}
 
-    <div id="pagination">
+    <nav class="pagination">
     {block:PreviousPage}
-    <a href="{PreviousPage}" id="back">back</a>
+    <a href="{PreviousPage}" class="back transparent borders">back</a>
     {/block:PreviousPage}
     
     {block:JumpPagination length="5"}
     {block:CurrentPage}
-    <span class="current">{PageNumber}</span>
+    <span class="current transparent borders">{PageNumber}</span>
     {/block:CurrentPage}{block:JumpPage}
-    <a class="jump" href="{URL}">{PageNumber}</a>
+    <a class="jump transparent borders" href="{URL}">{PageNumber}</a>
     {/block:JumpPage}
     {/block:JumpPagination}
     
     {block:NextPage}
-    <a href="{NextPage}" id="next">next</a>
+    <a href="{NextPage}" class="next transparent borders">next</a>
     {/block:NextPage}
-    </div><!-- pagination -->
+    </nav><!-- pagination -->
 
 {/block:Pagination}
+
+</main>
 
 </div><!-- wrapper -->
 
 <div id="footer"></div>
-
-</body>
 
 <script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
 
@@ -837,7 +696,7 @@ span.current {
 $(document).ready(function(){
 
 	$(window).scroll(function(){
-		if ($(this).scrollTop() > 200 && $(this).width() > 1000) {
+		if ($(this).scrollTop() > 200 && $(this).width() > 830) {
 			$("#sidebar").fadeIn();
 		} else {
 			$("#sidebar").fadeOut();
@@ -845,7 +704,7 @@ $(document).ready(function(){
 	});
 	
     $("#sidebar").click(function(){
-        $("#sidetext, #sidepages").toggle();
+        $("#sidebar-text, #sidebar-links").toggle();
     });
     
 });
@@ -859,5 +718,43 @@ document.getElementById("footer").style.fontWeight="bold";
 //seriously
     
 </script>
+
+<script type="text/javascript" src="http://static.tumblr.com/cqfswrg/1xXo902k0/jquery_photoset.js"></script>
+
+<script type="text/javascript">
+//pxu photosets
+    $(document).ready(function() {
+        $('.photo-slideshow').pxuPhotoset({
+            'gutter' : '10px',
+            'rounded' : 'false',
+        }, function() {
+        // callback
+        });
+    });
+    
+</script>
+
+<script>
+//calling lightbox on all images
+    $(function(){
+        $('.make_lightbox').each(function(){ 
+            $(this).on('click',function(){  
+                var lbArray = [];
+                var arrayContents = {
+                    "width":$(this).data('width'), 
+                    "height":$(this).data('height'), 
+                    "low_res":$(this).data("lowres"), 
+                    "high_res":$(this).data('highres')
+                }; 
+                lbArray.push(arrayContents); 
+                Tumblr.Lightbox.init(lbArray,1); 
+                $('body').toggleClass('tumblr_lightbox_active'); 
+            });
+        });
+    });       
+    
+</script>
+
+</body>
 
 </html>
