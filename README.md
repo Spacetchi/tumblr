@@ -6,17 +6,17 @@ This is the repository for all my [tumblr themes](https://fiveppi.tumblr.com).
 
 You will find the html files in  `[Theme Name] > theme > [theme_name].html`. Copy and paste the raw text into your tumblr's customize page.
 
-Documentation for each theme is in `[Theme Name] > theme > documentation.md`.
+Documentation for each theme is in `[#]. [Theme Name] > theme > documentation.md`.
 
 Additionally, this information is usually mirrored on [tumblr](https://fiveppi.tumblr.com) in a more user-friendly manner.
 
 ## Finished Themes
 
-- 404
-- Facebook
-- Hypertext Markup Language
-- Lemon
-- Very Boring Theme
+1. Lemon
+2. 404
+3. Very Boring Theme
+4. Hypertext Markup Language
+5. Facebook
 
 If you see a theme in the repository that is not in this list, DO NOT install it. It is in development. Wait for the release post on tumblr.
 
