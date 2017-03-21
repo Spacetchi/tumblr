@@ -27,7 +27,6 @@ Do not steal!
 <link rel="alternate" type="application/rss+xml" href="{RSS}">
  
 <script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
-<script src ="//static.tumblr.com/fwgzvyf/Oj1o08f6h/shythemes.vr.js"></script>
 
 <meta name="color:Background" content="#78c9a1">
 <meta name="color:Wrapper" content="#fcf2f0">
@@ -58,11 +57,18 @@ Do not steal!
     color:{color:Text};
 }
 
+* {
+    box-sizing:border-box;
+}
+
+html {
+    font-size:{text:Font Size}px;
+}
+
 body {
     background:{color:Background};
     color:{color:Text};
     font-family:'Source Sans Pro', Helvetica, Arial, sans-serif;
-    font-size:{text:Font Size}px;
     box-sizing:border-box;
 }
 
@@ -79,43 +85,48 @@ a:hover {
 
 blockquote {
     margin:0;
-    padding-left:15px;
+    padding:0 0 0 1em;
     border-left:2px solid {color:Text};
     transition:.5s;
 }
 
-ol, ul {
+ol, 
+ul {
     margin:0;
-    padding-left:15px;
+    padding:0 0 0 1em;
 }
 
-img, iframe {
-    display:block;
-}
-
-.post img {
-    width:100%;
+img:not(.lightbox-image) {
+    max-width:100%;
     height:auto;
 }
 
-p:last-child, blockquote:last-child {
+.media iframe,
+.tumblr_video_container {
+    max-width:100%;
+}
+
+* > *:last-child {
     margin-bottom:0;
 }
 
-p:first-child, blockquote:first-child {
+* > *:first-child {
     margin-top:0;
 }
 
 /* wrappers */
 
-#wrapper {
+.wrapper {
     margin:5vh auto;
-    width:910px;
+    width:calc(20vw + 400px);
+    max-width:100%;
+    padding:0 1rem;
 }
 
-#content {
+.content-area {
     background:{color:Wrapper};
-    padding:30px;
+    padding:2rem;
+    margin-bottom:5vh;
     -webkit-box-shadow:0px 0px 24px 5px rgba(70,70,70,0.5);
     -moz-box-shadow:0px 0px 24px 5px rgba(70,70,70,0.5);
     box-shadow:0px 0px 24px 5px rgba(70,70,70,0.5);
@@ -123,77 +134,42 @@ p:first-child, blockquote:first-child {
 
 /* title */
 
-h1#title {
+h1.title {
     text-align:center;
-    margin:0 0 5vh 0;
 }
 
-h1#title a {
-    background:{color:Link};
-    padding:10px;
-    border-radius:20px;
+.title a {
+    background:none;
 }
 
 /* sidebar */
 
-#sidebar {
-    width:220px;
-    margin-left:630px;
-    position:fixed;
-    
-}
-
-ul#links {
-    font-size:14px;
+ul.links {
     list-style-type:none;
     padding:0;
+    text-align:center;
 }
 
-ul#links li a {
-    display:block;
-    padding:4px 12px;
-    margin:8px 0;
-    border-radius:6px;
-    background:{color:Link};
-    color:{color:Text};
-}
-
-#nav-one a {
-    font-size:14px;
+.links li {
+    display:inline;
     padding:4px 12px;
     border-radius:6px;
     background:{color:Link};
-    color:{color:Text};
 }
 
-#nav-one a:hover {
-    color:{color:Text};
-}
-
-#nav-one a#next {
-    margin:0;
-    display:inline-block;
-    float:right;
-}
-
-#nav-one a#back {
-    float:left;
-}
-
-#nav-two {
-    display:none;
+.links li:not(:last-child) {
+    margin-right:0.5em;
 }
 
 /* posts */
 
 .post {
-    width:600px;
     position:relative;
-    margin-bottom:30px;
+    margin-bottom:3rem;
 }
 
-.post:nth-last-child(2) {
-    margin-bottom:0;
+.media {
+    text-align:center;
 }
 
 .media img {
@@ -210,29 +186,22 @@ ul#links li a {
 }
 
 .caption {
-    margin-top:10px;
-}
-
-h2.title {
-    margin-top:0;
-    margin-bottom:10px;
+    margin-top:1em;
 }
 
 h2.title a:hover {
     background:{color:Link};
 }
 
-.question {
-    font-size:15px;
-    font-weight:bold;
+h2.link a {
+    background:{color:Link};
 }
 
-.answer {
-    margin-top:10px;
+.question {
+    font-style:italic;
 }
 
 .quote {
-    font-size:18px;
     font-weight:bold;
 }
 
@@ -243,12 +212,13 @@ h2.title a:hover {
 /* audio posts */
 
 .audio {
-    margin:0 0 10px 0;
+    margin:0 0 1em 0;
 }
  
 .cover {
     background:{color:Link};
     width:78px;
+    height:78px;
     transition:.5s;
     line-height:0;
 }
@@ -279,17 +249,14 @@ h2.title a:hover {
     overflow-y:scroll;
     position:absolute;
     top:0;
-    left:98px;
+    left:calc(78px + 1em);
 }
 
 /* post footer */
 
-.postfooter {
-    font-size:11.5px;
-    margin-top:10px;
-    {block:PermalinkPage}
-    margin-bottom:30px;
-    {/block:PermalinkPage}
+.post-footer {
+    font-size:0.9rem;
+    margin-top:1rem;
 }
 
 .postfooter a {
@@ -299,115 +266,65 @@ h2.title a:hover {
 
 /* tags */
 
-.tags {
-    margin-bottom:30px;
+.tags a {
+    background:none;
+    font-style:italic;
+}
+
+/* pagination */
+
+.pagination {
+    text-align:center;
+    margin-top:3rem;
+}
+
+.pagination a {
+    padding:4px 12px;
+    border-radius:6px;
+}
+
+.pagination a:hover {
+    background:{color:Link};
+}
+
+.back {
+    margin-right:0.5em;
 }
 
 /* post notes */
 
 ol.notes {
-    margin:0;
+    margin:3rem 0 0 0;
     padding:0;
     list-style-type:none;
-    width:600px;
 }
 
-ol.notes li {
-    margin-bottom:5px;
-}
-
-ol.notes a {
+.notes a {
     background:none;
 }
 
-ol.notes a:not(.more_notes_link) {
-    font-style:italic;
+.notes a:not(.more_notes_link) {
+    font-weight:bold;
 }
 
-ol.notes img {
+.notes img {
     display:none;
-}
-
-/* responsive */
-
-@media (max-width:910px) {
-    
-    #wrapper {
-        width:90vw;
-    }
-    
-    .post {
-        width:calc(90vw - 60px);
-    }
-    
-    .media {
-        width:100%;
-    }
-    
-    .post img {
-        max-width:100%;
-    }
-    
-    #sidebar {
-        display:block;
-        position:static;
-        margin:0;
-        width:100%;
-        margin-bottom:30px;
-    }
-    
-    ul#links {
-        text-align:center;
-    }
-    
-    ul#links li {
-        display:inline-block;
-        width:auto;
-        margin:0 4px;
-    }
-    
-    #nav-one {
-        display:none;
-    }
-    
-    #nav-two {
-        font-size:14px;
-        display:block;
-        color:transparent;
-        text-align:center;
-        margin:25px 0;
-    }
-    
-    #nav-two a {
-        padding:4px 12px;
-        margin:0 4px;
-        border-radius:6px;
-        background:{color:Link};
-        color:{color:Text};
-    }
-    
-    #nav-left {
-        width:;
-    }
-    
 }
 
 </style>
 
 <body>
 
-<div id="wrapper">
+<div class="wrapper">
 
-<h1 id="title"><a href="{BlogURL}">{Title}</a></h1>
+<header class="content-area">
 
-<div id="content">
+    <h1 class="title"><a href="{BlogURL}">{Title}</a></h1>
 
-<div id="sidebar">
-
-    <p id="desc">{Description}</p>
+    <p class="desc">{Description}</p>
     
-    <ul id="links">
-
+    <nav>
+    <ul class="links">
     <li><a href="/">{lang:Home}</a></li>
     <li><a href="/archive">{lang:Archive}</a></li>
     {block:HasPages}
@@ -422,52 +339,24 @@ ol.notes img {
     <li><a href="/submit">{SubmitLabel}</a></li>
     {/block:SubmissionsEnabled}
     <li><a href="http://fiveppi.tumblr.com/">Theme</a></li>
-    
-    
     </ul>
-    
-    {block:Pagination}
-    <div id="nav-one">
-    
-    {block:PreviousPage}
-    <a href="{PreviousPage}" id="back">Back</a>
-    {/block:PreviousPage}
-    
-    {block:NextPage}
-    <a href="{NextPage}" id="next">Next</a>
-    {/block:NextPage}
-    
-    </div><!-- nav-one -->
-    {/block:Pagination}
-    
-    {block:PermalinkPagination}
-    <div id="nav-one">
-    {block:PreviousPost}
-    <a id="back" href="{PreviousPost}">Previous Post</a>
-    {/block:PreviousPost}
+    </nav>
 
-    {block:NextPost}
-    <a id="next" href="{NextPost}">Next Post</a>
-    {/block:NextPost}
-    </div><!-- nav-one -->
-    {/block:PermalinkPagination}
+</header>
 
-</div><!-- sidebar -->
+<main class="content-area">
 
 {block:Posts}
  
-<div class="post">
+<article class="post">
  
     {block:Text}
-    
     {block:Title}
     <h2 class="title"><a href="{Permalink}">{Title}</a></h2>
     {/block:Title}
-    
     {Body}
-    
     {/block:Text}
- 
+    
     {block:Photo}
     
     <div class="make_lightbox media" 
@@ -482,6 +371,8 @@ ol.notes img {
     {/block:Caption}
     
     {/block:Photo}
+    
+    <!-- BEGIN PXU PHOTOSET STUFF -->
  
     {block:Photoset}
      
@@ -526,22 +417,24 @@ ol.notes img {
     {/block:Caption}
 
     {/block:Photoset}
+    
+    <!-- END PXU PHOTOSET STUFF -->
  
     {block:Quote}
      
-    <div class="quote">“{Quote}”</div>
+    <h2 class="quote title">“{Quote}”</h2>
     {block:Source}
-    <div class="source">&mdash;{Source}</div>
+    <div class="caption">&mdash;{Source}</div>
     {/block:Source}
     
     {/block:Quote}
     
     {block:Link}
     
-    <h2 class="title"><a href="{URL}">{Name} (link)</a></h2>
+    <h2 class="title link"><a href="{URL}">{Name} (link)</a></h2>
     
     {block:Description}
-    <div class="link-desc">{Description}</div>
+    <div class="caption">{Description}</div>
     {/block:Description}
     
     {/block:Link}
@@ -602,16 +495,19 @@ ol.notes img {
     {/block:Audio}
                
     {block:Answer}
-    
-    <div class="q">
-    <span class="asker">{Asker} says:</span><br> <span class="question">{Question}</span>
-    </div><!-- q -->
-    <div class="answer">{Answer}</div>
-    
+    <p>
+    <span class="asker">{Asker} says:</span><br />
+    <span class="question">{Question}</span>
+    </p>
+    <div class="caption">
+    {block:Answerer}
+    <p class="answerer">{Answerer} answers:</p>
+    {/block:Answerer}
+    {Answer}
     {/block:Answer}
     
     {block:Date}
-    <div class="postfooter">
+    <div class="post-footer">
     <a href="{Permalink}">{TimeAgo}</a>
     {block:NoteCount}
     with <a href="{Permalink}">{NoteCountWithLabel}</a>
@@ -619,7 +515,7 @@ ol.notes img {
     </div>
     {/block:Date}
  
-</div><!-- post -->
+</article>
 
 {block:PermalinkPage}
 
@@ -640,32 +536,30 @@ ol.notes img {
 {/block:Posts}
 
 {block:Pagination}
-    <div id="nav-two">
-
+    <nav class="pagination">
     {block:PreviousPage}
-    <a href="{PreviousPage}" id="back">Back</a>
+    <a href="{PreviousPage}" class="back">Back</a>
     {/block:PreviousPage}
-
-    {block:NextPage}
-    <a href="{NextPage}" id="next">Next</a>
-    {/block:NextPage}
     
-    </div><!-- nav -->
+    {block:NextPage}
+    <a href="{NextPage}" class="next">Next</a>
+    {/block:NextPage}
+    </nav>
 {/block:Pagination}
-
+    
 {block:PermalinkPagination}
-    <div id="nav-two">
+    <nav class="pagination">
     {block:PreviousPost}
-    <a id="back" href="{PreviousPost}">Previous Post</a>
+    <a href="{PreviousPost}" class="back">Previous Post</a>
     {/block:PreviousPost}
 
     {block:NextPost}
-    <a id="next" href="{NextPost}">Next Post</a>
+    <a href="{NextPost}" class="next">Next Post</a>
     {/block:NextPost}
-    </div><!-- nav-two -->
+    </nav>
 {/block:PermalinkPagination}
 
-</div><!-- content -->
+</main>
     
 </div><!-- wrapper -->
 
@@ -674,15 +568,6 @@ ol.notes img {
 <script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
 
 <script type="text/javascript" src="http://static.tumblr.com/cqfswrg/1xXo902k0/jquery_photoset.js"></script>
-
-<script>
-
-$(document).ready(function() {
-    var $child = $("#sidebar");
-    $child.parent().css("min-height", $child.outerHeight());
-});
-    
-</script>
 
 <script type="text/javascript">
 
