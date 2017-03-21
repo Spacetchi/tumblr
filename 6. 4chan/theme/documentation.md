@@ -4,12 +4,12 @@
 
 Jump to the pre-made colour schemes based on 4chan's themes.
 
-- [Yotsuba](/#Yotsuba)
-- [Yotsuba B]/(#Yotsuba_B)
-- [Futaba](/#Futaba)
-- [Burichan](/#Burichan)
-- [Tomorrow](/#Tomorrow)
-- [Photon](/#Photon)
+- [Yotsuba](#Yotsuba)
+- [Yotsuba B](#Yotsuba_B)
+- [Futaba](#Futaba)
+- [Burichan](#Burichan)
+- [Tomorrow](#Tomorrow)
+- [Photon](#Photon)
 
 ## Options
 
