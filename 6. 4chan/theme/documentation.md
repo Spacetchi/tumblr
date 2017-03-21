@@ -2,14 +2,7 @@
 
 ## Pre-Made Colour Schemes
 
-Jump to the pre-made colour schemes based on 4chan's themes.
-
-- [Yotsuba](#Yotsuba)
-- [Yotsuba B](#Yotsuba_B)
-- [Futaba](#Futaba)
-- [Burichan](#Burichan)
-- [Tomorrow](#Tomorrow)
-- [Photon](#Photon)
+[Jump to the pre-made colour schemes based on 4chan's themes](#colour_schemes)
 
 ## Options
 
@@ -88,5 +81,12 @@ Toggles borders on post replies, post notes, and pagination. Default ON.
 Toggles infinite scroll, which only works on the first page (that's how it is on 4chan). Default ON.
 
 ## Colour Schemes
+
+- [Yotsuba](#yotsuba)
+- [Yotsuba B](#yotsuba_b)
+- [Futaba](#futaba)
+- [Burichan](#burichan)
+- [Tomorrow](#tomorrow)
+- [Photon](#photon)
 
 ### Yotsuba
