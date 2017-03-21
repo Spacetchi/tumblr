@@ -1,8 +1,6 @@
 # Degenerate Theme
 
-## Pre-Made Colour Schemes
-
-[Jump to the pre-made colour schemes based on 4chan's themes](#colour_schemes)
+[Jump to the pre-made colour schemes based on 4chan's themes.](#colour-schemes)
 
 ## Options
 
@@ -83,7 +81,7 @@ Toggles infinite scroll, which only works on the first page (that's how it is on
 ## Colour Schemes
 
 - [Yotsuba](#yotsuba)
-- [Yotsuba B](#yotsuba_b)
+- [Yotsuba B](#yotsuba-b)
 - [Futaba](#futaba)
 - [Burichan](#burichan)
 - [Tomorrow](#tomorrow)
