@@ -50,8 +50,8 @@ Do not steal!
 <meta name="color:Lines" content="#d9bfb7">
 <meta name="color:Post Title" content="#cc1105">
 <meta name="color:Names" content="#117743">
-<meta name="color:Button Background" content="#8993cd">
-<meta name="color:Button Border" content="#0e0b5d">
+<meta name="color:Button Background" content="#9f403b">
+<meta name="color:Button Border" content="#800201">
 <meta name="color:Meme Arrows" content="#789922">
 
 <meta name="image:Banner" content="https://secure.static.tumblr.com/65fb06ec471cd77cf293ddb9589269df/cqfswrg/auzon6t6z/tumblr_static_4d3yti1o1fcw00g08k0kks8o0.gif">
@@ -464,13 +464,13 @@ button.infinite {
     {block:NoteCount}
     with {NoteCountWithLabel}
     {/block:NoteCount}
-    <a href="{Permalink}" class="post-id">No.</a><a href="{Permalink}" class="post-id">{PostID}</a>{block:IndexPage} [<a href="{Permalink}">Reply</a>]{/block:IndexPage}
+    <a href="{Permalink}" class="post-id">No.</a><a href="{Permalink}" class="post-id">{PostID}</a> {block:IndexPage} [<a href="{Permalink}">Reply</a>]{/block:IndexPage}
     
     {block:PermalinkPage}
     {block:HasTags}
     <span class="tags">
     {block:Tags}
-    <a href="{TagURL}">#{Tag}</a> 
+     <a href="{TagURL}">#{Tag}</a> 
     {/block:Tags}
     </span><!-- tags -->
     {/block:HasTags}
@@ -664,8 +664,6 @@ button.infinite {
     
 </div><!-- wrapper -->
 
-</body>
-
 <script type="text/javascript" src="http://static.tumblr.com/cqfswrg/1xXo902k0/jquery_photoset.js"></script>
 
 <script type="text/javascript">
@@ -841,3 +839,7 @@ $('#infinite').click(function() {
 {/block:IndexPage}
 
 {/block:IfInfiniteScroll}
+
+</body>
+
+</html>
