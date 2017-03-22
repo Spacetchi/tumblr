@@ -8,21 +8,24 @@
 - Background (color)
 - Gradient Top (color)
 - Gradient Bottom (color)
-- Reply (color)
 - Text (color)
 - Link (color)
 - Link Hover (color)
+- Reply (color)
+- Lines (color)
 - Post Title (color)
 - Names (color)
-- Line (color)
+- Button Background (color)
+- Button Border (color)
 - Meme Arrows (color)
 - Font (font)
-- Font Size (number)
 - Gradient Background (boolean)
 - Anonymous (boolean)
 - Spoiler Text (boolean)
 - Borders (boolean)
 - Infinite Scroll (boolean)
+- Yotsuba Favicon (boolean)
+- Font Size (number)
 
 Default styling is 4chan's Yotsuba theme. Option explanations and additional information below. 
 
@@ -38,6 +41,10 @@ Make this the same as `Gradient Bottom` if you have `Gradient Background` turned
 
 Background of replies to a post, post notes on permalink page, and pagination. 
 
+### Lines
+
+Color of borders.
+
 ### Post Title
 
 Color of text in post titles.
@@ -46,9 +53,13 @@ Color of text in post titles.
 
 Color of OP's name; either 'Anonymous' or ReblogRootName.
 
-### Line
+### Button Background
 
-Color of borders.
+Background of the post toggle buttons.
+
+### Button Outline
+
+Outline of the post toggle buttons.
 
 ### Meme Arrows
 
@@ -78,6 +89,14 @@ Toggles borders on post replies, post notes, and pagination. Default ON.
 
 Toggles infinite scroll, which only works on the first page (that's how it is on 4chan). Default ON.
 
+### Yotsuba Favicon
+
+Toggles between the default 4chan favicon and your tumblr avatar for the favicon. Default ON.
+
+### Font Size
+
+A number of pixels, default 13. Do NOT write units. 
+
 ## Colour Schemes
 
 - [Yotsuba](#yotsuba)
@@ -88,3 +107,25 @@ Toggles infinite scroll, which only works on the first page (that's how it is on
 - [Photon](#photon)
 
 ### Yotsuba
+
+### Yotsuba B
+
+- Background: #edf1ff
+- Gradient Top: #d1d5ee
+- Gradient Bottom: #edf1ff
+- Text: #000000
+- Link: #34345c
+- Link Hover: #dd0000
+- Reply: #d6daf0
+- Lines: #b7c5d9
+- Post Title: #0f0c5d
+- Names: #117743
+- Button Background: #8993cd
+- Button Border: #0e0b5d
+- Meme Arrows: #789922
+- Font: Helvetica
+- Gradient Background: ON
+- Spoiler Text: ON
+- Borders: ON
+- Infinite Scroll: ON
+- Yotsuba Favicon: ON
