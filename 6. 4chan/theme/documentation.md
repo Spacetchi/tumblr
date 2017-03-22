@@ -8,6 +8,7 @@
 - Background (color)
 - Gradient Top (color)
 - Gradient Bottom (color)
+- Title (color)
 - Text (color)
 - Link (color)
 - Link Hover (color)
@@ -31,7 +32,7 @@ Default styling is 4chan's Yotsuba theme. Option explanations and additional inf
 
 ### Banner 
 
-Can be any image and size you want. Make it 300px by 100px if you want it to look like 4chan.
+Can be any image and size you want. Make it 300px by 100px if you want it to look like 4chan. Default to the Calvin picture.
 
 ### Background 
 
@@ -207,3 +208,9 @@ Same as [Yotsuba B](#yotsuba-b) EXCEPT:
 - Lines: #666666
 - Borders: OFFF
 - Font Size: 16
+
+## Additional Information
+
+There are a lot of scripts in this theme, because I had to make the markup look similar to that of 4chan's. Nonetheless, it shouldn't take *too* long to load and style.
+
+This theme uses [unnest](http://neothm.com/post/148902138319/un-nest-tumblr-captions-a-plugin-by), a plugin by neothm and magnusthemes on tumblr. This plugin creates a lot of empty paragraphs, so I've written a simple loop to delete them all. If for some reason you use empty paragraph tags in your posts, and you're finding that they're being removed by my script, I suggest using `<br>` instead. 
