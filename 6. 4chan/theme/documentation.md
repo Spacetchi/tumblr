@@ -101,18 +101,41 @@ A number of pixels, default 13. Do NOT write units.
 
 - [Yotsuba](#yotsuba)
 - [Yotsuba B](#yotsuba-b)
-- [Futaba](#futaba)
-- [Burichan](#burichan)
 - [Tomorrow](#tomorrow)
 - [Photon](#photon)
+- [Futaba](#futaba)
+- [Burichan](#burichan)
 
 ### Yotsuba
+
+- Background: #ffffee
+- Gradient Top: #fed6ae
+- Gradient Bottom: #ffffee
+- Title: #800000
+- Text: #800000
+- Link: #0000ee
+- Link Hover: #dd0000
+- Reply: #f0e0d6
+- Lines: #d9bfb7
+- Post Title: #cc1105
+- Names: #117743
+- Button Background: #9f403b
+- Button Border: #800201
+- Meme Arrows: #789922
+- Font: Helvetica
+- Gradient Background: ON
+- Borders: ON
+- Yotsuba Favicon: ON
+- Font Size: 13
+
+Note: Yotsuba is the default colour scheme, so if you want it, just re-install the theme.
 
 ### Yotsuba B
 
 - Background: #edf1ff
 - Gradient Top: #d1d5ee
 - Gradient Bottom: #edf1ff
+- Title: #af0a0f
 - Text: #000000
 - Link: #34345c
 - Link Hover: #dd0000
@@ -125,7 +148,62 @@ A number of pixels, default 13. Do NOT write units.
 - Meme Arrows: #789922
 - Font: Helvetica
 - Gradient Background: ON
-- Spoiler Text: ON
 - Borders: ON
-- Infinite Scroll: ON
 - Yotsuba Favicon: ON
+- Font Size: 13
+
+### Tomorrow
+
+- Background: #1d1f21
+- Title: #c5c8c6
+- Text: #c5c8c6
+- Link: #81a2be
+- Link Hover: #5f89ac
+- Reply: #282a2e
+- Lines: #282a2e
+- Post Title: #b294bb
+- Names: #c5c8c6
+- Button Background: #2b2b2b
+- Button Border: #383838
+- Meme Arrows: #789922
+- Font: Helvetica
+- Gradient Background: OFF
+- Borders: ON
+- Yotsuba Favicon: ON
+- Font Size: 13
+
+### Photon
+
+- Background: #eeeeee
+- Title: #004a99
+- Text: #333333
+- Link: #ff6600
+- Link Hover: #ff3300
+- Reply: #dddddd
+- Lines: #cccccc
+- Post Title: #111111
+- Names: #004a99
+- Button Background: #0069d3
+- Button Border: #003163
+- Meme Arrows: #789922
+- Font: Helvetica
+- Gradient Background: OFF
+- Borders: ON
+- Yotsuba Favicon: ON
+- Font Size: 13
+
+### Futaba
+
+Same as [Yotsuba ](#yotsuba)EXCEPT:
+
+- Lines: #666666
+- Borders: OFFF
+- Font Size: 16
+
+### Burichan
+
+Same as [Yotsuba B](#yotsuba-b) EXCEPT: 
+
+- Lines: #666666
+- Borders: OFFF
+- Font Size: 16
