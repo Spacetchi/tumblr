@@ -22,7 +22,12 @@ Do not steal!
 
 <title>{Title}</title>
        
+{block:IfNotYotsubaFavicon}
 <link rel="shortcut icon" href="{Favicon}">
+{/block:IfNotYotsubaFavicon}
+{block:IfYotsubaFavicon}
+<link rel="shortcut icon" href="http://s.4cdn.org/image/favicon.ico">
+{/block:IfYotsubaFavicon}
 
 <link rel="alternate" type="application/rss+xml" href="{RSS}">
  
@@ -35,39 +40,39 @@ Do not steal!
 <!-- normalize -->
 <link href="https://raw.githubusercontent.com/necolas/normalize.css/master/normalize.css" rel="stylesheet" type="text/css">
 
-<meta name="color:Background" content="#000">
-<meta name="color:Reply" content="#333">
-<meta name="color:Text" content="#fff">
-<meta name="color:Link" content="#aaa">
-<meta name="color:Link Hover" content="#ccc">
-<meta name="color:Post Title" content="#000">
-<meta name="color:Names" content="#000">
-<meta name="color:Line" content="#000">
+<meta name="color:Background" content="#ffffee">
+<meta name="color:Gradient Top" content="#fed6ae">
+<meta name="color:Gradient Bottom" content="#ffffee">
+<meta name="color:Text" content="#800000">
+<meta name="color:Link" content="#0000ee">
+<meta name="color:Link Hover" content="#dd0000">
+<meta name="color:Reply" content="#f0e0d6">
+<meta name="color:Lines" content="#d9bfb7">
+<meta name="color:Post Title" content="#cc1105">
+<meta name="color:Names" content="#117743">
+<meta name="color:Button Background" content="#8993cd">
+<meta name="color:Button Border" content="#0e0b5d">
 <meta name="color:Meme Arrows" content="#789922">
-<meta name="color:Gradient Top" content="#fff">
-<meta name="color:Gradient Bottom" content="#000">
 
-<meta name="image:Banner">
+<meta name="image:Banner" content="https://secure.static.tumblr.com/65fb06ec471cd77cf293ddb9589269df/cqfswrg/auzon6t6z/tumblr_static_4d3yti1o1fcw00g08k0kks8o0.gif">
 
 <meta name="if:Gradient Background" content="1">
 <meta name="if:Anonymous" content="1">
 <meta name="if:Spoiler Text" content="1">
 <meta name="if:Borders" content="1">
 <meta name="if:Infinite Scroll" content="1">
+<meta name="if:Yotsuba Favicon" content="1">
 
-<meta name="font:Font">
+<meta name="font:Font" content="helvetica, sans-serif">
 
-<meta name="select:Font Size" content="11px" title="11px">
-<meta name="select:Font Size" content="12px" title="12px">
-<meta name="select:Font Size" content="13px" title="13px">
-<meta name="select:Font Size" content="14px" title="14px">
-<meta name="select:Font Size" content="15px" title="15px">
-<meta name="select:Font Size" content="16px" title="16px">
-<meta name="select:Font Size" content="17px" title="17px">
-<meta name="select:Font Size" content="18px" title="18px">
-<meta name="select:Font Size" content="19px" title="19px">
+<meta name="text:Font Size" content="13">
 
 <style>
+
+#submit_form,
+#ask_form {
+    max-width:750px;
+}
 
 html {
     min-height:100%;
@@ -81,14 +86,14 @@ body {
     
     {block:IfGradientBackground}
     background:{color:Gradient Bottom};
-    background:-webkit-linear-gradient(to top, {color:Gradient Bottom} 95%, {color:Gradient Top});
-    background:-o-linear-gradient(to top, {color:Gradient Bottom} 95%, {color:Gradient Top});
-    background:-moz-linear-gradient(to top, {color:Gradient Bottom} 95%, {color:Gradient Top});
-    background:linear-gradient(to top, {color:Gradient Bottom} 95%, {color:Gradient Top});
+    background:-webkit-linear-gradient({color:Gradient Top}, {color:Gradient Bottom} 200px);
+    background:-o-linear-gradient({color:Gradient Top}, {color:Gradient Bottom} 200px);
+    background:-moz-linear-gradient({color:Gradient Top}, {color:Gradient Bottom} 200px);
+    background:linear-gradient({color:Gradient Top}, {color:Gradient Bottom} 200px);
     {/block:IfGradientBackground}
     
     color:{color:Text};
-    font-size:{select:Font Size};
+    font-size:{text:Font Size}px;
     font-family:{font:Font};
     word-wrap:break-word;
 }
@@ -101,23 +106,21 @@ a:hover {
     color:{color:Link Hover};
 }
 
-.media img {
-    display:block;
-}
-
 img:not(.lightbox-image) {
     max-width:100%;
     height:auto;
 }
 
-blockquote:not(.reply) {
+blockquote:not(.reply),
+q {
     margin-left:0;
     margin-right:0;
     padding:0;
     color:{color:Meme Arrows};
 }
 
-blockquote:not(.reply) > *:before {
+blockquote:not(.reply) > *:before,
+q:before {
     content:'>';
     display:inline;
 }
@@ -145,6 +148,12 @@ del:hover {
     color:white;
 }
 {/block:IfSpoilerText}
+
+button {
+    background:none;
+    border:none;
+    padding:0;
+}
 
 .wrapper {
     padding:10px;
@@ -185,14 +194,14 @@ h1.title {
 }
 
 main {
-    border-bottom:1px solid {color:Line};
+    border-bottom:1px solid {color:Lines};
     margin:10px 0;
 }
 
 /* posts */
 
 article {
-    border-top:1px solid {color:Line};
+    border-top:1px solid {color:Lines};
 }
 
 .post-info {
@@ -210,12 +219,13 @@ button::-moz-focus-inner {
 
 span.button {
     display:inline-block;
-    height:{select:Font Size};
-    width:{select:Font Size};
+    height:{text:Font Size}px;
+    width:{text:Font Size}px;
     position:relative;
+    margin-right:5px;
     border-radius:3px;
-    border:1px solid {color:Line};
-    background:{color:Reply};
+    border:1px solid {color:Button Border};
+    background:{color:Button Background};
     background-repeat:no-repeat;
 
     -webkit-background-size:cover;
@@ -235,8 +245,6 @@ span.button.closed {
 span.button button {
     width:100%;
     height:100%;
-    background:none;
-    border:none;
     position:absolute;
     top:0;
     left:0;
@@ -248,7 +256,8 @@ article .title {
     color:{color:Post Title};
 }
 
-.name {
+.name,
+a.tumblr_blog {
     font-weight:bold;
     color:{color:Names};
 }
@@ -258,7 +267,8 @@ article .title {
     color:{color:Text};
 }
 
-article:nth-of-type(n) .media {
+article:nth-of-type(n) .media,
+.reply img {
     width:320px;
 }
 
@@ -275,8 +285,8 @@ article:nth-of-type(4n) .media {
 }
 
 .media, 
-.audio,
-.video {
+.audio-container,
+.video-container {
     float:left;
     margin:0 10px 10px 0;
     max-width:100%;
@@ -284,10 +294,16 @@ article:nth-of-type(4n) .media {
 
 .media img {
     cursor:pointer;
+    display:block;
+    width:100%;
 }
 
 .question {
     font-weight:bold;
+}
+
+p.quote {
+    font-style:italic;
 }
 
 a.tumblr_blog {
@@ -296,24 +312,28 @@ a.tumblr_blog {
     display:inline;
 }
 
-blockquote.reply:first-of-type {
-    max-width:700px;
-}
-
-blockquote.reply {
-    background:{color:Reply};
-    padding:10px;
-    {block:IfBorders}
-    border:1px solid {color:Line};
-    {/block:IfBorders}
+.post.text .reply:first-of-type,
+.post.answer .reply:first-of-type,
+.post.chat .reply:first-of-type,
+.post.quote .reply:first-of-type {
+    max-width:750px;
 }
 
 blockquote.reply {
     margin:0 0 10px 0;
-    display:table;
 }
 
-*:not(.reply) > a.tumblr_blog:after {
+blockquote.reply:not(:first-of-type) {
+    background:{color:Reply};
+    padding:10px;
+    display:table;
+    max-width:500px;
+    {block:IfBorders}
+    border:1px solid {color:Lines};
+    {/block:IfBorders}
+}
+
+.reply:first-of-type > a.tumblr_blog:after {
     content:':';
     display:inline;
 }
@@ -324,7 +344,7 @@ blockquote.reply {
 
 .notes {
     display:block;
-    border-top:1px solid {color:Line};
+    border-top:1px solid {color:Lines};
     margin:0;
     padding:10px 0;
     list-style-type:none;
@@ -337,7 +357,7 @@ blockquote.reply {
     max-width:500px;
     display:table;
     {block:IfBorders}
-    border:1px solid {color:Line};
+    border:1px solid {color:Lines};
     {/block:IfBorders}
 }
 
@@ -355,7 +375,7 @@ nav.pagination {
     margin:10px 0;
     padding:10px;
     {block:IfBorders}
-    border:1px solid {color:Line};
+    border:1px solid {color:Lines};
     {/block:IfBorders}
     display:table;
     background:{color:Reply};
@@ -365,28 +385,25 @@ nav.pagination {
     font-weight:bold;
 }
 
-body:not(.__1) .infinite {
+body:not(.__1) .infinite-container {
     display:none;
 }
 
-#infinite {
-    background:none;
-    border:none;
-    padding:0;
+button.infinite {
     color:{color:Link};
     text-decoration:underline;
     font-family:{font:Font};
-    font-size:{select:Font Size};
+    font-size:{text:Font Size}px;
     cursor:pointer;
 }
 
-#infinite:hover {
+.infinite:hover {
     color:{color:Link Hover};
 }
 
 </style>
 
-<body class="__{block:JumpPagination}{block:CurrentPage}{PageNumber}{/block:CurrentPage}{/block:JumpPagination}">
+<body class='__{block:JumpPagination length="10"}{block:CurrentPage}{PageNumber}{/block:CurrentPage}{/block:JumpPagination}'>
 
 <div class="wrapper">
 
@@ -423,22 +440,22 @@ body:not(.__1) .infinite {
 
 {block:Posts}
  
-<article class="post clearfix">
+<article class="post clearfix {PostType}">
 
     <header class="post-info open">
     
     {block:IndexPage}<span class="button open"><button class="hide-post"></button></span>{/block:IndexPage}
 
     {block:Text}
-    {block:Title}<span class="title">{Title}</span>{/block:Title}
+    {block:Title}<span class="title">{Title} </span>{/block:Title}
     {/block:Text}
     
     {block:Chat}
-    {block:Title}<span class="title">{Title}</span>{/block:Title}
+    {block:Title}<span class="title">{Title} </span>{/block:Title}
     {/block:Chat}
     
     {block:Link}
-    <a href="{URL}" class="title">{Name}</a>
+    <a href="{URL}" class="title">{Name} </a>
     {/block:Link}
 
     {block:Date}
@@ -532,11 +549,10 @@ body:not(.__1) .infinite {
     {block:Quote}
     
     <div class="caption"> 
-    <p>“{Quote}”
+    <p class="quote">“{Quote}”</p>
     {block:Source}
-    <span class="source">&mdash;{Source}</span>
+    <p class="source">&mdash;{Source}</p>
     {/block:Source}
-    </p>
     </div>
     
     {/block:Quote}
@@ -565,7 +581,7 @@ body:not(.__1) .infinite {
  
     {block:Video}
     
-    <div class="video">{Video-400}</div>
+    <div class="video-container">{Video-400}</div>
     {block:Caption}
     <div class="caption">{Caption}</div>
     {/block:Caption}
@@ -574,7 +590,7 @@ body:not(.__1) .infinite {
 
     {block:Audio}
     
-    <div class="audio">
+    <div class="audio-container">
     {block:AudioEmbed}
     {AudioEmbed-400 color="white"}
     {/block:AudioEmbed}
@@ -614,12 +630,11 @@ body:not(.__1) .infinite {
 {block:Pagination}
     <nav class="pagination" id="pagination">
 
-    {block:IfInfiniteScroll}<span class="infinite">[<button id="infinite">All</button>]</span>{/block:IfInfiniteScroll}
+    {block:IfInfiniteScroll}<span class="infinite-container">[<button id="infinite" class="infinite">All</button>]</span>{/block:IfInfiniteScroll}
     
     {block:PreviousPage}[<a href="{PreviousPage}" class="back">Back</a>]{/block:PreviousPage}<!-- google chrome does weird whitespace collapsing here	
 
-    -->{block:JumpPagination length="10"}
-    {block:CurrentPage}[<span class="current">{PageNumber}</span>]{/block:CurrentPage}
+    -->{block:JumpPagination length="10"}<!-- google chrome does weird whitespace collapsing here--> {block:CurrentPage}[<span class="current">{PageNumber}</span>]{/block:CurrentPage}
     {block:JumpPage}[<span class="jump"><a href="{URL}">{PageNumber}</a></span>]{/block:JumpPage}
     {/block:JumpPagination}<!-- google chrome does weird whitespace collapsing here	
 
@@ -667,35 +682,35 @@ body:not(.__1) .infinite {
 <script src="http://static.tumblr.com/wgg6svp/jeWobvfj7/unnest.min.js" type="text/javascript"></script>
 
 <script>
-    var callLightbox = function() {
-        $('.make_lightbox').each(function(){ 
-            // this is just an element I let them click, it carries a series of data- attributes.
-            $(this).on('click',function(){  
-                // when clicked. this is the newer jQuery click() handler that's only in v1.8+ so that may be something to note.
-                var lbArray = []; // create blank array.
-                var arrayContents = {
-                    "width":$(this).data('width'), 
-                    "height":$(this).data('height'), 
-                    "low_res":$(this).data("lowres"), 
-                    "high_res":$(this).data('highres')
-                }; 
-                // make set of the data- attributes. 
-                lbArray.push(arrayContents); 
-                // push the set into the array.
-                Tumblr.Lightbox.init(lbArray,1); 
-                // trigger Tumblr lightbox. the '1' is the number of photos it expects. specific to how tumblr has things set up.
-                $('body').toggleClass('tumblr_lightbox_active'); 
-                // use this to prevent the user from scrolling.
-            });
+var lightbox = function() {
+    $('.make_lightbox').each(function(){ 
+        // this is just an element I let them click, it carries a series of data- attributes.
+        $(this).on('click',function(){  
+            // when clicked. this is the newer jQuery click() handler that's only in v1.8+ so that may be something to note.
+            var lbArray = []; // create blank array.
+            var arrayContents = {
+                "width":$(this).data('width'), 
+                "height":$(this).data('height'), 
+                "low_res":$(this).data("lowres"), 
+                "high_res":$(this).data('highres')
+            }; 
+            // make set of the data- attributes. 
+            lbArray.push(arrayContents); 
+            // push the set into the array.
+            Tumblr.Lightbox.init(lbArray,1); 
+            // trigger Tumblr lightbox. the '1' is the number of photos it expects. specific to how tumblr has things set up.
+            $('body').toggleClass('tumblr_lightbox_active'); 
+            // use this to prevent the user from scrolling.
         });
-    }
+    });
+}
 </script>
 
 <script>
 
 //unnests blockquotes
-var blockquotes = function() {
-
+var callBlockquotes = function() {
+    
     $('.post-content').unNest({ 
         yourCaption: ".caption", //your caption selector
         wrapName: ".reply", //the name of the captions’ new wrapper
@@ -709,7 +724,6 @@ var blockquotes = function() {
 //takes all replys out of caption and appends them to post
 var moveReply = function() {
     $('.post-content').each(function(){
-        console.log("start");
         var post = this;
         $(post).children('.caption').children('.reply').each(function() {
             if ($(this).is(':first-of-type')) {
@@ -720,7 +734,6 @@ var moveReply = function() {
             }
         });
         $(post).children('.caption').detach();
-        console.log("deleted");
     });
 }
 
@@ -735,10 +748,11 @@ var removeUnnecessary = function() {
 
 //adds tumblr username to the last reply
 var appendTumblr = function() {
-    $('article').each(function(){
+    $('.caption').each(function(){
         var post = this;
         $(post).children('.reply').each(function() {
-            if ((this.innerHTML.indexOf('class="tumblr_blog"') == -1)) {
+            if ( (this.innerHTML.indexOf('class="tumblr_blog"') == -1)
+                && !($(this).is(':first-of-type')) ) {
                 $(this).prepend('<a class="tumblr_blog" href="{BlogURL}">{Name}</a>');
             }
             
@@ -761,16 +775,15 @@ var togglePosts = function() {
 }
 
 var callbacks = function() {
-    callLightbox();
-    blockquotes();
-    moveReply();
+    lightbox();
     removeUnnecessary();
     appendTumblr();
 }
 
 $(document).ready(function() {
-    callbacks();
+    callBlockquotes();
     togglePosts();
+    callbacks();
 });
 
 </script>
@@ -792,9 +805,9 @@ var infinite = function() {
         itemSelector : "article"          
                    // selector for all items you'll retrieve
       
-    }, function( newElements ) {
+    }, function(newElements) {
             //photoset callback
-            $( newElements ).find('.photo-slideshow').pxuPhotoset({
+            $(newElements).find('.photo-slideshow').pxuPhotoset({
                 lightbox:"true",
                 rounded:"false",
                 borderRadius: '0px',
@@ -802,6 +815,16 @@ var infinite = function() {
                 photoset:'.photo-slideshow',
                 photoWrap:'.photo-data',
                 photo:'.pxu-photo'
+            });
+            
+            //unnest callback
+            $(newElements).find('.post-content').unNest({ 
+                yourCaption: ".caption",
+                wrapName: ".reply",
+                newCaptionUsername: false,
+                originalPostCaptionUsername: false,
+                tumblrAvatars: false,
+                usernameColon: false
             });
             
             callbacks();
@@ -818,18 +841,3 @@ $('#infinite').click(function() {
 {/block:IndexPage}
 
 {/block:IfInfiniteScroll}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
