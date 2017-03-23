@@ -53,7 +53,7 @@ Do not steal!
 <meta name="select:Border Width" content="2px" title="2px">
 
 <meta name="select:Post Size" content="400px" title="400px">
-<meta name="select:Post Size" content="450px" title="400px">
+<meta name="select:Post Size" content="450px" title="450px">
 <meta name="select:Post Size" content="500px" title="500px">
 <meta name="select:Post Size" content="550px" title="550px">
 
@@ -68,7 +68,7 @@ Do not steal!
 
 ::-webkit-scrollbar {
     width:8px; 
-    background:{color:Text};
+    background:{color:Background};
 }
 ::-webkit-scrollbar-thumb {
     background-color:{color:Accent};
@@ -204,6 +204,7 @@ ul.links {
 .links li {
     list-style-type:none;
     display:inline;
+    margin:0 3px;
 }
 
 /* sidebar */
@@ -227,16 +228,12 @@ ul.sidebar-links {
 
 .sidebar-links li {
     padding:0.5em 1em;
-{block:IfBorders}
-    border-bottom:{select:Border Width} solid {color:Accent}; 
-{/block:IfBorders}
-{block:IfNotBorders}
-    border:1px solid transparent;
-{/block:IfNotBorders}
 }
 
-.sidebar-links ul:not(:last-child) li:last-of-type {
-    border-bottom:none;
+.sidebar-links li{block:IfNotShowSidebarImage}:not(:last-of-type){/block:IfNotShowSidebarImage} {
+    {block:IfBorders}
+    border-bottom:{select:Border Width} solid {color:Accent}; 
+    {/block:IfBorders}
 }
 
 .sidebar-img {
@@ -247,11 +244,8 @@ ul.sidebar-links {
 .sidebar-text {
 {block:IfShowSidebarImage}
 {block:IfBorders}
-    border-top:{select:Border Width} solid {color:Accent}; 
+    border-top:{select:Border Width} solid {color:Accent};
 {/block:IfBorders}
-{block:IfNotBorders}
-    border:1px solid transparent;
-{/block:IfNotBorders}
 {/block:IfShowSidebarImage}
     margin:0;
     padding:1em;
@@ -274,6 +268,7 @@ ul.post-info {
     list-style-type:none;
     position:absolute;
     left:calc({select:Post Size} + 2rem + 1rem + 2 * {select:Border Width});
+    top:0;
     display:none;
 }
 
@@ -436,7 +431,7 @@ ol.notes {
 
 {block:IfShowSidebar}
 
-<div id="sidebar" class="sidebar transparent borders">
+<aside id="sidebar" class="sidebar transparent borders">
 
     <ul id="sidebar-links" class="sidebar-links">
     <li><a href="/">{lang:Home}</a></li>
@@ -459,7 +454,7 @@ ol.notes {
     {/block:IfShowSidebarImage}
     <p id="sidebar-text" class="sidebar-text">{text:Sidebar Text}</p>
     
-</div><!-- sidebar -->
+</aside>
 
 {/block:IfShowSidebar}
 
@@ -591,7 +586,7 @@ ol.notes {
     {/block:Chat}
     
     {block:Video}
-    <div class="media">{Video-700}</div>
+    <div class="media">{Video-500}</div>
     {block:Caption}
      {Caption}
     {/block:Caption}
