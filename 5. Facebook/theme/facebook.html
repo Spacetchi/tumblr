@@ -1,4 +1,6 @@
 <!DOCTYPE html>
+<html>
+
 <head>
 
 <!-- theme by spacetchi, Medusa Moxie 
@@ -911,8 +913,6 @@ ol.notes blockquote a {
     
 </div><!-- wrapper -->
 
-</body>
-
 <script type="text/javascript" src="http://static.tumblr.com/cqfswrg/1xXo902k0/jquery_photoset.js"></script><!-- pxu-photoset script-->
 
 <script type="text/javascript" src="http://static.tumblr.com/cqfswrg/tr3odz0m5/jquery_sticky-sidebar.js"></script><!-- stickykit -->
@@ -971,6 +971,7 @@ $(document).ready(function(){
     
 </script>
 
+{block:IfInfiniteScroll}
 {block:IndexPage}
 <script type="text/javascript">
 
@@ -1013,3 +1014,8 @@ $(document).ready(function() {
     
 </script>
 {/block:IndexPage}
+{/block:IfInfiniteScroll}
+
+</body>
+
+</html>
