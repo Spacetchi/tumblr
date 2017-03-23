@@ -7,15 +7,16 @@ http://spacetchi.tumblr.com/
 
 http://fiveppi.tumblr.com/
 
-http://spacetchi.net/
+http://tchi.space/
 
 Do not steal! -->
 
-<meta charset="utf-8"> <!-- encoding -->
+<meta charset="utf-8">
 
 {block:Description}
 <meta name="description" content="{MetaDescription}" />
 {/block:Description}
+<meta name="viewport" content="width=device-width, initial-scale=1">
 
 <title>{Title}</title>
 
@@ -28,16 +29,11 @@ Do not steal! -->
 <!-- jquery -->
 <script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
 
-<!-- video script by shythemes! -->
-<script src ="https://static.tumblr.com/fwgzvyf/Oj1o08f6h/shythemes.vr.js"></script>
-
 <!-- photoset stylesheet by pixelunion! -->
 <link href="https://static.tumblr.com/qudkd6d/OcDnl99gb/style.css" rel="stylesheet" type="text/css"/>
 
-<meta name="viewport" content="width=device-width, initial-scale=1">
-
-<meta name="color:Background" content="#000">
-<meta name="color:Text" content="#fff">
+<meta name="color:Background" content="#eee">
+<meta name="color:Text" content="#000718">
 <meta name="color:Cover" content="#2e2e2e">
 <meta name="color:Link" content="#222c7a">
 <meta name="color:Post Background" content="#fff">
@@ -53,8 +49,6 @@ Do not steal! -->
 <meta name="if:Infinite Scroll" content="1">
 <meta name="if:Show Tags" content="0">
 <meta name="if:Show Info" content="0">
-
-
 
 <meta name="text:Info">
 
@@ -92,46 +86,40 @@ a:hover {
     text-decoration:underline;
 }
 
-img, iframe {
-    display:block;
-}
-
-blockquote {
-    margin:0 0 0 10px;
-    padding:0 0 0 10px;
-    border-left:1px solid {color:Text};
-}
-
-.media img, iframe {
+img:not(.lightbox-image),
+iframe {
     max-width:100%;
 }
 
-.media img {
-    cursor:pointer;
+blockquote {
+    margin:0 0 0 1em;
+    padding:0 0 0 1em;
+    border-left:1px solid {color:Text};
 }
 
-h2 {
-    font-size:1.2em;
+* > *:first-child {
+    margin-top:0;
+}
+
+* > *:last-child {
+    margin-bottom:0;
 }
 
 /* wrappers */
 
-#wrapper {
+.wrapper {
     max-width:851px;
-    margin-left:auto;
-    margin-right:auto;
-    margin-top:0;
-    margin-bottom:5vh;
+    margin:0 auto;
 }
 
-#content {
+.content {
     float:right;
     margin-top:15px;
 }
 
 /* header */
 
-#cover {
+.cover {
     background:transparent;
     position:relative;
     background:{color:Cover} url('{image:Cover}');
@@ -144,7 +132,7 @@ h2 {
     height:315px;
 }
 
-#avatar {
+.top .avatar {
     display:block;
     background:{color:Post Background};
     {block:IfRoundedCorners}
@@ -157,36 +145,36 @@ h2 {
     border:1px solid {color:Borders};
 }
 
-#avatar img {
+.avatar img {
     display:block;
 }
 
-#name {
+.name {
     position:absolute;
     left:170px;
     bottom:15px;
 }
 
-#name a {
+.name a {
     color:white;
 }
 
-#name a:hover {
+.name a:hover {
     text-decoration:none;
 }
 
-h1#title {
+h1.title {
     margin:0;
     text-shadow:1px 1px black;
 }
 
-p#username {
+.username {
     margin:0;
     font-size:20px;
     text-shadow:1px 1px black;
 }
 
-#links {
+.links {
     background:{color:Post Background};
     margin:0;
     padding:0 0 0 170px;
@@ -196,28 +184,28 @@ p#username {
     {/block:IfRoundedCorners}
 }
 
-#links ul {
+.links ul {
     margin:0;
     list-style-type:none;
     padding:12px 0;
 }
 
-#links ul li {
+.links ul li {
     display:inline;
     padding:0 15px;
 }
 
-#links ul li {
+.links ul li {
     border-right:1px solid {color:Borders};
 }
 
-#links ul li:first-of-type {
+.links ul li:first-of-type {
     border-left:1px solid {color:Borders};
 }
 
 /* sidebar */
 
-#sidebar {
+.sidebar {
     width:292px;
     background:{color:Post Background};
     float:left;
@@ -230,13 +218,13 @@ p#username {
     margin-top:15px;
 }
 
-#description {
+.description {
     {block:IfShowInfo}
     padding-bottom:10px;
     {/block:IfShowInfo}
 }
 
-#info {
+.info {
     border-top:{color:Borders};
     padding-top:10px;
 }
@@ -245,7 +233,6 @@ p#username {
 
 .post {
     position:relative;
-    width:520px;
     background:{color:Post Background};
     border:1px solid {color:Borders};
     {block:IfRoundedCorners}
@@ -261,11 +248,11 @@ p#username {
     padding:10px;
 }
 
-.post .post-header {
+.post-header {
     margin-bottom:10px;
 }
 
-.post .post-header .avatar {
+.post-header .avatar {
     height:40px;
     width:40px;
     display:block;
@@ -273,43 +260,28 @@ p#username {
     margin-right:10px;
 }
 
-.post .post-header .post-info {
+.post-info {
     display:inline;
     font-size:12px;
 }
 
-.post .post-header .post-info a {
+.post-info a {
     font-weight:bold;
-}
-
-.post .post-footer {
-    padding-top:8px;
-    margin-top:10px;
-    border-top:{color:Borders};
-}
-
-.post .post-footer ul {
-    list-style-type:none;
-    margin:0;
-    padding:0;
-}
-
-.post .post-footer ul li {
-    display:inline-block;
-    padding-right:5px;
-    font-size:11px;
 }
 
 h2.title {
     margin-top:0;
+    font-size:1.2em;
 }
 
 h2.title a {
     text-decoration:none;
 }
 
-.post p:first-child {
-    margin-top:0;
+.media img {
+    display:block;
+    width:100%;
+    cursor:pointer;
 }
 
 .caption {
@@ -323,13 +295,13 @@ p.quote {
     font-size:16px;
 }
 
-.q {
+.question-container {
     padding:10px;
     border:1px solid {color:Borders};
     margin-bottom:10px;
 }
 
-.q a,
+.asker a,
 .question {
     font-weight:700;
 }
@@ -355,7 +327,7 @@ a.link .link-text {
     margin-top:0;
 }
 
-a.link .link-img {
+.link-img {
     height:150px;
     width:150px;
     overflow:hidden;
@@ -363,10 +335,29 @@ a.link .link-img {
 
 .link-img img {
     max-height:150px;
+    max-width:none;
 }
 
 .excerpt {
     display:inline;
+}
+
+.post-footer {
+    padding-top:8px;
+    margin-top:10px;
+    border-top:1px solid {color:Borders};
+}
+
+.post-footer ul {
+    list-style-type:none;
+    margin:0;
+    padding:0;
+}
+
+.post-footer ul li {
+    display:inline-block;
+    padding-right:5px;
+    font-size:11px;
 }
 
 /* permalink page */
@@ -419,70 +410,65 @@ ol.notes blockquote a {
 
 /* navigation */
 
-#nav {
+.pagination {
     margin:20px 0;
     text-align:center;
     {block:IfInfiniteScroll}
     {block:IndexPage}
     visibility:hidden;
     {/block:IndexPage}
-    {/blockIfInfiniteScroll}
+    {/block:IfInfiniteScroll}
 }
 
-#nav * {
-    display:inline-block;
-    background:{color:Post};
-    padding:10px;
+.pagination * {
+    background:{color:Post Background};
+    padding:5px 10px;
     {block:IfInfiniteScroll}
     {block:IndexPage}
     height:0;
     {/block:IndexPage}
-    {/blockIfInfiniteScroll}
+    {/block:IfInfiniteScroll} 
+    border:1px solid {color:Borders};
 }
 
 /* responsive */
 
 @media (max-width: 851px) {
 
-    #wrapper {
+    .wrapper {
         max-width:100%;
     }
     
-    #sidebar {
+    .sidebar,
+    .top .avatar {
         display:none;
     }
     
-    #avatar {
-        display:none;
-    }
-    
-    #name {
+    .name {
         left:15px;
     }
     
-    #links {
+    .links {
         padding:0;
         text-align:center;
     }
     
-    #content {
+    .content {
         margin:15px auto;
         float:none;
         width:522px;
         max-width:100%;
     }
     
-    #header {
+    .top {
         width:522px;
         max-width:100%;
         margin:0 auto;
     }
     
-    #header,
-    #content,
-    .comments,
-    .media img,
-    iframe {
+    header,
+    .content,
+    .comments {
         max-width:100%;
     }
     
@@ -498,18 +484,18 @@ ol.notes blockquote a {
 
 @media (max-width:522px) {
     
-    #name,
-    #header #avatar {
+    .name,
+    .header .avatar {
         display:none;
     }
     
-    #cover {
+    .cover {
         position:static;
         top:0;
         height:300px;
     }
     
-    #links {
+    .links {
         padding:0;
         text-align:center;
         position:fixed;
@@ -519,8 +505,8 @@ ol.notes blockquote a {
         z-index:3;
     }
     
-    #links ul li,
-    #links ul li:first-of-type {
+    .links ul li,
+    .links ul li:first-of-type {
         border:none;
     }
     
@@ -546,23 +532,23 @@ ol.notes blockquote a {
 
 <body>
 
-<div id="wrapper">
+<div class="wrapper">
 
-<div id="header">
+<header class="top">
 
-<div id="cover">
+<div class="cover">
 
-    <div id="avatar"><a href="{BlogURL}"><img src="{PortraitUrl-128}"></a></div>
+    <div class="avatar"><a href="{BlogURL}"><img src="{PortraitUrl-128}"></a></div>
     {block:IfShowName}
-    <div id="name">
-    <h1 id="title"><a href="{BlogURL}">{BlogTitle}</a></h1>
-    <p id="username"><a href="{BlogURL}">({Name})</a></p>
+    <div class="name">
+    <h1 class="title"><a href="{BlogURL}">{BlogTitle}</a></h1>
+    <p class="username"><a href="{BlogURL}">({Name})</a></p>
     </div><!-- name -->
     {/block:IfShowName}
     
 </div><!-- cover -->
 
-<div id="links">
+<nav class="links">
 
     <ul>
 
@@ -583,39 +569,39 @@ ol.notes blockquote a {
     
     </ul>
 
-</div><!-- links -->
+</nav>
     
-</div><!-- header -->
+</header>
 
-<div id="container" class="clearfix">
+<div class="container clearfix">
 
-<div id="sidebar">
+<aside class="sidebar" id="sidebar">
 
 <h2 class="title">Introduction</h2>
 
-<div id="description">
+<div class="description">
 {Description}
 </div>
 
 {block:IfShowInfo}
-<div id="info">
+<div class="info">
 {text:Info}
 </div>
 {/block:IfShowInfo}
 
-</div><!-- sidebar -->
+</aside><!-- sidebar -->
 
-<div id="content">
+<main class="content" id="content">
 
 {block:Posts}
  
-<div class="post" id="{PostID}">
+<article class="post" id="{PostID}">
 
 <div class="post-content">
 
 {block:Date}
 
-<div class="post-header clearfix">
+<header class="post-header clearfix">
 
     <div class="avatar">
     <a href="
@@ -671,7 +657,7 @@ ol.notes blockquote a {
 
     </div><!-- post-info -->
     
-</div><!--post-header -->
+</header>
 
 {block:Date}
  
@@ -784,9 +770,7 @@ ol.notes blockquote a {
     <p>
     {block:Lines}
     <div class="{Alt} user_{UserNumber}">
-    {block:Label}
-    <span class="name">{Label}</span>{/block:Label}
-    &nbsp;{Line}
+    {block:Label}{Label}{/block:Label}&nbsp;{Line}
     </div>
     {/block:Lines}
     </p>
@@ -819,26 +803,26 @@ ol.notes blockquote a {
                
     {block:Answer}
     
-    <div class="q">
-    <span class="asker">{Asker} says:</span><br> <span class="question">{Question}</span>
-    </div><!-- q -->
+    <div class="question-container">
+    <span class="asker">{Asker} says:</span><br />
+    <span class="question">{Question}</span>
+    </div><!-- question-container -->
+    
+    {block:Answerer}
+    <div class="answerer">{Answerer}</div>
+    {/block:Answerer}
     
     <div class="answer">{Answer}</div>
     
     {/block:Answer}
     
     {block:Date}
-    <div class="post-footer">
-    
+    <footer class="post-footer">
     <ul>
-    
     <li class="like"><a href="{Permalink}" target="blank">Like</a></li>
-    
     <li class="reblog"><a href="{ReblogURL}" target="blank">Share</a></li>
-    
     </ul>
-
-    </div><!-- post-footer -->
+    </footer><!-- post-footer -->
     {/block:Date}
     
 </div><!-- post-content -->
@@ -882,45 +866,46 @@ ol.notes blockquote a {
     
 {/block:PermalinkPage}
     
-</div><!-- post -->
+</article>
  
 {/block:Posts}
 
 {block:Pagination}
-    <div id="nav">
+    <nav class="pagination" id="pagination">
 
     {block:PreviousPage}
-    <a id= "prev" href="{PreviousPage}">back</a>
+    <a class="back" id= "back" href="{PreviousPage}">back</a>
     {/block:PreviousPage}
     {block:JumpPagination length="3"}
     {block:CurrentPage}
-    <span id="current">{PageNumber}</span>
-    {/block:CurrentPage}{block:JumpPage}
+    <span class="current">{PageNumber}</span>
+    {/block:CurrentPage}
+    {block:JumpPage}
     <a class="jump" href="{URL}">{PageNumber}</a>
     {/block:JumpPage}
     {/block:JumpPagination}
     {block:NextPage}
-    <a id="next" href="{NextPage}">next</a>
+    <a class="next" id="next" href="{NextPage}">next</a>
     {/block:NextPage}
     
-    </div><!-- nav -->
+    </nav>
 {/block:Pagination}
 
 {block:PermalinkPagination}
-    <div id="nav">
+    <nav class="pagination">
     
     {block:PreviousPost}
-    <a id="back" href="{PreviousPost}">Previous Post</a>
+    <a class="back" href="{PreviousPost}">Previous Post</a>
     {/block:PreviousPost}
 
     {block:NextPost}
-    <a id="next" href="{NextPost}">Next Post</a>
+    <a class="next" href="{NextPost}">Next Post</a>
     {/block:NextPost}
     
-    </div><!-- nav -->
+    </nav>
 {/block:PermalinkPagination}
 
-</div><!-- content -->
+</main>
 
 </div><!-- container -->
     
@@ -930,29 +915,18 @@ ol.notes blockquote a {
 
 <script type="text/javascript" src="http://static.tumblr.com/cqfswrg/1xXo902k0/jquery_photoset.js"></script><!-- pxu-photoset script-->
 
-<script type="text/javascript" src="http://static.tumblr.com/cqfswrg/tr3odz0m5/jquery_sticky-sidebar.js"></script><!-- sticky sidebar script -->
+<script type="text/javascript" src="http://static.tumblr.com/cqfswrg/tr3odz0m5/jquery_sticky-sidebar.js"></script><!-- stickykit -->
 
 {block:IfInfiniteScroll}
 <script type="text/javascript" src="http://static.tumblr.com/cqfswrg/k0bodz8wo/jquery_infinite-scroll.js"></script><!-- infinite scroll script -->
 {/block:IfInfiniteScroll}
 
 <script type="text/javascript">
-
 $(document).ready(function() {
     var $child = $("#sidebar");
     $child.parent().css("min-height", $child.outerHeight());
+    $child.stick_in_parent();
 });
-
-</script>
-
-<script type="text/javascript">
-
-$(document).ready(function(){
-    
-    $("#sidebar").stick_in_parent();
-    
-});
-    
 </script>
 
 <script type="text/javascript">
@@ -1004,11 +978,11 @@ $(document).ready(function() {
     
     $('#content').infinitescroll({
  
-        navSelector  : "div#nav",            
+        navSelector  : "#pagination",            
                    // selector for the paged navigation (it will be hidden)
-        nextSelector : "div#nav a#next",    
+        nextSelector : "a#next",    
                    // selector for the NEXT link (to page 2)
-        itemSelector : "#content div.post"          
+        itemSelector : "article"          
                    // selector for all items you'll retrieve
       
     }, function( newElements ) {
@@ -1025,9 +999,6 @@ $(document).ready(function() {
             
             //lightbox callback
             callLightbox();
-            
-            //resizeVideos callback
-            $(newElements).find('.video').resizeVideos();
             
             //like button callback
             var $newElems = $(newElements);
