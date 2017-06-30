@@ -114,7 +114,8 @@ blockquote {
 }
 
 img:not(.lightbox-image),
-iframe {
+iframe,
+.tumblr_video_container {
     max-width:100%;
 }
 
@@ -263,21 +264,17 @@ ul.sidebar-links {
 }
 
 ul.post-info {
-    width:8em;
-    padding:0 0.5em;
-    list-style-type:none;
-    position:absolute;
-    left:calc({select:Post Size} + 2rem + 1rem + 2 * {select:Border Width});
-    top:0;
-    display:none;
+    padding:0;
+    margin:1em 0 0 0;
 }
-
+        
 .post-info li {
-    margin:2px 0;
+    display:inline-block;
+    padding:0.5em;
 }
 
-.post-container:hover .post-info {
-    display:block;
+.post-info li:not(:last-of-type) {
+    margin-right:1em;
 }
 
 .post-content {
@@ -296,14 +293,19 @@ h2.title a {
     color:{color:Text};
 }
 
+.media {
+    width:100%;
+    text-align:center;
+}
+
 .media img {
-    width:{select:Post Size};
+    width:100%;
     display:block;
     cursor:pointer;
 }
 
 .tumblr_video_container {
-    width:{select:Post Size} !important; /* must use this due to tumblr */
+    display:inline-block;
 }
 
 .caption {
@@ -345,6 +347,10 @@ em.question {
     margin-top:4rem;
 }
 
+.tags a {
+    padding-right:1em;
+}
+
 ol.notes {
     margin:0;
     padding:1em;
@@ -373,25 +379,6 @@ ol.notes {
     color:{color:Text};
     padding:3px;
     margin:0 0.5rem;
-}
-
-@media only screen and (max-width: 830px) {
-    ul.post-info,
-    .post-container:hover .post-info {
-        width:auto;
-        position:static;
-        padding:0.5em;
-        margin:1em 0 0 0;
-        display:table;
-    }
-        
-    .post-info li {
-        display:inline;
-    }
-    
-    .post-info li:not(:last-child) {
-        margin-right:1em;
-    }
 }
 
 </style>
@@ -595,7 +582,7 @@ ol.notes {
     {block:Audio}
     <div class="media">
     {block:AudioEmbed}
-    {AudioEmbed-640 color="white"}
+    {AudioEmbed color="white"}
     {/block:AudioEmbed}
     </div>
     {block:Caption}
@@ -617,20 +604,17 @@ ol.notes {
 </article>
 
     {block:Date}
-    <ul class="post-info transparent borders">
-    <li><a href="{Permalink}" title="{TimeAgo}">{ShortMonth}. {DayOfMonth}{DayOfMonthSuffix}, {Year}</a></li>
-    
-    {block:RebloggedFrom}
-    <li><a href="{ReblogParentURL}" title="{ReblogParentName}">Via</a></li>
-    {/block:RebloggedFrom}
-    
-    {block:ContentSource}
-    <li><a href="{SourceURL}">Source</a></li>
-    {/block:ContentSource}
+    <ul class="post-info">
+    <li class="transparent borders"><a href="{Permalink}" title="{TimeAgo}">{ShortMonth}. {DayOfMonth}{DayOfMonthSuffix}, {Year}</a></li>
     
     {block:NoteCount}
-    <li><a href="{Permalink}">{NoteCountWithLabel}</a></li>
+    <li class="transparent borders"><a href="{Permalink}">{NoteCountWithLabel}</a></li>
     {/block:NoteCount}
+    
+    {block:ContentSource}
+    <li class="transparent borders"><a href="{SourceURL}">Source</a></li>
+    {/block:ContentSource}
+    
     </ul><!-- post-info-->
     {/block:Date}
 
