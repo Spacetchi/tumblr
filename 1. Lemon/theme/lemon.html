@@ -96,6 +96,7 @@ body {
     color:{color:Text};
     font-family:'Ubuntu Mono', 'lucida console', courier, monospace;
     word-wrap:break-word;
+    line-height:1.6;
 }
 
 a {
@@ -172,9 +173,10 @@ header {
 h1.title,
 h1.title a,
 h1.title a:hover {
-    font-size:1.3em;
+    font-size:1.2em;
     color:{color:Text};
     text-decoration:none;
+    margin-bottom:0;
 }
 
 .header-img {
@@ -183,6 +185,10 @@ h1.title a:hover {
     position:absolute;
     bottom:-1rem;
     right:1rem;
+}
+
+p.desc {
+    margin-top:0;
 }
 
 .header-img img {
@@ -229,7 +235,7 @@ ul.sidebar-links {
 }
 
 .sidebar-links li {
-    padding:0.5em 1em;
+    padding:0.2rem 1rem;
 }
 
 .sidebar-links li{block:IfNotShowSidebarImage}:not(:last-of-type){/block:IfNotShowSidebarImage} {
@@ -271,7 +277,7 @@ ul.post-info {
         
 .post-info li {
     display:inline-block;
-    padding:0.5em;
+    padding:0.2rem 0.5rem;
 }
 
 .post-info li:not(:last-of-type) {
@@ -376,9 +382,9 @@ ol.notes {
     font-weight:bold;
 }
 
-.pagination > * {
-    color:{color:Text};
-    padding:3px;
+.pagination * {
+    display:inline-block;
+    padding:0.2rem 0.5rem;
     margin:0 0.5rem;
 }
 
@@ -412,7 +418,7 @@ ol.notes {
     </nav>
     
     {block:IfShowHeaderImage}
-    <div class="header-img borders"><a href="/"><img src="{image:Header Image}" /></a></div>
+    <div class="header-img transparent borders"><a href="/"><img src="{image:Header Image}" /></a></div>
     {/block:IfShowHeaderImage}
     
 </header>
@@ -427,7 +433,7 @@ ol.notes {
     <li><a href="/ask">Ask</a></li>
     {/block:AskEnabled}
     {block:SubmissionsEnabled}
-    <li><a href="/submit">{SubmitLabel}</a></li>
+    <li><a href="/submit">Submit</a></li>
     {/block:SubmissionsEnabled}
     {block:HasPages}
     {block:Pages}
