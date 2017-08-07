@@ -29,18 +29,15 @@ Do not steal!
 <link rel="shortcut icon" href="{Favicon}">
 <link rel="alternate" type="application/rss+xml" href="{RSS}">
  
-<script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
-
 <meta name="image:Background">
 
 <meta name="color:Background" content="#78c9a1">
-<meta name="color:Wrapper" content="#fcf2f0">
+<meta name="color:Post Background" content="#f2eadb">
 <meta name="color:Text" content="#222">
 <meta name="color:Link" content="#bbe4d0">
 
 <meta name="if:Rounded Images" content="1">
-
-<meta name="text:Font Size" content="15">
+<meta name="if:Repeat Background" content="0">
 
 </head>
 
@@ -73,8 +70,12 @@ html {
 body {
     background:{color:Background} url('{image:Background}') no-repeat center center fixed;
     background-size:cover;
+{block:IfRepeatBackground}
+    background-size:auto;
+    background-repeat:repeat;
+{/block:IfRepeatBackground}
     color:{color:Text};
-    font-family:'Lora', georgia, 'times new roman', sans-serif;
+    font-family:'Lora', georgia, 'times new roman', serif;
     box-sizing:border-box;
     font-size:calc(14px + 0.2vw);
 }
@@ -141,7 +142,7 @@ img:not(.lightbox-image) {
 
 .content-area,
 ol.notes {
-    background:{color:Wrapper};
+    background:{color:Post Background};
     padding:2rem;
     margin-bottom:3rem;
     -webkit-box-shadow:0px 0px 24px 5px rgba(70,70,70,0.4);
@@ -165,11 +166,15 @@ ul.links {
     padding:0.3em 0.6em;
     border-radius:0.4em;
     background:{color:Link};
-    margin-bottom:0.5em;
+    margin-top:0.5em;
 }
 
 .links li:not(:last-child) {
     margin-right:0.5em;
+}
+
+p.desc {
+    margin-bottom:0.5em;
 }
 
 /* posts */
