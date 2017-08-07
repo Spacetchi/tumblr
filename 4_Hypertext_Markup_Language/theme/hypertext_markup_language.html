@@ -26,10 +26,8 @@ Do not steal!
        
 <link rel="shortcut icon" href="{Favicon}">
 <link rel="alternate" type="application/rss+xml" href="{RSS}">
- 
-<script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
 
-<script src="https://cdn.rawgit.com/leafo/sticky-kit/v1.1.2/jquery.sticky-kit.min.js" type="text/javascript"></script>
+<meta name="if:Show Post Info on Index Page" content="0">
 
 </head>
 
@@ -46,13 +44,17 @@ Do not steal!
 }
 
 html {
-    font-size:16px + 0.1vw;
+    font-size:16px;
+    font-size:calc(15px + 0.2vw);
 }
 
 body {
     font-family:'Times New Roman', georgia, palatino, serif;
     color:black;
     background:white;
+    padding:0;
+    margin:0;
+    line-height:1.6;
 }
 
 a {
@@ -70,6 +72,12 @@ blockquote {
     border-left:1px solid black;
 }
 
+ul, 
+ol {
+    margin:0 0 0 1em;
+    padding:0 0 0 1em;
+}
+
 * > *:first-child {
     margin-top:0;
 }
@@ -78,57 +86,48 @@ blockquote {
     margin-bottom:0;
 }
 
-img:not(.lightbox-image), 
-iframe {
+img:not(.lightbox-image) {
     max-width:100%;
     height:auto;
+}
+
+.media iframe,
+#ask_form,
+#submit_form {
+    max-width:100%;
+    display:block;
 }
 
 .media img {
     cursor:pointer;
     display:block;
-}
-
-.clearfix {
-    overflow:auto;
-    zoom:1
+    width:100%;
 }
 
 /* wrappers */
 
 .wrapper {
-    margin:5rem auto;
+    margin:2rem auto;
+    padding:1rem;
     max-width:100%;
     width:60%;
-    width:calc(25vw + 350px);
-    position:relative;
-}
-
-.columns {
-    position:relative;
-}
-
-header {
-    margin-bottom:5rem;
-}
-
-main {
-    width:80%;
-    float:right;
+    width:calc(8vw + 500px);
 }
 
 /* sidebar */
 
-.sidebar {
-    width:20%;
-    position:absolute;
-    top:0;
-    bottom:0;
+.links {
+    margin-bottom:5rem;
 }
 
-.sidebar ul {
+.links ul {
     margin:0;
-    padding:2em 1em;
+    padding:0;
+    list-style-type:none;
+}
+    
+.links li {
+    display:inline;
 }
 
 /* post */
@@ -145,9 +144,25 @@ main {
     margin-top:1em;
 }
 
-.permalink {
-    display:block;
-    margin-top:1rem;
+.chat .name {
+    font-weight:bold;
+}
+
+.quote {
+    font-style:italic;
+    font-weight:400;
+}
+
+.quote.medium {
+    font-size:1.2em;
+}
+
+.quote.long {
+    font-size:1em;
+}
+
+.question {
+    font-style:italic;
 }
 
 /* post notes */
@@ -164,6 +179,7 @@ ol.notes {
 .notes li.more_notes_link_container {
     text-align:left !important; /* must use this due to tumblr code */
     text-transform:lowercase;
+    list-style-type:none;
 }
 
 /* pagination */
@@ -173,40 +189,36 @@ ol.notes {
     text-transform:lowercase;
 }
 
-.pagination > * {
-    padding:0 0.5em;
-}
-
-@media (max-width: 800px) {
-    .sidebar {
-        display:block;
-        height:auto;
-        position:relative;
-        width:100%;
-        text-align:center;
-        margin-bottom:5em;
+@media (min-width:800px) {
+    .wrapper {
+        margin:5rem 0;
+        padding:0 3rem;
     }
     
-    nav ul li {
-        display:inline;
-        padding:0 0.5em;
+    header {
+        margin-bottom:5rem;
     }
-    
-    main {
-        width:100%;
-        float:none;
+    .links {
+        position:fixed;
+        left:calc(8vw + 500px);
+        top:5rem;
+    }
+    .links ul {
+        list-style-type:disc;
+        padding-left:1em;
+    }
+    .links li {
+        display:list-item;
     }
 }
-
 
 </style>
 
 <body>
 
-<div class="wrapper clearfix">
+<div class="wrapper">
 
 {block:IndexPage}
-
 <header>
 
     <h1 class="title"><a href="{BlogURL}">{Title}</a></h1>
@@ -214,16 +226,12 @@ ol.notes {
     <p id="desc">{Description}</p>
 
 </header>
-
 {/block:IndexPage}
 
-<div class="columns clearfix">
+<aside class="links">
 
-<aside class="sidebar">
-
-    <nav class="links" id="links">
+<nav>
     <ul>
-
     <li><a href="/">{lang:Home}</a></li>
     <li><a href="/archive">{lang:Archive}</a></li>
     {block:HasPages}
@@ -235,11 +243,11 @@ ol.notes {
     <li><a href="/ask">Ask</a></li>
     {/block:AskEnabled}
     {block:SubmissionsEnabled}
-    <li><a href="/submit">{SubmitLabel}</a></li>
+    <li><a href="/submit">Submit</a></li>
     {/block:SubmissionsEnabled}
     <li><a href="http://fiveppi.tumblr.com/">Theme</a></li>
     </ul>
-    </nav>
+</nav>
 
 </aside>
 
@@ -253,11 +261,12 @@ ol.notes {
     
     {block:Date}
     <div class="post-info">
-    
-    posted {TimeAgo}
+    <p>
+    posted {DayOfWeek}, {ShortMonth}. {DayOfMonth}{DayOfMonthSuffix}, {Year} at {12HourWithZero}:{Minutes}:{Seconds} {CapitalAmPm}
     {block:NoteCount}
-    with {NoteCountWithLabel}
+    <br />with {NoteCountWithLabel}
     {/block:NoteCount}
+    </p>
     
     {block:HasTags}
     <div class="tags">
@@ -273,13 +282,10 @@ ol.notes {
     {/block:PermalinkPage}
  
     {block:Text}
-    
     {block:Title}
     <h2 class="title"><a href="{Permalink}">{Title}</a></h2>
     {/block:Title}
-    
     {Body}
-    
     {/block:Text}
  
     {block:Photo}
@@ -343,7 +349,7 @@ ol.notes {
  
     {block:Quote}
      
-    <h2 class="quote">“{Quote}”</h2>
+    <h2 class="quote {Length}">“{Quote}”</h2>
     {block:Source}
     <p class="source">&mdash;{Source}</p>
     {/block:Source}
@@ -351,13 +357,10 @@ ol.notes {
     {/block:Quote}
     
     {block:Link}
-    
-    <h2 class="title"><a href="{URL}">{Name} (link)</a></h2>
-    
+    <h2 class="title"><a href="{URL}">{Name} →</a></h2>
     {block:Description}
     <div class="link-desc">{Description}</div>
     {/block:Description}
-    
     {/block:Link}
  
     {block:Chat}
@@ -382,7 +385,7 @@ ol.notes {
  
     {block:Video}
     
-    <div class="media video">{Video-700}</div>
+    <div class="media video">{Video-500}</div>
     {block:Caption}
     <div class="caption">{Caption}</div>
     {/block:Caption}
@@ -390,33 +393,36 @@ ol.notes {
     {/block:Video}
 
     {block:Audio}
-    
-    <div class="audio">
-    {block:AudioEmbed}
-    {AudioEmbed-640 color="white"}
-    {/block:AudioEmbed}
-    </div><!-- audio -->
-   
+    <div class="media audio">
+    {block:AudioEmbed}{AudioEmbed color="white"}{/block:AudioEmbed}
+    </div>
     {block:Caption}
     <div class="caption">{Caption}</div>
     {/block:Caption}
-    
     {/block:Audio}
                
     {block:Answer}
-    
     <p>
-    <span class="asker">{Asker} says:</span><br> <em class="question">{Question}</em>
+    <span class="asker">{Asker} says:</span> <span class="question">{Question}</span>
     </p>
     <p class="answer">{Answer}</p>
-    
     {/block:Answer}
     
-    {block:IndexPage}
     {block:Date}
-    <a href="{Permalink}" class="permalink">★</a>
-    {/block:Date}
+    {block:IndexPage}
+    
+    <p>
+    {block:IfNotShowPostInfoOnIndexPage}
+    <a href="{Permalink}" title="{TimeAgo} with {NoteCountWithLabel}">★</a>
+    {/block:IfNotShowPostInfoOnIndexPage}
+    
+    {block:IfShowPostInfoOnIndexPage}
+    <a href="{Permalink}">{TimeAgo}</a> with <a href="{Permalink}">{NoteCountWithLabel}</a>
+    {/block:IfShowPostInfoOnIndexPage}
+    </p>
+
     {/block:IndexPage}
+    {/block:Date}
  
 </article><!-- post -->
 
@@ -458,19 +464,9 @@ ol.notes {
 
 </main>
 
-</div><!-- columns -->
-
 </div><!-- wrapper -->
 
-<script type="text/javascript">
-
-$(document).ready(function() {
-    var $child = $("#sidebar");
-    $child.parent().css("min-height", $child.outerHeight());
-    $("#links").stick_in_parent({'recalc_every':2});
-});
-    
-</script>
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
 
 <script type="text/javascript" src="http://static.tumblr.com/cqfswrg/1xXo902k0/jquery_photoset.js"></script>
 
