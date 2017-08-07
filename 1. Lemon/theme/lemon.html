@@ -84,13 +84,11 @@ html {
 }
 
 body {
-    background:{color:Background} url('{image:Background}');
-    background-attachment:fixed;
+    background:{color:Background} url('{image:Background}') no-repeat center center fixed;
 {block:IfRepeatBackground}
     background-repeat:repeat;
 {/block:IfRepeatBackground} 
 {block:IfNotRepeatBackground}
-    background-repeat:no-repeat;
     background-size:cover;
 {/block:IfNotRepeatBackground}
     color:{color:Text};
@@ -120,9 +118,9 @@ iframe,
     max-width:100%;
 }
 
-
-iframe#ask_form {
-	display:block;
+iframe#ask_form,
+iframe.tumblr_audio_player {
+    display:block;
 }
 
 img {
@@ -151,7 +149,6 @@ ol {
 }
 
 .borders {
-    border:{select:Border Width} solid transparent;
 {block:IfBorders}
     border:{select:Border Width} solid {color:Accent}; 
 {/block:IfBorders}
@@ -161,7 +158,7 @@ ol {
 
 .wrapper {
     margin:4rem auto;
-    width:calc({select:Post Size} + 2rem + 2 * {select:Border Width});
+    width:calc({select:Post Size} + 2rem {block:IfBorders}+ 2 * {select:Border Width}{/block:IfBorders});
     max-width:calc(100% - 2rem);
     padding:1rem;
 }
