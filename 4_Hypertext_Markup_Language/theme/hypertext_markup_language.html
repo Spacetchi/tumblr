@@ -27,6 +27,8 @@ Do not steal!
 <link rel="shortcut icon" href="{Favicon}">
 <link rel="alternate" type="application/rss+xml" href="{RSS}">
 
+<meta name="color:Link" content="#00f">
+<meta name="color:Active Link" content="#f00">
 <meta name="if:Show Post Info on Index Page" content="0">
 
 </head>
@@ -58,12 +60,12 @@ body {
 }
 
 a {
-    color:blue;
+    color:{color:Link};
     text-decoration:underline;
 }
 
 a:active {
-    color:red;
+    color:{color:Active Link};
 }
 
 blockquote {
