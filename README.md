@@ -6,7 +6,7 @@ This is the repository for all my [tumblr themes](https://fiveppi.tumblr.com).
 
 You will find the html files in  `[Theme Name] > theme > [theme_name].html`. Copy and paste the raw text into your tumblr's customize page.
 
-Documentation for each theme is in `[#]. [Theme Name] > theme > documentation.md`.
+Documentation for each theme is in `[Theme Name] > theme > documentation.md`.
 
 Additionally, this information is usually mirrored on [tumblr](https://fiveppi.tumblr.com) in a more user-friendly manner.
 
