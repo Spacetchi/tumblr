@@ -13,13 +13,16 @@ Do not steal!
 
 -->
 
-<link href='https://fonts.googleapis.com/css?family=Source+Sans+Pro' rel='stylesheet' type='text/css'>
+<link href="https://fonts.googleapis.com/css?family=Lora:400,400i,700,700i" rel="stylesheet">
+
+
 
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
 {block:Description}
 <meta name="description" content="{MetaDescription}" />
 {/block:Description}
+<meta name="viewport" content="width=device-width, initial-scale=1">
 
 <title>{Title}</title>
        
@@ -27,6 +30,8 @@ Do not steal!
 <link rel="alternate" type="application/rss+xml" href="{RSS}">
  
 <script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
+
+<meta name="image:Background">
 
 <meta name="color:Background" content="#78c9a1">
 <meta name="color:Wrapper" content="#fcf2f0">
@@ -66,21 +71,26 @@ html {
 }
 
 body {
-    background:{color:Background};
+    background:{color:Background} url('{image:Background}') no-repeat center center fixed;
+    background-size:cover;
     color:{color:Text};
-    font-family:'Source Sans Pro', Helvetica, Arial, sans-serif;
+    font-family:'Lora', georgia, 'times new roman', sans-serif;
     box-sizing:border-box;
+    font-size:calc(14px + 0.2vw);
 }
 
 a {
     color:{color:Text};
     text-decoration:none;
-    background:{color:Link};
 }
 
 a:hover {
     color:{color:Text};
     background:none;
+}
+
+h1 {
+    line-height:1.2;
 }
 
 blockquote {
@@ -106,6 +116,12 @@ img:not(.lightbox-image) {
     max-width:100%;
 }
 
+.tumblr_audio_player,
+#ask_form,
+#submit_form {
+    display:block;
+}
+
 * > *:last-child {
     margin-bottom:0;
 }
@@ -117,44 +133,39 @@ img:not(.lightbox-image) {
 /* wrappers */
 
 .wrapper {
-    margin:5vh auto;
-    width:calc(20vw + 400px);
+    margin:10vh auto;
+    width:calc(8vw + 500px);
     max-width:100%;
     padding:0 1rem;
 }
 
-.content-area {
+.content-area,
+ol.notes {
     background:{color:Wrapper};
     padding:2rem;
-    margin-bottom:5vh;
-    -webkit-box-shadow:0px 0px 24px 5px rgba(70,70,70,0.5);
-    -moz-box-shadow:0px 0px 24px 5px rgba(70,70,70,0.5);
-    box-shadow:0px 0px 24px 5px rgba(70,70,70,0.5);
+    margin-bottom:3rem;
+    -webkit-box-shadow:0px 0px 24px 5px rgba(70,70,70,0.4);
+    -moz-box-shadow:0px 0px 24px 5px rgba(70,70,70,0.4);
+    box-shadow:0px 0px 24px 5px rgba(70,70,70,0.4);
 }
 
-/* title */
-
-h1.title {
-    text-align:center;
-}
+/* header */
 
 .title a {
     background:none;
 }
 
-/* sidebar */
-
 ul.links {
     list-style-type:none;
     padding:0;
-    text-align:center;
 }
 
 .links li {
-    display:inline;
-    padding:4px 12px;
-    border-radius:6px;
+    display:inline-block;
+    padding:0.3em 0.6em;
+    border-radius:0.4em;
     background:{color:Link};
+    margin-bottom:0.5em;
 }
 
 .links li:not(:last-child) {
@@ -165,11 +176,24 @@ ul.links {
 
 .post {
     position:relative;
-    margin-bottom:3rem;
 }
 
-.media {
-    text-align:center;
+.post-content {
+    line-height:1.8;
+}
+
+.post-content a {
+    border-bottom:2px solid {color:Link};
+}
+
+.post-content a:hover {
+    background:{color:Link};
+    color:{color:Text};
+    border:none;
+}
+
+.tumblr_video_container {
+    margin:0 auto;
 }
 
 .media img {
@@ -189,12 +213,16 @@ ul.links {
     margin-top:1em;
 }
 
-h2.title a:hover {
-    background:{color:Link};
-}
-
 h2.link a {
     background:{color:Link};
+    padding:0.3em 0.6em;
+    border-radius:0.4em;
+    display:inline-block;
+}
+
+.excerpt {
+    font-size:0.8em;
+    opacity:0.7;
 }
 
 .question {
@@ -202,7 +230,16 @@ h2.link a {
 }
 
 .quote {
-    font-weight:bold;
+    font-style:italic;
+    font-weight:400;
+}
+
+.quote.medium {
+    font-size:1.2em;
+}
+
+.quote.long {
+    font-size:1em;
 }
 
 .name {
@@ -255,19 +292,15 @@ h2.link a {
 /* post footer */
 
 .post-footer {
+    border-top:1px solid {color:Text};
+    padding-top:1rem;
     font-size:0.9rem;
-    margin-top:1rem;
-}
-
-.postfooter a {
-    background:none;
-    margin:0;
+    margin-top:2rem;
 }
 
 /* tags */
 
-.tags a {
-    background:none;
+.tag {
     font-style:italic;
 }
 
@@ -275,32 +308,34 @@ h2.link a {
 
 .pagination {
     text-align:center;
-    margin-top:3rem;
+    padding:1rem;
+    display:table;
+    margin:3rem auto 0 auto;
+}
+
+.pagination * {
+    display:inline-block;
 }
 
 .pagination a {
-    padding:4px 12px;
-    border-radius:6px;
-}
-
-.pagination a:hover {
     background:{color:Link};
+    padding:0.3em 0.6em;
+    border-radius:0.4em;
 }
 
-.back {
+.current {
+    padding:0 0.3em;
+}
+
+.pagination *:not(:last-child) {
     margin-right:0.5em;
 }
 
 /* post notes */
 
 ol.notes {
-    margin:3rem 0 0 0;
-    padding:0;
     list-style-type:none;
-}
-
-.notes a {
-    background:none;
+    line-height:1.8;
 }
 
 .notes a:not(.more_notes_link) {
@@ -336,7 +371,7 @@ ol.notes {
     <li><a href="/ask">Ask</a></li>
     {/block:AskEnabled}
     {block:SubmissionsEnabled}
-    <li><a href="/submit">{SubmitLabel}</a></li>
+    <li><a href="/submit">Submit</a></li>
     {/block:SubmissionsEnabled}
     <li><a href="http://fiveppi.tumblr.com/">Theme</a></li>
     </ul>
@@ -344,17 +379,20 @@ ol.notes {
 
 </header>
 
-<main class="content-area">
+<main>
 
 {block:Posts}
  
-<article class="post">
+<article class="post content-area">
+
  
     {block:Text}
     {block:Title}
-    <h2 class="title"><a href="{Permalink}">{Title}</a></h2>
+    <h2 class="title">{Title}</h2>
     {/block:Title}
+    <div class="post-content">
     {Body}
+    </div>
     {/block:Text}
     
     {block:Photo}
@@ -367,7 +405,7 @@ ol.notes {
     </div>
     
     {block:Caption}
-    <div class="caption">{Caption}</div>
+    <div class="caption post-content">{Caption}</div>
     {/block:Caption}
     
     {/block:Photo}
@@ -413,7 +451,7 @@ ol.notes {
     </div><!-- photo-slidshow -->
 
     {block:Caption}
-    <div class="caption">{Caption}</div>
+    <div class="caption post-content">{Caption}</div>
     {/block:Caption}
 
     {/block:Photoset}
@@ -421,31 +459,37 @@ ol.notes {
     <!-- END PXU PHOTOSET STUFF -->
  
     {block:Quote}
-     
-    <h2 class="quote title">“{Quote}”</h2>
+    <div class="post-content">
+    <h2 class="quote title {Length}">“{Quote}”</h2>
     {block:Source}
     <div class="caption">&mdash;{Source}</div>
     {/block:Source}
+    </div>
     
     {/block:Quote}
     
     {block:Link}
     
-    <h2 class="title link"><a href="{URL}">{Name} (link)</a></h2>
+    <h2 class="title link"><a href="{URL}" target="{Target}">Link: {Name}</a></h2>
+    <div class="post-content">
+    {block:Excerpt}
+    <p class="excerpt">{Excerpt}</p>
+    {/block:Excerpt}
     
     {block:Description}
     <div class="caption">{Description}</div>
     {/block:Description}
+    </div>
     
     {/block:Link}
  
     {block:Chat}
     
     {block:Title}
-    <h2 class="title"><a href="{Permalink}">{Title}</a></h2>
+    <h2 class="title">{Title}</h2>
     {/block:Title}
     
-    <div class="chat"> 
+    <div class="chat post-content"> 
     {block:Lines}
     <div class="{Alt} user_{UserNumber}">
     {block:Label}
@@ -459,44 +503,28 @@ ol.notes {
  
     {block:Video}
     
-    <div class="media video">{Video-700}</div>
+    <div class="media video">{Video-500}</div>
     {block:Caption}
-    <div class="caption">{Caption}</div>
+    <div class="caption post-content">{Caption}</div>
     {/block:Caption}
     
     {/block:Video}
 
     {block:Audio}
-    
-    <div class="audio">
-   
-    <div class="playbox">
-    <div class="playbutton">
-    {block:AudioPlayer}{AudioPlayerWhite}{/block:AudioPlayer}
+    <div class="media audio">
+    {block:AudioEmbed}
+    {AudioEmbed color="white"}
+    {/block:AudioEmbed}
     </div>
-    </div>
-    <div class="cover">
-    {block:AlbumArt}
-    <img src="{AlbumArtURL}">
-    {/block:AlbumArt}
-    </div>
-    <div class="audioinfo">
-    {block:TrackName}<b>{TrackName}</b>{/block:TrackName}
-    {block:Artist}by <b>{Artist}</b><br>{/block:Artist}
-    {block:Album}From <b>{Album}</b>{/block:Album}
-    </div><!-- audioinfo -->
-   
-    </div><!-- audio -->
-   
     {block:Caption}
-    <div class="caption">{Caption}</div>
+    <div class="caption post-content">{Caption}</div>
     {/block:Caption}
-    
     {/block:Audio}
                
     {block:Answer}
+    <div class="post-content">
     <p>
-    <span class="asker">{Asker} says:</span><br />
+    <span class="asker">{Asker} says:</span>
     <span class="question">{Question}</span>
     </p>
     <div class="caption">
@@ -504,28 +532,30 @@ ol.notes {
     <p class="answerer">{Answerer} answers:</p>
     {/block:Answerer}
     {Answer}
+    </div><!-- caption -->
+    </div><!-- post-content -->
     {/block:Answer}
     
     {block:Date}
-    <div class="post-footer">
+    <footer class="post-footer">
+    
     <a href="{Permalink}">{TimeAgo}</a>
     {block:NoteCount}
     with <a href="{Permalink}">{NoteCountWithLabel}</a>
     {/block:NoteCount}
-    </div>
+    
+    {block:HasTags}
+    {block:Tags}
+    <a href="{TagURL}" class="tag">#{Tag}</a> 
+    {/block:Tags}
+    {/block:HasTags}
+    
+    </footer>
     {/block:Date}
  
 </article>
 
 {block:PermalinkPage}
-
-{block:HasTags}
-<div class="tags">
-    {block:Tags}
-    <a href="{TagURL}">#{Tag}</a> 
-    {/block:Tags}
-</div><!-- tags -->
-    {/block:HasTags}
 
     {block:NoteCount}
     {block:PostNotes}{PostNotes}{/block:PostNotes}
@@ -536,10 +566,18 @@ ol.notes {
 {/block:Posts}
 
 {block:Pagination}
-    <nav class="pagination">
+    <nav class="pagination content-area">
     {block:PreviousPage}
     <a href="{PreviousPage}" class="back">Back</a>
     {/block:PreviousPage}
+    
+    {block:JumpPagination length="5"}
+    {block:CurrentPage}
+    <span class="current">{PageNumber}</span>
+    {/block:CurrentPage}{block:JumpPage}
+    <a class="jump" href="{URL}">{PageNumber}</a>
+    {/block:JumpPage}
+    {/block:JumpPagination}
     
     {block:NextPage}
     <a href="{NextPage}" class="next">Next</a>
@@ -548,7 +586,7 @@ ol.notes {
 {/block:Pagination}
     
 {block:PermalinkPagination}
-    <nav class="pagination">
+    <nav class="pagination content-area">
     {block:PreviousPost}
     <a href="{PreviousPost}" class="back">Previous Post</a>
     {/block:PreviousPost}
