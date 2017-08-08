@@ -71,6 +71,7 @@ body {
     margin:0;
     padding:0;
     background:{color:Background} url('{image:Background}');
+    background-position:center;
     background-attachment:fixed;
     background-repeat:no-repeat;
     background-size:cover;
@@ -306,7 +307,6 @@ h2.title a {
 a.link {
     display:block;
     position:relative;
-    overflow:hidden;
     border:1px solid {color:Borders};
 }
 
@@ -317,8 +317,13 @@ a.link:hover {
 a.link .link-text {
     font-size:12px;
     padding:10px;
-    height:150px;
     overflow:hidden;
+}
+
+.has-excerpt .link-text {
+    height:150px;
+    position:absolute;
+    left:150px;
 }
 
 .link-text h2 {
@@ -329,12 +334,6 @@ a.link .link-text {
 .link-img {
     height:150px;
     width:150px;
-    overflow:hidden;
-}
-
-.link-img img {
-    max-height:150px;
-    max-width:none;
 }
 
 .excerpt {
@@ -696,17 +695,14 @@ ol.notes blockquote a {
     
     {block:Link}
     
-    <a href="{URL}" class="link">
-    <div class="link-text"
-    {block:Thumbnail}
-    style="position:absolute;left:150px"
-    {/block:Thumbnail}>
+    <a href="{URL}" class="link {block:Thumbnail}has-excerpt{/block:Thumbnail}">
+    <div class="link-text">
     <h2>{Name}</h2>
     <div class="excerpt">{Excerpt}</div>
     </div><!-- link-text -->
     
     {block:Thumbnail}
-    <div class="link-img"><img src="{Thumbnail-HighRes}"></div>
+    <div class="link-img" style="background:url('{Thumbnail}'); background-size:cover"></div>
     {/block:Thumbnail}
     </a><!-- link -->
     
@@ -736,7 +732,7 @@ ol.notes blockquote a {
  
     {block:Video}
     
-    <div class="video">{Video-500}</div>
+    <div class="media video">{Video-500}</div>
     {block:Caption}
     <div class="caption">{Caption}</div>
     {/block:Caption}
@@ -745,7 +741,7 @@ ol.notes blockquote a {
 
     {block:Audio}
     
-    <div class="audio">
+    <div class="media audio">
     {block:AudioEmbed}
     {AudioEmbed color="white"}
     {/block:AudioEmbed}
@@ -941,8 +937,11 @@ $(document).ready(function() {
                    // selector for the paged navigation (it will be hidden)
         nextSelector : "a#next",    
                    // selector for the NEXT link (to page 2)
-        itemSelector : "article"          
+        itemSelector : "article",          
                    // selector for all items you'll retrieve
+        loading : {
+            msgText: "Loading..."
+        }
       
     }, function( newElements ) {
             //photoset callback
