@@ -63,6 +63,10 @@ Do not steal! -->
     
 /* general */
 
+* {
+    box-sizing:border-box;
+}
+
 body {
     margin:0;
     padding:0;
@@ -77,6 +81,7 @@ body {
     color:{color:Text};
     font-family:'Roboto Mono', 'Lucida Console', courier, monospace;
     font-size:13px;
+    word-wrap:break-word;
 }
 
 a {
@@ -91,6 +96,15 @@ a:hover {
 img:not(.lightbox-image),
 iframe {
     max-width:100%;
+}
+
+img {
+    height:auto;
+}
+
+#ask_form,
+#submit_form {
+    display:block;
 }
 
 blockquote {
@@ -110,16 +124,19 @@ blockquote {
 /* wrappers */
 
 .wrapper {
-    max-width:851px;
+    max-width:100%;
+    width:542px;
     margin:0 auto;
-}
+    padding:0 10px;
 
-.content {
-    float:right;
-    margin-top:15px;
 }
 
 /* header */
+
+.top {
+    position:relative;
+    margin-bottom:15px;
+}
 
 .cover {
     background:transparent;
@@ -127,42 +144,32 @@ blockquote {
     background:{color:Cover} url('{image:Cover}');
     background-repeat:no-repeat;
     background-size:cover;
-    {block:IfRepeatCover}
+{block:IfRepeatCover}
     background-repeat:repeat;
     background-size:auto;
-    {/block:IfRepeatCover}
+{/block:IfRepeatCover}
     height:315px;
 }
-
+   
+.sidebar,
 .top .avatar {
-    display:block;
-    background:{color:Post Background};
-    {block:IfRoundedCorners}
-    border-radius:4px;
-    {/block:IfRoundedCorners}
-    padding:5px;
+    display:none;
+}
+   
+.cover .name {
     position:absolute;
-    bottom:-25px;
-    left:15px;
-    border:1px solid {color:Borders};
+    padding:15px;
+    left:0;
+    bottom:0;
+    max-width:100%;
 }
 
-.avatar img {
-    display:block;
-}
-
-.name {
-    position:absolute;
-    left:170px;
-    bottom:15px;
-}
-
-.name a {
+.cover a {
     color:white;
 }
 
-.name a:hover {
-    text-decoration:none;
+.cover a:hover {
+    text-decoration:none;   
 }
 
 h1.title {
@@ -178,8 +185,8 @@ h1.title {
 
 .links {
     background:{color:Post Background};
-    margin:0;
-    padding:0 0 0 170px;
+    padding:0;
+    text-align:center;
     border:1px solid {color:Borders};
     {block:IfRoundedCorners}
     border-radius:0 0 5px 5px;
@@ -192,46 +199,14 @@ h1.title {
     padding:12px 0;
 }
 
-.links ul li {
+.links li {
     display:inline;
     padding:0 15px;
 }
 
-.links ul li {
+.links li:not(:last-of-type) {
     border-right:1px solid {color:Borders};
 }
-
-.links ul li:first-of-type {
-    border-left:1px solid {color:Borders};
-}
-
-/* sidebar */
-
-.sidebar {
-    width:292px;
-    background:{color:Post Background};
-    float:left;
-    padding:10px;
-    border:1px solid {color:Borders};
-    {block:IfRoundedCorners}
-    border-radius:5px;
-    {/block:IfRoundedCorners}
-    position:relative;
-    margin-top:15px;
-}
-
-.description {
-    {block:IfShowInfo}
-    padding-bottom:10px;
-    {/block:IfShowInfo}
-}
-
-.info {
-    border-top:{color:Borders};
-    padding-top:10px;
-}
-
-/* posts */
 
 .post {
     position:relative;
@@ -245,8 +220,8 @@ h1.title {
     margin-bottom:15px;
 }
 
-.post-content {
-    width:500px;
+.post-main {
+    max-width:100%;
     padding:10px;
 }
 
@@ -260,6 +235,10 @@ h1.title {
     display:block;
     float:left;
     margin-right:10px;
+}
+
+.post-content {
+    line-height:1.8;
 }
 
 .post-info {
@@ -286,15 +265,31 @@ h2.title a {
     cursor:pointer;
 }
 
+.media iframe {
+    display:block;
+}
+
 .caption {
     margin-top:10px;
 }
 
-p.quote {
-    margin-top:0;
-    font-weight:700;
+.quote {
+    margin:0;
     font-style:italic;
-    font-size:16px;
+    font-weight:700;
+    font-size:1.4em;
+}
+
+.quote.medium {
+    font-size:1.2em;
+}
+
+.quote.long {
+    font-size:1em;
+}
+
+.chat .name {
+    font-weight:700;
 }
 
 .question-container {
@@ -311,7 +306,6 @@ p.quote {
 a.link {
     display:block;
     position:relative;
-    max-height:150px;
     overflow:hidden;
     border:1px solid {color:Borders};
 }
@@ -323,10 +317,13 @@ a.link:hover {
 a.link .link-text {
     font-size:12px;
     padding:10px;
+    height:150px;
+    overflow:hidden;
 }
 
 .link-text h2 {
     margin-top:0;
+    font-size:1.2em;
 }
 
 .link-img {
@@ -366,7 +363,6 @@ a.link .link-text {
 
 .comments {
     background:{color:Secondary Post Background};
-    width:520px;
     {block:IfRoundedCorners}
     border-radius:0 0 5px 5px;
     {/block:IfRoundedCorners}
@@ -375,7 +371,6 @@ a.link .link-text {
 .tags {
     border-top:1px solid {color:Borders};
     padding:10px;
-    height:18px;
 }
 
 .post-notes {
@@ -435,96 +430,66 @@ ol.notes blockquote a {
 
 /* responsive */
 
-@media (max-width: 851px) {
-
+@media (min-width: 860px) {
     .wrapper {
-        max-width:100%;
-    }
-    
-    .sidebar,
-    .top .avatar {
-        display:none;
-    }
-    
-    .name {
-        left:15px;
-    }
-    
-    .links {
-        padding:0;
-        text-align:center;
-    }
-    
-    .content {
-        margin:15px auto;
-        float:none;
-        width:522px;
-        max-width:100%;
-    }
-    
-    .top {
-        width:522px;
-        max-width:100%;
+        width:829px;
         margin:0 auto;
-    }
-    
-    header,
-    .content,
-    .comments {
-        max-width:100%;
-    }
-    
-    .post-content {
-        max-width:calc(100% - 22px);
-    }
-    
-    .post {
-        max-width:calc(100% - 2px);
-    }
-
-}
-
-@media (max-width:522px) {
-    
-    .name,
-    .header .avatar {
-        display:none;
-    }
-    
-    .cover {
-        position:static;
-        top:0;
-        height:300px;
-    }
-    
-    .links {
         padding:0;
-        text-align:center;
-        position:fixed;
-        top:0;
-        width:calc(100% - 2px);
-        border-radius:0;
-        z-index:3;
+    }
+    .content {
+        float:right;
     }
     
-    .links ul li,
-    .links ul li:first-of-type {
-        border:none;
+    .top .avatar {
+        display:block;
+        background:{color:Post Background};
+        {block:IfRoundedCorners}
+        border-radius:4px;
+        {/block:IfRoundedCorners}
+        padding:5px;
+        position:absolute;
+        bottom:-25px;
+        left:15px;
+        border:1px solid {color:Borders};
+    }
+    .avatar img {
+        display:block;
+    }
+    .cover .name {
+        left:155px;
+    }
+    .links {
+        padding:0 0 0 155px;
+        text-align:left;
     }
     
-    .link img {
-        display:none;
+    .sidebar {
+        display:block;
+        width:292px;
+        background:{color:Post Background};
+        float:left;
+        padding:10px;
+        border:1px solid {color:Borders};
+        {block:IfRoundedCorners}
+        border-radius:5px;
+        {/block:IfRoundedCorners}
+        position:relative;
     }
-    
-    .link-text {
-        position:static !important;
+    .description {
+        {block:IfShowInfo}
+        padding-bottom:10px;
+        {/block:IfShowInfo}
     }
-    
+    .info {
+        border-top:1px solid {color:Borders};
+        padding-top:10px;
+    }
+    .post {
+        width:522px;
+    }
     
 }
-
-
-/* clearfix */
+    /* clearfix */
 
 .clearfix {
     overflow:auto;
@@ -554,20 +519,7 @@ ol.notes blockquote a {
 
     <ul>
 
-    <li><a href="/">Home</a></li>
-    <li><a href="/archive">Archive</a></li>
-    {block:HasPages}
-    {block:Pages}
-    <li><a href="{URL}">{Label}</a></li>
-    {/block:Pages}
-    {/block:HasPages}
-    {block:AskEnabled}
-    <li><a href="/ask">Ask</a></li>
-    {/block:AskEnabled}
-    {block:SubmissionsEnabled}
-    <li><a href="/submit">{SubmitLabel}</a></li>
-    {/block:SubmissionsEnabled}
-    <li><a href="http://fiveppi.tumblr.com/">Theme</a></li>
+    <li><a href="/">Home</a></li><li><a href="/archive">Archive</a></li>{block:HasPages}{block:Pages}<li><a href="{URL}">{Label}</a></li>{/block:Pages}{/block:HasPages}{block:AskEnabled}<li><a href="/ask">Ask</a></li>{/block:AskEnabled}{block:SubmissionsEnabled}<li><a href="/submit">Submit</a></li>{/block:SubmissionsEnabled}<li><a href="http://fiveppi.tumblr.com/" title="Updated 2017-08-07">Theme</a></li>
     
     </ul>
 
@@ -599,7 +551,7 @@ ol.notes blockquote a {
  
 <article class="post" id="{PostID}">
 
-<div class="post-content">
+<div class="post-main">
 
 {block:Date}
 
@@ -661,7 +613,9 @@ ol.notes blockquote a {
     
 </header>
 
-{block:Date}
+{/block:Date}
+
+<div class="post-content">
  
     {block:Text}
     
@@ -733,7 +687,7 @@ ol.notes blockquote a {
  
     {block:Quote}
      
-    <p class="quote">“{Quote}”</p>
+    <p class="quote {Length}">“{Quote}”</p>
     {block:Source}
     <p class="source">&mdash;{Source}</p>
     {/block:Source}
@@ -772,7 +726,7 @@ ol.notes blockquote a {
     <p>
     {block:Lines}
     <div class="{Alt} user_{UserNumber}">
-    {block:Label}{Label}{/block:Label}&nbsp;{Line}
+    {block:Label}<span class="name">{Label}</span>{/block:Label}&nbsp;{Line}
     </div>
     {/block:Lines}
     </p>
@@ -793,7 +747,7 @@ ol.notes blockquote a {
     
     <div class="audio">
     {block:AudioEmbed}
-    {AudioEmbed-640 color="white"}
+    {AudioEmbed color="white"}
     {/block:AudioEmbed}
     </div><!-- audio -->
    
@@ -817,6 +771,8 @@ ol.notes blockquote a {
     <div class="answer">{Answer}</div>
     
     {/block:Answer}
+
+</div><!-- post-content -->
     
     {block:Date}
     <footer class="post-footer">
@@ -827,7 +783,7 @@ ol.notes blockquote a {
     </footer><!-- post-footer -->
     {/block:Date}
     
-</div><!-- post-content -->
+</div><!-- post-main -->
 
 {block:IndexPage}
 {block:IfShowTags}
@@ -925,7 +881,9 @@ ol.notes blockquote a {
 $(document).ready(function() {
     var $child = $("#sidebar");
     $child.parent().css("min-height", $child.outerHeight());
-    $child.stick_in_parent();
+    $child.stick_in_parent({
+        "offset_top": 15
+    });
 });
 </script>
 
