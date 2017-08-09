@@ -111,7 +111,13 @@ img:not(.lightbox-image) {
     height:auto;
 }
 
-blockquote:not(.reply),
+figure {
+    margin-right:0;
+    margin-left:0;
+}
+
+blockquote,
+blockquote a,
 q {
     margin-left:0;
     margin-right:0;
@@ -119,7 +125,7 @@ q {
     color:{color:Meme Arrows};
 }
 
-blockquote:not(.reply) > *:before,
+blockquote > *:before,
 q:before {
     content:'>';
     display:inline;
@@ -256,8 +262,7 @@ article .title {
     color:{color:Post Title};
 }
 
-.name,
-a.tumblr_blog {
+.name {
     font-weight:bold;
     color:{color:Names};
 }
@@ -298,6 +303,10 @@ article:nth-of-type(4n) .media {
     width:100%;
 }
 
+.media iframe {
+    max-width:100%;
+}
+
 .question {
     font-weight:bold;
 }
@@ -306,24 +315,37 @@ p.quote {
     font-style:italic;
 }
 
-a.tumblr_blog {
+.reply .name {
     font-weight:bold;
     text-decoration:none;
     display:inline;
 }
 
-.post.text .reply:first-of-type,
-.post.answer .reply:first-of-type,
-.post.chat .reply:first-of-type,
-.post.quote .reply:first-of-type {
+.inactive {
+    text-decoration:line-through;
+}
+
+.reply:first-of-type {
     max-width:750px;
 }
 
-blockquote.reply {
+.photo .reply:first-of-type,
+.video .reply:first-of-type,
+.audio .reply:first-of-type,
+.photoset .reply:first-of-type {
+    max-width:900px;
+}
+
+.reply {
     margin:0 0 10px 0;
 }
 
-blockquote.reply:not(:first-of-type) {
+.reply:first-of-type > .name:after {
+    content:':';
+    display:inline;
+}
+
+.reply:not(:first-of-type) {
     background:{color:Reply};
     padding:10px;
     display:table;
@@ -331,11 +353,6 @@ blockquote.reply:not(:first-of-type) {
     {block:IfBorders}
     border:1px solid {color:Lines};
     {/block:IfBorders}
-}
-
-.reply:first-of-type > a.tumblr_blog:after {
-    content:':';
-    display:inline;
 }
 
 .post > *:last-child {
@@ -444,6 +461,8 @@ button.infinite {
 
     <header class="post-info open">
     
+    <p>
+    
     {block:IndexPage}<span class="button open"><button class="hide-post"></button></span>{/block:IndexPage}
 
     {block:Text}
@@ -455,7 +474,7 @@ button.infinite {
     {/block:Chat}
     
     {block:Link}
-    <a href="{URL}" class="title">{Name} </a>
+    <a href="{URL}" class="title">Link: {Name}</a><span> </span>
     {/block:Link}
 
     {block:Date}
@@ -467,6 +486,7 @@ button.infinite {
     <a href="{Permalink}" class="post-id">No.</a><a href="{Permalink}" class="post-id">{PostID}</a> {block:IndexPage} [<a href="{Permalink}">Reply</a>]{/block:IndexPage}
     
     {block:PermalinkPage}
+    {block:RebloggedFrom}[<a href="{ReblogRootURL}">Source</a>]{/block:RebloggedFrom}
     {block:HasTags}
     <span class="tags">
     {block:Tags}
@@ -477,6 +497,8 @@ button.infinite {
     {/block:PermalinkPage}
 
     {/block:Date}
+    
+    </p>
     
     </header><!-- post-info -->
     
@@ -491,11 +513,17 @@ button.infinite {
     <img src="{PhotoURL-HighRes}" alt="{PhotoAlt}"  class="photoset-img"/>
     </div>
     
+    {block:NotReblog}
     {block:Caption}
-    <div class="caption">{Caption}</div>
+    <div class="caption">
+    <div class="reply">{Caption}</div>
+    </div>
     {/block:Caption}
+    {/block:NotReblog}
     
     {/block:Photo}
+    
+<!----------------- BEGIN PHOTOSET STUFF --------------------->
  
     {block:Photoset}
 
@@ -534,34 +562,46 @@ button.infinite {
 
     </div><!-- photo-slideshow -->
 
+    {block:NotReblog}
     {block:Caption}
-    <div class="caption">{Caption}</div>
+    <div class="caption">
+    <div class="reply">{Caption}</div>
+    </div>
     {/block:Caption}
+    {/block:NotReblog}
 
     {/block:Photoset}
     
+<!----------------- END PHOTOSET STUFF --------------------->
+    
     {block:Text}
-    
-    <div class="caption">{Body}</div>
-    
+    {block:NotReblog}
+    <div class="caption">
+    <div class="reply">{Body}</div>
+    </div>
+    {/block:NotReblog}
     {/block:Text}
  
     {block:Quote}
-    
-    <div class="caption"> 
+    <div class="caption">
+    <div class="reply">
     <p class="quote">“{Quote}”</p>
     {block:Source}
     <p class="source">&mdash;{Source}</p>
     {/block:Source}
     </div>
-    
+    </div>
     {/block:Quote}
     
     {block:Link}
     
+    {block:NotReblog}
     {block:Description}
-    <div class="caption">{Description}</div>
+    <div class="caption">
+    <div class="reply">{Description}</div>
+    </div>
     {/block:Description}
+    {/block:NotReblog}
     
     {/block:Link}
  
@@ -582,34 +622,65 @@ button.infinite {
     {block:Video}
     
     <div class="video-container">{Video-400}</div>
+    {block:NotReblog}
     {block:Caption}
-    <div class="caption">{Caption}</div>
+    <div class="caption">
+    <div class="reply">{Caption}</div>
+    </div>
     {/block:Caption}
+    {/block:NotReblog}
     
     {/block:Video}
 
     {block:Audio}
     
-    <div class="audio-container">
+    <div class="media audio-container">
     {block:AudioEmbed}
-    {AudioEmbed-400 color="white"}
+    {AudioEmbed color="white"}
     {/block:AudioEmbed}
     </div><!-- audio -->
    
+    {block:NotReblog}
     {block:Caption}
-    <div class="caption">{Caption}</div>
+    <div class="caption">
+    <div class="reply">{Caption}</div>
+    </div>
     {/block:Caption}
+    {/block:NotReblog}
     
     {/block:Audio}
                
     {block:Answer}
     
     <div class="caption">
+    <div class="reply">
     <span class="asker">{Asker} says: </span><span class="question">{Question}</span>
     {block:Answerer}<p>{Answerer} answers: {/block:Answerer}</p><p class="answer">{Answer}</p>
+    </div>
     </div><!-- caption -->
     
     {/block:Answer}
+    
+    {block:RebloggedFrom}
+    <div class="caption">
+        {block:Reblogs}
+        
+        <div class="reply {block:isOriginalEntry}original-reblog{/block:isOriginalEntry}">
+        {block:IsActive}
+        <a target="_blank" href="{Permalink}" class="name">{Username}</a>
+        {/block:IsActive}
+        
+        {block:IsDeactivated}
+        <span class="inactive name">{Username}</span>
+        {/block:IsDeactivated}
+        
+        {Body}
+        </div><!-- reply -->
+        
+        {/block:Reblogs}
+    </div>
+    {/block:RebloggedFrom}
+
     
     </div><!-- post-content -->
  
@@ -706,58 +777,6 @@ var lightbox = function() {
 
 <script>
 
-//unnests blockquotes
-var callBlockquotes = function() {
-    
-    $('.post-content').unNest({ 
-        yourCaption: ".caption", //your caption selector
-        wrapName: ".reply", //the name of the captions’ new wrapper
-        newCaptionUsername: false, //if the user adds a new caption, following a series of captions, show their username above the caption
-        originalPostCaptionUsername: false, //for the original captions, or a user-added caption that previously didn’t have any, have their username on it
-        tumblrAvatars: false, //”dashboard style” caption, have the avatar of the blog next to the username
-        usernameColon: false //if turned to false, removes the colon at the end of usernames bc :) seriously :) hwy :)
-    });
-}
-
-//takes all replys out of caption and appends them to post
-var moveReply = function() {
-    $('.post-content').each(function(){
-        var post = this;
-        $(post).children('.caption').children('.reply').each(function() {
-            if ($(this).is(':first-of-type')) {
-                $(this).children('*').appendTo(post);
-            }
-            else { 
-                $(this).appendTo(post);
-            }
-        });
-        $(post).children('.caption').detach();
-    });
-}
-
-//removes all empty paragraphs
-var removeUnnecessary = function() {
-    $('p').each(function() {
-        if (this.innerHTML == '') {
-            $(this).detach();
-        }
-    });
-}
-
-//adds tumblr username to the last reply
-var appendTumblr = function() {
-    $('.caption').each(function(){
-        var post = this;
-        $(post).children('.reply').each(function() {
-            if ( (this.innerHTML.indexOf('class="tumblr_blog"') == -1)
-                && !($(this).is(':first-of-type')) ) {
-                $(this).prepend('<a class="tumblr_blog" href="{BlogURL}">{Name}</a>');
-            }
-            
-        });
-    });
-}
-
 //toggle posts on button click
 var togglePosts = function() {
 
@@ -772,16 +791,9 @@ var togglePosts = function() {
     
 }
 
-var callbacks = function() {
-    lightbox();
-    removeUnnecessary();
-    appendTumblr();
-}
-
 $(document).ready(function() {
-    callBlockquotes();
     togglePosts();
-    callbacks();
+    lightbox();
 });
 
 </script>
@@ -815,17 +827,7 @@ var infinite = function() {
                 photo:'.pxu-photo'
             });
             
-            //unnest callback
-            $(newElements).find('.post-content').unNest({ 
-                yourCaption: ".caption",
-                wrapName: ".reply",
-                newCaptionUsername: false,
-                originalPostCaptionUsername: false,
-                tumblrAvatars: false,
-                usernameColon: false
-            });
-            
-            callbacks();
+            lightbox();
             
         });
 }
