@@ -195,7 +195,7 @@ Note: Yotsuba is the default colour scheme, so if you want it, just re-install t
 
 ### Futaba
 
-Same as [Yotsuba ](#yotsuba)EXCEPT:
+Same as [Yotsuba](#yotsuba) EXCEPT:
 
 - Lines: #666666
 - Borders: OFFF
@@ -211,6 +211,10 @@ Same as [Yotsuba B](#yotsuba-b) EXCEPT:
 
 ## Additional Information
 
-There are a lot of scripts in this theme, because I had to make the markup look similar to that of 4chan's. Nonetheless, it shouldn't take *too* long to load and style.
+The new version of the theme uses tumblr features I found [here](http://bychloethemes.tumblr.com/undocs) (a big thank you to [bychloethemes](http://bychloethemes.tumblr.com) for putting in the time and effort to find these features). The new version uses less javascript. Until tumblr releases official documentation for these features, I will continue support for the old version of this theme. However, I recommend that you stick with the new version.
 
-This theme uses [unnest](http://neothm.com/post/148902138319/un-nest-tumblr-captions-a-plugin-by), a plugin by neothm and magnusthemes on tumblr. This plugin creates a lot of empty paragraphs, so I've written a simple loop to delete them all. If for some reason you use empty paragraph tags in your posts, and you're finding that they're being removed by my script, I suggest using `<br>` instead. 
+Also, these new features don't display properly in the blog preview on the tumblr customize page, so don't freak out if it looks weird. Save and check out your blog on a new tab.
+
+If this theme suddenly stops working (and you didn't do anything that may have caused that to happen), you may install the old version of the theme. 
+
+The OLD VERSION of the theme uses [unnest](http://neothm.com/post/148902138319/un-nest-tumblr-captions-a-plugin-by), a plugin by neothm and magnusthemes on tumblr. This plugin creates a lot of empty paragraphs, so I've written a simple loop to delete them all. If for some reason you use empty paragraph tags in your posts, and you're finding that they're being removed by my script, I suggest using `<br>` instead. 
