@@ -1,6 +1,6 @@
 # Facebook Theme
 
-Static Previews: [Tom Preview](http://fiveppi.tumblr.com/facebook/1), [Pink Preview](http://fiveppi.tumblr.com/facebook/2).
+Static Previews: [Tom Preview](http://fiveppp.tumblr.com/facebook/1), [Pink Preview](http://fiveppp.tumblr.com/facebook/2).
 
 ## Options
 
