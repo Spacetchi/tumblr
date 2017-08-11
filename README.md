@@ -1,14 +1,14 @@
 # tumblr
 
-This is the repository for all my [tumblr themes](https://fiveppi.tumblr.com). 
+This is the repository for all my [tumblr themes](https://5ppi.tumblr.com). 
 
 ## How-To
 
-You will find the html files in  `[Theme Name] > theme > [theme_name].html`. Copy and paste the raw text into your tumblr's customize page.
+You will find the html files in  `[Theme_Name] > theme > [theme_name].html`. Copy and paste the raw text into your tumblr blog's customize page.
 
-Documentation for each theme is in `[Theme Name] > theme > documentation.md`.
+Documentation for each theme is in `[Theme_Name] > theme > documentation.md`.
 
-Additionally, this information is usually mirrored on [tumblr](https://fiveppi.tumblr.com) in a more user-friendly manner.
+Additionally, this information is usually mirrored on [tumblr](https://5ppi.tumblr.com) in a more user-friendly manner.
 
 ## Finished Themes
 
@@ -17,6 +17,7 @@ Additionally, this information is usually mirrored on [tumblr](https://fiveppi.t
 3. Very Boring Theme
 4. Hypertext Markup Language
 5. Facebook
+6. 4chan
 
 If you see a theme in the repository that is not in this list, DO NOT install it. It is in development. Wait for the release post on tumblr.
 
@@ -24,38 +25,32 @@ If you see a theme in the repository that is not in this list, DO NOT install it
 
 ### Credit 
 
-You can modify the themes as you wish, but you must keep the original credit, in its original colour and position. This includes the credit inside comments as well.
+You can modify the themes as you wish, but leave my credit links alone. This includes the credit inside comments as well.
 
-However, if you put a small piece of one of my themes into another theme by someone else, you may leave out visible credit, as long as it is not a major part of the resulting theme. You must still credit me somewhere in the code with this:
+However, you can put a small piece of one of my themes into another theme by someone else. In this case, you may leave out visible credit, as long as it is not a major part of the resulting theme. You must still credit me somewhere in the code with this:
 
 ```
 <!-- [sidebar, header, script, etc.] by spacetchi, Medusa Moxie 
 
 http://spacetchi.tumblr.com/
 
-http://fiveppi.tumblr.com/
+http://5ppi.tumblr.com/
 
 http://tchi.space/
 
 -->
 ```
 
-### Redistribution and Re-hosting
+Also check with the creator of the other theme to make sure they're okay with that. 
 
-Because this repository will be updated continuously, your copies of my codes will become outdated. For this reason, I discourage re-hosting without my explicit permission. If you want my themes to be accessible to users who may be unable to access GitHub for some reason, please message me before uploading somewhere else. I will see what I can do.
+### Redistribution
 
-You MAY distribute a *modified* version of my theme as long as it follows the crediting criteria above, and you ALSO credit me in your release post and documentation (on tumblr, GitHub, etc.). Please be reasonable; don't just modify one thing and then claim that you made half of it. 
+Because this repository is updated continuously, your copies of my codes will become outdated. For this reason, do not re-host without my explicit permission. If you want my themes to be accessible to users who are unable to access GitHub for some reason, please message me before uploading somewhere else. I will see what I can do.
 
-You CANNOT sell anything using my themes. 
-
-### Base Code Exception
+### Base Code
 
 You may use this without any credit whatsoever, and sell themes based on it.
 
 ## Pull Requests
 
 If you see a problem with a theme, go ahead and send a pull request.
-
-## Scripts
-
-I have re-hosted some scripts written by other people in this repository under `Scripts` because I don't like tumblr hosting. I do not claim ANY credit for these codes. If you don't want your code hosted here, please send me a message.
