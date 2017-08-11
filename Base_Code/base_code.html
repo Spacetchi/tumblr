@@ -25,8 +25,6 @@ Do not steal!
 <link rel="shortcut icon" href="{Favicon}">
 <link rel="alternate" type="application/rss+xml" href="{RSS}">
 
-<script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
-
 <!-- photoset stylesheet by pixelunion! -->
 <link href="https://static.tumblr.com/qudkd6d/OcDnl99gb/style.css" rel="stylesheet" type="text/css"/>
 
@@ -61,14 +59,36 @@ blockquote {
     border-left:1px solid {color:Text};
 }
 
-img:not(.lightbox-image), 
-iframe {
+img:not(.lightbox-image) {
     max-width:100%;
+    height:auto;
+}
+
+figure {
+	margin-right:0;
+	margin-left:0;
 }
 
 .media img {
     cursor:pointer;
 	display:block;
+}
+
+.media iframe {
+    display:block;
+}
+
+*:first-child {
+    margin-top:0;
+}
+
+*:last-child {
+    margin-bottom:0;
+}
+
+#ask_form,
+#submit_form {
+    display:block;
 }
 
 </style>
@@ -309,7 +329,7 @@ iframe {
     
 </div><!-- wrapper -->
 
-</body>
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
 
 <script type="text/javascript" src="http://static.tumblr.com/cqfswrg/1xXo902k0/jquery_photoset.js"></script>
 
@@ -356,3 +376,7 @@ $(document).ready(function() {
     });       
     
 </script>
+
+</body>
+
+</html>
