@@ -440,7 +440,7 @@ button.infinite {
     {block:SubmissionsEnabled}
     <a href="/submit" title="Submit">sm</a> /
     {/block:SubmissionsEnabled}
-    <a href="http://fiveppi.tumblr.com/" title="Theme Credit: Updated 2017-08-09">thm</a>
+    <a href="http://fiveppi.tumblr.com/" title="Theme Credit: Updated 2017-08-11">thm</a>
     ]
     [ <a href="/archive" title="Archive">Archive</a> ]
     </nav>
@@ -653,18 +653,26 @@ button.infinite {
     {/block:Audio}
                
     {block:Answer}
-    
+    {block:NotReblog}
     <div class="caption">
     <div class="reply">
     <span class="asker">{Asker} says: </span><span class="question">{Question}</span>
     {block:Answerer}<p>{Answerer} answers: {/block:Answerer}</p><p class="answer">{Answer}</p>
     </div>
     </div><!-- caption -->
-    
+    {/block:NotReblog} <!-- reblogged version of post found below -->
     {/block:Answer}
     
     {block:RebloggedFrom}
     <div class="caption">
+    
+        {block:Answer}
+            <div class="reply">
+            <span class="asker">{Asker} says: </span><span class="question">{Question}             </span>
+            {block:Answerer}<p>{Answerer} answers: {/block:Answerer}</p><p class="answer">{Answer}</p>
+            </div>
+        {/block:Answer}
+        
         {block:Reblogs}
         
         <div class="reply {block:isOriginalEntry}original-reblog{/block:isOriginalEntry}">
@@ -680,6 +688,7 @@ button.infinite {
         </div><!-- reply -->
         
         {/block:Reblogs}
+        
     </div>
     {/block:RebloggedFrom}
 
