@@ -5,7 +5,7 @@
 
 http://spacetchi.tumblr.com/
 
-http://5ppi.tumblr.com/
+http://fiveppi.tumblr.com/
 
 http://spacetchi.net/
 
@@ -138,6 +138,12 @@ q:before {
 
 * > *:last-child {
     margin-bottom:0;
+}
+
+.reply ul,
+.reply ol {
+    display:table;
+    padding-left:2em;
 }
 
 {block:IfSpoilerText}
@@ -344,6 +350,7 @@ p.quote {
 
 .reply {
     margin:0 0 10px 0;
+    position:relative;
 }
 
 .reply:first-of-type > .name:after {
@@ -444,7 +451,7 @@ button.infinite {
     {block:SubmissionsEnabled}
     <a href="/submit" title="Submit">sm</a> /
     {/block:SubmissionsEnabled}
-    <a href="http://fiveppi.tumblr.com/" title="Theme Credit: Updated 2017-08-11">thm</a>
+    <a href="http://fiveppi.tumblr.com/">thm</a>
     ]
     [ <a href="/archive" title="Archive">Archive</a> ]
     </nav>
@@ -453,7 +460,7 @@ button.infinite {
     
     <img src="{image:Banner}" class="banner" />
     
-    <h1 class="title">/{Name}/ - {Title}</h1>
+    <h1 class="title">/89c/ - {Title}</h1>
 
     <p class="desc">{Description}</p>
 
@@ -591,9 +598,7 @@ button.infinite {
     {block:Quote}
     <div class="caption">
     <div class="reply">
-    <blockquote>
-    <p>{Quote}</p>
-    </blockquote>
+    <p class="quote">“{Quote}”</p>
     {block:Source}
     <p class="source">&mdash;{Source}</p>
     {/block:Source}
@@ -745,7 +750,7 @@ button.infinite {
     {block:SubmissionsEnabled}
     <a href="/submit" title="Submit">sm</a> /
     {/block:SubmissionsEnabled}
-    <a href="http://fiveppi.tumblr.com/" title="Credit">thm</a>
+    <a href="http://fiveppi.tumblr.com/" title="Theme Credit: Updated 2017-08-17">thm</a>
     ]
     [ <a href="{BlogURL}/archive" title="Archive">Archive</a> ]
     </nav>
