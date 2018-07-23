@@ -306,11 +306,11 @@ pre {
 }
 {/block:PermalinkPage}
 
-.reply {
+.reblog-reply {
     margin-top:1.6em;
 }
 
-.reply:last-child {
+.reblog-reply:last-child {
     margin-bottom:1.6em;
 }
 
@@ -359,12 +359,12 @@ pre {
     opacity:0.5;
 }
 
-.reply:hover .name,
-.reply:hover .name a {
+.reblog-reply:hover .name,
+.reblog-reply:hover .name a {
     color:rgba({RGBcolor:Text}, 1);
 }
 
-.reply:hover .name img {
+.reblog-reply:hover .name img {
     opacity:1;
 }
 
@@ -375,7 +375,7 @@ pre {
     margin-left:0.5em;
 }
 
-.reply:hover .small {
+.reblog-reply:hover .small {
     display:inline;
 }
 
@@ -815,7 +815,7 @@ ol.notes blockquote {
         
         {block:Reblogs}
         
-        <div class="reply {block:isNotOriginalEntry}unoriginal{/block:isNotOriginalEntry} {block:isOriginalEntry}original{/block:isOriginalEntry}">
+        <div class="reblog-reply {block:isNotOriginalEntry}unoriginal{/block:isNotOriginalEntry} {block:isOriginalEntry}original{/block:isOriginalEntry}">
         <div class="reply-header">
         {block:IsActive}
         <span class="name active"><img src="{PortraitURL-64}"/><a target="_blank" href="{Permalink}">{Username}</a></span>
