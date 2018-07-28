@@ -18,6 +18,7 @@ Additionally, this information is usually mirrored on [tumblr](https://5ppi.tumb
 4. Hypertext Markup Language
 5. Facebook
 6. 4chan
+7. Highlighter
 
 If you see a theme in the repository that is not in this list, DO NOT install it. It is in development. Wait for the release post on tumblr.
 
