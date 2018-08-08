@@ -970,7 +970,7 @@ pre {
 "use strict";
 window.addEventListener('load', startup, false);
 function startup() {
-    let photosets = document.getElementsByClassName("media-photoset");
+    let photosets = document.getElementsByClassName("media-photo");
     for (let i = 0, n = photosets.length; i < n; i++) {
         let photoset = photosets[i];
         makePhotoset(photoset);
@@ -1002,19 +1002,22 @@ function lightbox(image_containers, current) {
     Tumblr.Lightbox.init(lightboxes, current);
 }
 function makePhotoset(photoset) {
-    var images = photoset.getElementsByClassName("media--image--container");
     var layout = photoset.dataset.layout;
-    for (var i = 0; i < layout.length; i++) {
-        var cols = layout[i];
-        var row = document.createElement("div");
-        row.classList.add("photo-row-" + cols);
-        row.classList.add("photo-row");
-        
-        for (var j = 0; j < parseInt(cols); j++) {
-            row.appendChild(images[0]);
+    if (layout) {
+        var images = photoset.getElementsByClassName("media--image--container");
+
+        for (var i = 0; i < layout.length; i++) {
+            var cols = layout[i];
+            var row = document.createElement("div");
+            row.classList.add("photo-row-" + cols);
+            row.classList.add("photo-row");
+            
+            for (var j = 0; j < parseInt(cols); j++) {
+                row.appendChild(images[0]);
+            }
+            
+            photoset.appendChild(row);
         }
-        
-        photoset.appendChild(row);
     }
 }
 </script>
