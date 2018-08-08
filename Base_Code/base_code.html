@@ -20,22 +20,25 @@ Do not steal!
 <meta name="description" content="{MetaDescription}" />
 {/block:Description}
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>{Title}</title>
+<title>{Title} - {block:PostSummary}{PostSummary}{/block:PostSummary}</title>
        
 <link rel="shortcut icon" href="{Favicon}">
 <link rel="alternate" type="application/rss+xml" href="{RSS}">
-
-<!-- photoset stylesheet by pixelunion! -->
-<link href="https://static.tumblr.com/qudkd6d/OcDnl99gb/style.css" rel="stylesheet" type="text/css"/>
 
 <meta name="color:Background" content="#000">
 <meta name="color:Text" content="#fff">
 <meta name="color:Link" content="#aaa">
 <meta name="color:Link Hover" content="#ccc">
 
+<meta name="if:Show RSS" content="1">
+
 <style>
     
 /* general */
+
+* {
+    box-sizing:border-box;
+}
 
 body {
     margin:0;
@@ -59,9 +62,13 @@ blockquote {
     border-left:1px solid {color:Text};
 }
 
-img:not(.lightbox-image) {
+img {
     max-width:100%;
     height:auto;
+}
+
+img.lightbox-image {
+    max-width:none;
 }
 
 figure {
@@ -69,13 +76,8 @@ figure {
 	margin-left:0;
 }
 
-.media img {
-    cursor:pointer;
-	display:block;
-}
-
-.media iframe {
-    display:block;
+pre {
+    white-space:pre-wrap;
 }
 
 *:first-child {
@@ -86,22 +88,106 @@ figure {
     margin-bottom:0;
 }
 
+/* essential tumblr styling */
+
+/* iframe-type */
+
+.media iframe {
+    display:block;
+}
+
+/* videos and audio */
+
+.tumblr_video_container,
+.tumblr_audio_container {
+    width:initial !important;
+    height:initial !important;
+}
+.tumblr_video_container  {
+    position: relative;
+    padding-bottom: 56.25%;
+    height: 0;
+}
+.tumblr_video_iframe {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    left: 0;
+    top: 0;
+}
+
+.instagram-media {
+    max-width:none !important;
+    min-width:0 !important;
+    width:100% !important;
+}
+
+/* forms */
+
 #ask_form,
 #submit_form {
     display:block;
+}
+
+/* image-type */
+
+/* all images */
+
+.photo-row {
+    padding:0.1em 0;
+    display:flex;
+}
+
+.media--image--container {
+    cursor:pointer;
+    padding:0 0.1em;
+    flex-grow:1;
+}
+
+.media--image--container:first-child {
+    padding-left:0;
+}
+
+.media--image--container:last-child {
+    padding-right:0;
+}
+
+.media--image {
+	width:100%;
+	height:100%;
+}
+
+/* lightbox */
+
+.tmblr-lightbox .vignette {
+    background:none!important;
+}
+
+.lightbox-image {
+    border-radius:0!important;
+}
+
+/* infinite scroll */
+
+.pagination--infinite {
+    display:none;
+}
+
+.page-1 .pagination--infinite {
+    display:initial;
 }
 
 </style>
 
 </head>
 
-<body>
+<body {block:Pagination}class="page-{CurrentPage}"{/block:Pagination}>
 
 <div class="wrapper">
 
-<h1 class="title"><a href="{BlogURL}">{Title}</a></h1>
+<h1 class="page--title"><a href="{BlogURL}">{Title}</a></h1>
 
-<p class="desc">{Description}</p>
+<p class="page--description">{Description}</p>
 
 	<nav>
     <ul>
@@ -118,164 +204,178 @@ figure {
     {block:SubmissionsEnabled}
     <li><a href="/submit">{SubmitLabel}</a></li>
     {/block:SubmissionsEnabled}
-    <li><a href="http://5ppi.tumblr.com/">Theme</a></li>    
+    {block:IfShowRSS}
+    <li><a href="{RSS}">RSS</a></li>
+    {/block:IfShowRSS}
+    <li><a href="https://5ppi.tumblr.com/" title="Updated 1970-01-01">Theme</a></li>
     </ul>
 	</nav>
 
-<main>
+<main class="posts">
 
 {block:Posts}
  
-<article class="post">
+<article class="post post-{PostType}">
+
+    {block:Title}
+    <h2 class="post--title"><a href="{Permalink}">{Title}</a></h2>
+    {/block:Title}
  
     {block:Text}
     
-    {block:Title}
-    <h2 class="title"><a href="{Permalink}">{Title}</a></h2>
-    {/block:Title}
-    
+    {block:NotReblog}
     {Body}
+    {/block:NotReblog}
     
     {/block:Text}
  
     {block:Photo}
     
-    <div class="media make_lightbox" 
+    <div class="media media-photo">
+    
+    <div class="media--image--container" 
     data-width="{PhotoWidth-HighRes}" 
     data-height="{PhotoHeight-HighRes}" 
-    data-lowres="{PhotoURL-500}" data-highres="{PhotoURL-HighRes}">
-    <img src="{PhotoURL-HighRes}" alt="{PhotoAlt}"  class="photoset-img"/>
+    data-lowres="{PhotoURL-500}" 
+    data-highres="{PhotoURL-HighRes}">
+    <img src="{PhotoURL-HighRes}" 
+        srcset="{PhotoURL-250} 250w,
+                {PhotoURL-400} 400w,
+                {PhotoURL-500} 500w,
+                {PhotoURL-HighRes} 1280w"
+        sizes="80vw" alt="{PhotoAlt}"  class="media--image"/>
     </div>
     
-    {block:Caption}
-    <div class="caption">{Caption}</div>
-    {/block:Caption}
+    </div>
     
     {/block:Photo}
  
     {block:Photoset}
 
-    <div class="photo-slideshow" id="photoset_{PostID}" data-layout="{PhotosetLayout}">
+    <div class="media media-photo media-photoset" id="photoset_{PostID}" data-layout="{PhotosetLayout}">
 
     {block:Photos}
     
-    <div class="media photo-data">
-    
-    <div class="pxu-photo">
-    <img alt="{PhotoAlt}" 
-    src="{PhotoURL-500}" 
-    width="{PhotoWidth-500}" 
-    height="{PhotoHeight-500}" 
-    data-highres="{PhotoURL-HighRes}" 
+    <div class="media--image--container" 
     data-width="{PhotoWidth-HighRes}" 
     data-height="{PhotoHeight-HighRes}" 
-    class="{block:Exif}exif-yes{/block:Exif} {block:Caption}caption-yes{/block:Caption}"{block:Exif}
-    data-camera="{block:Camera}{Camera}{/block:Camera}" 
-    data-iso="{block:ISO}{ISO}{/block:ISO}" 
-    data-aperture="{block:Aperture}{Aperture}{/block:Aperture}" 
-    data-exposure="{block:Exposure}{Exposure}{/block:Exposure}" 
-    data-focal="{block:FocalLength}{FocalLength}{/block:FocalLength}"{/block:Exif} {block:Caption}
-    data-caption="{Caption}"{/block:Caption} />
-    </div><!-- pxu-photo -->
-    
-    <div class="icons">
-    <a class="tumblr-box" rel="post-{PostID}" href="{PhotoURL-HighRes}">
-    <span class="zoom"></span>
-    </a>
-    </div><!-- icons -->
-     
-    </div><!-- photo-data -->
+    data-lowres="{PhotoURL-500}" 
+    data-highres="{PhotoURL-HighRes}">
+    <img src="{PhotoURL-HighRes}" 
+        srcset="{PhotoURL-250} 250w,
+                {PhotoURL-400} 400w,
+                {PhotoURL-500} 500w,
+                {PhotoURL-HighRes} 1280w"
+        sizes="50vw" alt="{PhotoAlt}"  class="media--image"/>
+    </div>
     
     {/block:Photos}
 
-    </div><!-- photo-slidshow -->
-
-    {block:Caption}
-    <div class="caption">{Caption}</div>
-    {/block:Caption}
+    </div><!-- photoset -->
 
     {/block:Photoset}
  
     {block:Quote}
      
-    <p class="quote">“{Quote}”</p>
+    <p class="quote--quote">“{Quote}”</p>
     {block:Source}
-    <p class="source">&mdash;{Source}</p>
+    <p class="quote--source">&mdash;{Source}</p>
     {/block:Source}
     
     {/block:Quote}
     
     {block:Link}
     
-    <h2 class="title"><a href="{URL}">{Name} (link)</a></h2>
+    <h2 class="post--title link--link"><a href="{URL}">{Name} (link)</a></h2>
     
     {block:Description}
-    <div class="caption">{Description}</caption>
+    <div class="post--caption">{Description}</caption>
     {/block:Description}
     
     {/block:Link}
  
     {block:Chat}
     
-    {block:Title}
-    <h2 class="title"><a href="{Permalink}">{Title}</a></h2>
-    {/block:Title}
-    
-    <div class="chat"> 
-    <p>
+    <div class="chat--chat"> 
     {block:Lines}
-    <div class="{Alt} user_{UserNumber}">
+    <div class="{Alt} user-{UserNumber}">
+    <p>
     {block:Label}
-    <span class="name">{Label}</span>{/block:Label}
+    <span class="chat--name">{Label}</span>{/block:Label}
     &nbsp;{Line}
+    </p>
     </div>
     {/block:Lines}
-    </p>
     </div><!-- chat -->
     
     {/block:Chat}
  
     {block:Video}
     
-    <div class="media video">{Video-700}</div>
-    {block:Caption}
-    <div class="caption">{Caption}</div>
-    {/block:Caption}
+    <div class="media media-video">{Video-700}</div>
     
     {/block:Video}
 
     {block:Audio}
     
-    <div class="audio">
+    <div class="media media-audio">
     {block:AudioEmbed}
     {AudioEmbed color="white"}
     {/block:AudioEmbed}
     </div><!-- audio -->
-   
-    {block:Caption}
-    <div class="caption">{Caption}</div>
-    {/block:Caption}
     
     {/block:Audio}
                
     {block:Answer}
     
-    <div class="q">
-    <span class="asker">{Asker} says:</span><br> <span class="question">{Question}</span>
-    </div><!-- q -->
-    <div class="answer">{Answer}</div>
+    <p class="answer--asker">{Asker} says:</p>
+    <p class="answer--question">{Question}</p>
+    {block:Answerer}<p class="answer--answerer">{Answerer} answers:</p>{/block:Answerer}
+    <div class="answer--answer">{Answer}</div>
     
     {/block:Answer}
     
-    {block:Date}
-    <div class="post-info">
+    {block:NotReblog}
+    {block:Caption}
+    <div class="post--caption">
+    {Caption}
+    </div>
+    {/block:Caption}
+    {/block:NotReblog}
     
+    {block:RebloggedFrom}
+    <div class="post--caption replies">
+        
+        {block:Reblogs}
+        
+        <div class="reply reply-{block:isNotOriginalEntry}unoriginal{/block:isNotOriginalEntry}{block:isOriginalEntry}original{/block:isOriginalEntry}">
+        <div class="reply-header">
+        {block:IsActive}
+        <span class="reply--name reply--name-active"><img src="{PortraitURL-24}"/><a target="_blank" href="{Permalink}">{Username}</a></span>
+        {/block:IsActive}
+        
+        {block:IsDeactivated}
+        <span class="reply--name reply--name-inactive">{Username}<em>deactivated</em></span>
+        {/block:IsDeactivated}
+        </div>
+        
+        {Body}
+        </div><!-- reply -->
+        
+        {/block:Reblogs}
+        
+    </div>
+    {/block:RebloggedFrom}
+    
+    {block:Date}
+    <footer class="post--info">
+    <p>
     posted {TimeAgo}
     {block:NoteCount}
     with {NoteCountWithLabel}
     {/block:NoteCount}
-
-    </div><!-- post-info -->
+    </p>
+    </footer>
     {/block:Date}
  
 </article>
@@ -283,7 +383,7 @@ figure {
 {block:PermalinkPage}
 
     {block:HasTags}
-    <div class="tags">
+    <div class="post--tags">
     {block:Tags}
     <a href="{TagURL}">#{Tag}</a> 
     {/block:Tags}
@@ -299,15 +399,20 @@ figure {
 
 {/block:Posts}
 
+</main>
+
 {block:Pagination}
     <nav class="pagination">
 
     {block:PreviousPage}
-    <a href="{PreviousPage}" class="back">Back</a>
+    <a href="{PreviousPage}" class="pagination--back">Back</a>
     {/block:PreviousPage}
 
     {block:NextPage}
-    <a href="{NextPage}" class="next">Next</a>
+    {block:IndexPage}
+    <button class="pagination--infinite">Infinite Scroll</button>
+    {/block:IndexPage}
+    <a href="{NextPage}" class="pagination--next">Next</a>
     {/block:NextPage}
     
     </nav>
@@ -316,65 +421,110 @@ figure {
 {block:PermalinkPagination}
     <nav class="pagination">
     {block:PreviousPost}
-    <a href="{PreviousPost}" class="back">Previous Post</a>
+    <a href="{PreviousPost}" class="pagination--back">Previous Post</a>
     {/block:PreviousPost}
 
     {block:NextPost}
-    <a href="{NextPost}" class="next">Next Post</a>
+    <a href="{NextPost}" class="pagination--next">Next Post</a>
     {/block:NextPost}
     </nav>
 {/block:PermalinkPagination}
-
-</main>
     
 </div><!-- wrapper -->
 
-<script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
-
-<script type="text/javascript" src="http://static.tumblr.com/cqfswrg/1xXo902k0/jquery_photoset.js"></script>
+{block:IndexPage}
+<script src="https://static.tumblr.com/cqfswrg/azXpd458x/infinitescroll.js" type="text/javascript"></script>
+{/block:IndexPage}
 
 <script>
 
-//only used if theme has a #sidebar. delete otherwise
-$(document).ready(function() {
-    var $child = $("#sidebar");
-    $child.parent().css("min-height", $child.outerHeight());
-});
+"use strict";
 
-</script>
+window.addEventListener('load', startup, false);
 
-<script type="text/javascript">
-//pxu photosets
-    $(document).ready(function() {
-        $('.photo-slideshow').pxuPhotoset({
-            'gutter' : '10px',
-            'rounded' : 'false',
-        }, function() {
-        // callback
-        });
+function startup() {
+    let photosets = document.getElementsByClassName("media-photoset");
+    for (let i = 0, n = photosets.length; i < n; i++) {
+        let photoset = photosets[i];
+        makePhotoset(photoset);
+        makeLightboxes(photoset);
+    }
+    
+{block:IndexPage}
+    let container = document.querySelector('.posts');
+    let button = document.querySelector('.pagination--infinite');
+
+    let infinite = new InfiniteScroll( container, {
+        path: '.pagination--next',
+        append: '.post',
+        history: false,
+        button: '.pagination--infinite',
+        loadOnScroll: false,
     });
     
-</script>
+    button.addEventListener("click", function() {
+        infinite.loadNextPage();
+        infinite.option({ loadOnScroll: true });
+        document.querySelector('.pagination').style.display = "none";
+    });
 
-<script>
-//calling lightbox on all images
-    $(function(){
-        $('.make_lightbox').each(function(){ 
-            $(this).on('click',function(){  
-                var lbArray = [];
-                var arrayContents = {
-                    "width":$(this).data('width'), 
-                    "height":$(this).data('height'), 
-                    "low_res":$(this).data("lowres"), 
-                    "high_res":$(this).data('highres')
-                }; 
-                lbArray.push(arrayContents); 
-                Tumblr.Lightbox.init(lbArray,1); 
-                $('body').toggleClass('tumblr_lightbox_active'); 
-            });
+    infinite.on( 'append', function(response, path, items) {
+        for (let i = 0, n = items.length; i < n; i++) {
+            let photoset = items[i].querySelector('.media-photoset');
+            if (photoset) {
+                makePhotoset(photoset);
+                makeLightboxes(photoset);
+            }
+        }
+    });
+{/block:IndexPage}
+
+}
+
+function makeLightboxes(photoset) {
+    let image_containers = photoset.getElementsByClassName("media--image--container");
+    for (let i = 0, n = image_containers.length; i < n; i++) {
+        let image_container = image_containers[i];
+        image_container.addEventListener("click", function() {
+            let current = i + 1;
+            lightbox(image_containers, current);
         });
-    });       
-    
+    }
+}
+
+function lightbox(image_containers, current) {
+    let lightboxes = [];
+    for (let i = 0, n = image_containers.length; i < n; i++) {
+        let image_container = image_containers[i]
+        let arrayContents = {
+            "width" : image_container.dataset.width,
+            "height" : image_container.dataset.height,
+            "low_res" : image_container.dataset.lowres,
+            "high_res" : image_container.dataset.highres,
+        }
+        lightboxes.push(arrayContents);
+    }
+    Tumblr.Lightbox.init(lightboxes, current);
+
+}
+
+function makePhotoset(photoset) {
+    var images = photoset.getElementsByClassName("media--image--container");
+    var layout = photoset.dataset.layout;
+    for (var i = 0; i < layout.length; i++) {
+        var cols = layout[i];
+        var row = document.createElement("div");
+        row.classList.add("photo-row-" + cols);
+        row.classList.add("photo-row");
+        
+        for (var j = 0; j < parseInt(cols); j++) {
+            row.appendChild(images[0]);
+        }
+        
+        photoset.appendChild(row);
+    }
+}
+
 </script>
 
 </body>
