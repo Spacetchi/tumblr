@@ -583,6 +583,10 @@ pre {
     box-decoration-break: clone;
 }
 
+.post--source {
+    float:left;
+}
+
 /* text posts */
 
 .read_more_container {
@@ -849,7 +853,7 @@ pre {
     <p class="answer--asker">{Asker} said:</p>
     <p class="answer--question">{Question}</p>
     <hr/>
-    {block:Answerer}<p class="answer--answerer">{Answerer} answered: {/block:Answerer}</p>
+    {block:Answerer}<p class="answer--answerer">{Answerer} answered:</p>{/block:Answerer}
     <p class="answer--answer">{Answer}</p>
     {/block:Answer}
     
@@ -889,12 +893,20 @@ pre {
     <footer class="post--footer">
     
     <p class="post--info">
-    <span>
+    
+    {block:RebloggedFrom}
+    <span class="post--source">
+    <a href="{ReblogRootURL}">Source</a>
+    </span>
+    {/block:RebloggedFrom} 
+    
+    <span class="post--datenotes">
     <a href="{Permalink}">{Month} {DayOfMonthWithZero}, {Year}</a>
     {block:NoteCount}
     with <a href="{Permalink}">{NoteCountWithLabel}</a>
     {/block:NoteCount}
     </span>
+    
     </p>
     
     {block:PermalinkPage}
