@@ -501,6 +501,10 @@ ul.sidebar--links {
     margin-top:1em;
 }
 
+.reply--header {
+    margin-bottom:1em;
+}
+
 .reply--header a {
     text-decoration:none;
     font-weight:bold;
@@ -580,12 +584,18 @@ ul.sidebar--links {
 
 /* permalink page */
 
-.notes-container {
-    margin-top:4em;
+.notes--container {
+    margin-top:5em;
 }
 
 .tags a {
-    padding-right:1em;
+    text-decoration:none;
+    padding:0.2em 0.5em;
+    margin-right:1em;
+}
+
+.tags a:last-child {
+    margin-right:0;
 }
 
 .notes {
@@ -650,7 +660,7 @@ ul.sidebar--links {
     <!-- --> <!-- -->
     {/block:Pages}
     {/block:HasPages}
-    <li><a href="http://5ppi.tumblr.com/" title="Updated 2018-09-09">Theme</a></li>
+    <li><a href="http://5ppi.tumblr.com/" title="Updated 2018-09-10">Theme</a></li>
     </nav>
     
     {block:IfShowHeaderImage}
@@ -832,7 +842,7 @@ ul.sidebar--links {
         {block:Reblogs}
         
         <div class="reply reply-{block:isNotOriginalEntry}unoriginal{/block:isNotOriginalEntry}{block:isOriginalEntry}original{/block:isOriginalEntry}">
-        <div class="reply--header{block:IsDeactivated}-inactive{/block:IsDeactivated}">
+        <div class="reply--header {block:IsDeactivated}reply--header-inactive{/block:IsDeactivated}">
         {block:IsActive}
         <span class="reply--name reply--name-active"><a target="_blank" href="{Permalink}">{Username}</a></span>
         {/block:IsActive}
@@ -883,7 +893,7 @@ ul.sidebar--links {
     {block:HasTags}
     <div class="tags">
     {block:Tags}
-    <a href="{TagUrl}">#{Tag}</a>
+    <a href="{TagUrl}" class="transparent borders">#{Tag}</a>
     {/block:Tags}
     </div>
     {/block:HasTags}
