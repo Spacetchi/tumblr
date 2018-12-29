@@ -255,15 +255,15 @@ ol > li {
 }
 
 ol > li:before {
-    content:counter(ol-counter)':';
+    content:counter(ol-counter);
     display:block;
     width:1.6em;
     position:absolute;
     text-align:center;
     left:0;
     font-weight:bold;
-    font-size:0.9em;
-    top:0.1em;
+    font-size:0.7em;
+    top:0.4em;
 }
 
 img {
@@ -393,11 +393,11 @@ pre {
 }
 {/block:PermalinkPage}
 
-.reply {
+.replog {
     margin-top:1.6em;
 }
 
-.reply:last-child {
+.replog:last-child {
     margin-bottom:1.6em;
 }
 
@@ -409,12 +409,12 @@ pre {
     display:none;
 }
 
-.reply--header {
+.replog--header {
     margin-bottom:1.6em;
     font-weight:bold;
 }
 
-.reply--header {
+.replog--header {
     background-image: 
     repeating-linear-gradient(
         rgba({RGBcolor:Text}, 0.5), 
@@ -426,19 +426,19 @@ pre {
     background-position:0 0.8em;
 }
 
-.reply--name,
-.reply--name a {
+.replog--name,
+.replog--name a {
     background:{color:Background};
     box-shadow: 10px 0 0 {color:Background}, -10px 0 0 {color:Background};
     color:rgba({RGBcolor:Text}, 0.5);
     box-decoration-break: clone;
 }
 
-.reply--name a {
+.replog--name a {
     background:none;
 }
 
-.reply--name img {
+.replog--name img {
     height:1em;
     border-radius:10px;
     margin-bottom:-5px;
@@ -446,23 +446,23 @@ pre {
     opacity:0.5;
 }
 
-.reply:hover .reply--name,
-.reply:hover .reply--name a {
+.replog:hover .replog--name,
+.replog:hover .replog--name a {
     color:rgba({RGBcolor:Text}, 1);
 }
 
-.reply:hover .reply--name img {
+.replog:hover .replog--name img {
     opacity:1;
 }
 
-.reply--name .small {
+.replog--name .small {
     line-height:inherit;
     font-weight:normal;
     display:none;
     margin-left:0.5em;
 }
 
-.reply:hover .small {
+.replog:hover .small {
     display:inline;
 }
 
@@ -671,10 +671,15 @@ pre {
     background:{color:Background};
 }
 
+.notes a:hover {
+    background:{color:Background};
+}
+
 .notes blockquote {
     margin-left:3.2em;
     padding-left:0;
     border:none;
+    display:inline;
 }
 
 .notes .action,
@@ -720,7 +725,7 @@ pre {
     <li><a href="{URL}">{Label}</a></li>
     {/block:Pages}
     {/block:HasPages}
-    <li><a href="http://5ppi.tumblr.com/" title="Updated 2018-08-07">Theme</a></li>    
+    <li><a href="http://5ppi.tumblr.com/" title="Updated 2018-12-28">Theme</a></li>    
     </ul>
 	</nav>
 	
@@ -866,18 +871,18 @@ pre {
     {/block:NotReblog}
     
     {block:RebloggedFrom}
-    <div class="post--caption replies">
+    <div class="post--caption replogs">
         
         {block:Reblogs}
         
-        <div class="reply reply-{block:isNotOriginalEntry}unoriginal{/block:isNotOriginalEntry} {block:isOriginalEntry}original{/block:isOriginalEntry}">
-        <div class="reply--header">
+        <div class="replog replog-{block:isNotOriginalEntry}unoriginal{/block:isNotOriginalEntry} {block:isOriginalEntry}original{/block:isOriginalEntry}">
+        <div class="replog--header">
         {block:IsActive}
-        <span class="reply--name reply--name-active"><img src="{PortraitURL-64}"/><a target="_blank" href="{Permalink}">{Username}</a></span>
+        <span class="replog--name replog--name-active"><img src="{PortraitURL-64}"/><a target="_blank" href="{Permalink}">{Username}</a></span>
         {/block:IsActive}
         
         {block:IsDeactivated}
-        <span class="reply--name reply--name-inactive">{Username}<em class="small">deactivated</em></span>
+        <span class="replog--name replog--name-inactive">{Username}<em class="small">deactivated</em></span>
         {/block:IsDeactivated}
         </div>
         
