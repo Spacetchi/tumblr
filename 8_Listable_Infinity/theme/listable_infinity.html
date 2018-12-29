@@ -24,9 +24,10 @@ Do not steal!
 <link rel="shortcut icon" href="{Favicon}">
 <link rel="alternate" type="application/rss+xml" href="{RSS}">
 
-<link href="https://fonts.googleapis.com/css?family=Merriweather:300,300i,700,700i" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css?family=Space+Mono:400,400i,700,700i" rel="stylesheet">
 
-<meta name="color:Background" content="#fff">
+<meta name="color:Gradient Light" content="#fff">
+<meta name="color:Gradient Dark" content="#eee">
 <meta name="color:Text" content="#000">
 <meta name="color:Link" content="#fff55a">
 <meta name="color:Link Hover" content="#ffe866">
@@ -36,45 +37,107 @@ Do not steal!
     
 /* general */
 
-* {
+::-moz-selection {
+    background:rgba(255, 255, 255, 0.3);
+}
+
+::selection {
+    background:rgba(255, 255, 255, 0.3);
+}
+
+*,
+*:before,
+*:after {
     box-sizing:border-box;
+}
+
+html {
+	font-size:14px;
+	font-size:calc(14px + 0.2vw);
 }
 
 body {
     margin:0;
     padding:0;
-    background:{color:Background};
     color:{color:Text};
 	word-wrap:break-word;
-	font-family:Merriweather;
-	font-size:14px;
-	font-size:calc(14px + 0.2vw);
-	line-height:1.6;
+	font-family:'Space Mono';
+	line-height:1.8;
+    font-variant-ligatures: none;
+}
+
+body,
+.post--body {
+    background-color:{color:Gradient Dark}; 
+    background-image:
+        radial-gradient(
+            circle farthest-side at 70% 10%, 
+            rgba({RGBcolor:Gradient Light}, 0.8), 
+            transparent),
+        radial-gradient(
+            circle farthest-side at 20% 90%, 
+            rgba({RGBcolor:Gradient Light}, 0.8), 
+            transparent);
+    background-attachment:fixed;
 }
 
 a {
     color:{color:Link};
     text-decoration:none;
-}
-
-.content a {
-    border-bottom:1px solid {color:Link};
+    background-image:
+        linear-gradient(rgba(255,255,255,0.2) 0%,
+                        rgba(255,255,255,0.2) 100%);
+    background-repeat:no-repeat;
+    background-size: 100% 0.6em;
+    background-position: 0 95%;
 }
 
 a:hover {
-    color:{color:Link Hover};
+    background-image:
+        linear-gradient(rgba(255,255,255,0.5) 0%,
+                        rgba(255,255,255,0.5) 100%);
+}
+
+a:hover,
+a:focus {
+
 }
 
 a.tumblr-box {
     border:none;
 }
 
+h1:after,
+h2:after,
+h3:after,
+h4:after,
+h5:after,
+h6:after {
+    content:'';
+    display:block;
+    width:1.5em;
+    border-bottom:0.3rem solid rgba(255, 255, 255, 0.2);
+    margin-top:0.2em;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    margin:2em 0;
+    margin:2rem 0;
+}
+
 h1 {
-    font-size:2em;
+    font-size:1.6em;
+    line-height:1.3;
 }
 
 h2 {
-    font-size:1.5em;
+    font-size:1.4em;
+    line-height:1.3
 }
 
 h3 {
@@ -93,7 +156,9 @@ h6 {
 blockquote {
     margin:0 0 0 1.5em;
     padding:0 0 0 1.5em;
-    border-left:2px solid {color:Text};
+    margin:0 0 0 calc((3em - 0.3rem) / 2);
+    padding:0 0 0 calc((3em - 0.3rem) / 2);
+    border-left:0.3rem solid rgba(255, 255, 255, 0.2);
 }
 
 ul {
@@ -108,25 +173,48 @@ ul > li {
 }
 
 ul > li:before {
-    content:'—';
+    content:'';
     display:block;
-    width:3em;
+    width:1em;
+    margin:0 1em;
     position:absolute;
-    text-align:center;
     left:0;
+    top:0.9em;
+    top:calc((2em - 0.3rem) / 2);
+    border-top:0.3rem solid rgba(255, 255, 255, 0.2);
+    font-weight:bold;
 }
 
 ol {
-    padding-left:2.5em;
+	counter-reset:count;
+	list-style-type:none;
+	padding:0;
 }
 
 ol > li {
-    padding-left:0.5em;
+    position:relative;
+    padding-left:3em;
 }
 
-img:not(.lightbox-image) {
+ol > li:before {
+    content:counter(count);
+	counter-increment:count;
+	color:rgba(255, 255, 255, 0.3);
+	font-weight:bold;
+	position:absolute;
+	display:block;
+	width:3em;
+	left:0;
+	text-align:center;
+}
+
+img {
     max-width:100%;
     height:auto;
+}
+
+.lightbox-image {
+    max-width:none;
 }
 
 figure {
@@ -134,23 +222,80 @@ figure {
 	margin-left:0;
 }
 
+hr { 
+    height:0;
+    width:30%;
+    text-align:left;
+    border:none;
+    border-bottom:0.3rem solid rgba(255, 255, 255, 0.2);
+    margin:2em 0;
+}
+
 pre {
     white-space:pre-wrap;
 }
 
-hr { 
-    height:0;
-    width:30%;
-    border:none;
-    border-bottom:1px solid rgba({RGBColor:Text}, 0.5);
-    margin-top:2em;
-    margin-bottom:2em;
+pre,
+code {
+    border:0.3rem solid rgba(255, 255, 255, 0.2);
+    font-family:inherit;
 }
 
-.media img {
+code {
+    padding:0.1em 0.2em;
+    font-size:0.8em;
+}
+
+pre {
+    padding:0.5em 0.8em;
+}
+
+pre code {
+    border:none;
+    padding:0;
+}
+
+.photoset--image {
     cursor:pointer;
 	display:block;
 	width:100%;
+}
+
+.photo-row {
+    padding:0.2em 0;
+    display:flex;
+}
+
+.photo-row:first-child {
+    padding-top:0;
+}
+
+.photo-row:last-child {
+    padding-bottom:0;
+}
+
+.media-photo {
+    margin-bottom:0.5em;
+    cursor:pointer;
+}
+
+.photo-row .media-photo {
+    margin:0;
+    padding:0 0.2em;
+    flex-grow:1;
+}
+.media-photo:first-child {
+    padding-left:0;
+}
+
+.media-photo:last-child {
+    padding-right:0;
+}
+
+.photoset--image {
+	width:100%;
+	height:100%;
+	object-fit:cover;
 }
 
 .media iframe {
@@ -206,59 +351,92 @@ hr {
 
 /* header */
 
-.links li:before {
-    content:'';
+.page--title {
+    border-bottom:0.3rem solid rgba(255, 255, 255, 0.2);
+    margin-bottom:1em;
+    padding-bottom:0.2em;
+    display:inline-block;
+}
+
+.page--title:after {
     display:none;
 }
 
-.links li {
-    display:inline;
-    padding-left:0;
-    margin-right:1em;
+.page--title a {
+    background:none;
 }
 
-.links li:last-child {
-    margin-right:0;
-}
-
-.page-header,
-.post-list {
+.page--header {
     margin-bottom:9em;
+}
+
+.page--description {
+    margin:0 0 1em 0;
+}
+
+.header--links > li {
+    padding-left:2em;
+}
+
+.header--links > li:before {
+    margin:0 1em 0 0;
+}
+
+.header--links a {
+    background:none;
 }
 
 /* posts */
 
-.post-container {
-    display:block;
+.post--dummy {
+    margin-bottom:3em;
 }
 
-.post-body {
+.post--header + .post--body {
+    margin-top:1em;
+}
+
+.post--body {
 {block:IndexPage}
     display:none;
 {/block:IndexPage}
     margin-bottom:3em;
 }
 
-.post-title {
-    margin-bottom:0;
-    font-size:1em;
+.post--title,
+.post--identity {
+    text-transform:lowercase;
 }
 
-.post-meta {
+.post--title:after,
+.post--identity:after {
+    display:none;
+}
+
+.post--identity {
+    font-size:1.2em;
+    line-height:1.6;
+    font-weight:normal;
+}
+
+.post--meta {
     font-size:0.9em;
     margin-top:0;
-    margin-bottom:1em;
 }
 
-.datenotes a {
+.post--info > * {
     margin-right:1em;
 }
 
-.caption {
+.post--info > *:last-child {
+    margin-right:0;
+}
+
+.post--caption {
     margin-top:1em;
 }
 
-.reply-header img {
+.replog--header img {
     width:1em;
     height:auto;
     border-radius:50%;
@@ -266,87 +444,119 @@ hr {
     margin-right:1em;
 }
 
-.reply-header {
-    padding:0 1em;
-}
-
-.name {
+.replog--name {
     font-weight:bold;
+    padding-bottom:0.5em;
+    border-bottom:0.3rem solid rgba(255, 255, 255, 0.2);
+    display:inline-block;
 }
 
-.name a {
-    border:none;
+.replog--name a {
+    background:none;
 }
 
-.deactivated {
+.replog--deactivated {
     font-weight:normal;
     font-size:0.8em;
     margin-left:1em;
 }
 
-.reblog-reply {
-    margin-bottom:1em;
+.replog {
+    margin-bottom:2em;
 }
 
-.photoset {
-    line-height:0;
+.post-quote .quote {
+    position:relative;
+    font-style:italic;
+    z-index:1;
 }
 
-.photoset img {
-    display:block;
+.post-quote .quote:before {
+    content:'“';
+    position:absolute;
+    font-size:8em;
+    font-weight:bold;
+    font-style:italic;
+    top:-0.6em;
+    left:-0.3em;
+    color:rgba(255,255,255,0.3);
+    z-index:-1;
 }
 
-.photoset .media {
-    display:inline-block;
+.post-quote .source {
+    font-weight:bold;
 }
 
-.photo-row-1 .media {
-    width:100%;
-}
-
-.photo-row-2 .media {
-    width:50%;
-}
-
-.photo-row-3 .media {
-    width:33.33333%;
-}
-
-.photoset .media {
-    padding:0 0.1em;
-}
-
-.photo-row {
-    padding:0.1em 0;
-}
-
-.photoset:first-child {
-    margin:-0.1em;
+.post-quote .post--replogs {
+    display:none;
 }
 
 .pagination {
-    text-align:center;
+    margin-top:9em;
+    text-transform:lowercase;
 }
 
 .pagination a {
-    margin:0 0.5em;
+    background:none;
+}
+
+.pagination > * {
+    margin-right:1em;
+}
+
+.pagination > *:last-child {
+    margin-right:0;
+}
+
+.infinite {
+    display:none;
+}
+
+.body-1 .infinite {
+    display:inline;
+}
+
+.infinite {
+    border:none;
+    background:none;
+    padding:0;
+    font-size:1em;
+    font-family:inherit;
+    color:{color:Link};
+    cursor:pointer;
+}
+
+.infinite:hover {
+    color:{color:Link Hover};
 }
 
 /* permalink page */
 
-.tags:before {
-    content:'Tagged as: ';
+.post--tags:before {
+    content:'tags: ';
 }
 
-.tags .tag:after {
+.post--tags .tag:after {
     content:', ';
 }
 
-.tags .tag:last-child:after {
+.post--tags .tag:last-child:after {
     content:'.';
 }
 
-.notes img {
+.notes {
+    margin-top:9em;
+}
+
+.notes li:before {
+    display:none;
+}
+
+.notes li {
+    padding:0;
+}
+
+.notes .avatar_frame {
     display:none;
 }
 
@@ -355,18 +565,66 @@ hr {
 }
 
 @media (min-width: 1000px) {
+    
     .wrapper {
         margin:0;
-        width:45%;
     }
-    
+
     {block:IndexPage}
     
-    .post-body {
-        position:absolute;
-        width:45%;
-        right:3em;
-        margin-top:-6em;
+    .wrapper {
+        width:50%;
+    }
+    
+    .page--description {
+        position:fixed;
+        width:42%;
+        right:4em;
+        top:8em;
+    }
+    
+    .post--container {
+        display:inline-block;
+    }
+    
+    .post--dummy {
+        margin-bottom:1em;
+    }
+    
+    .post--header + .post--body {
+        margin:0;
+    }
+    
+    .post--container:hover .post--body,
+    .post--container:focus .post--body,
+    .post--container:focus-within .post--body {
+        display:block;
+        position:fixed;
+        width:42%;
+        right:4em;
+        top:8em;
+        min-height:100%;
+    }
+    
+    .post--body > * {
+        opacity:0.7;
+    }
+    
+    .post--caption-single {
+        display:none;
+    }
+    
+    .replog,
+    .replog--header {
+        display:none;
+    }
+    
+    .post-text .replog {
+        display:block;
+    }
+    
+    .post-text .replog:not(:first-child) {
+        display:none;
     }
     
     {/block:IndexPage}
@@ -376,16 +634,19 @@ hr {
 
 </head>
 
-<body>
+<body class="body-{CurrentPage}">
 
 <div class="wrapper">
 
-<header class="page-header">
+<header class="page--header">
 
-<h1 class="title"><a href="{BlogURL}">{Title}</a></h1>
+<h1 class="page--title"><a href="{BlogURL}">{Title}</a></h1>
 
+<p class="page--description">{Description}</p>
+
+    {block:IndexPage}
     <nav>
-    <ul class="links">
+    <ul class="header--links">
     <li><a href="/">{lang:Home}</a></li>
     <li><a href="/archive">{lang:Archive}</a></li>
     {block:AskEnabled}
@@ -399,114 +660,55 @@ hr {
     <li><a href="{URL}">{Label}</a></li>
     {/block:Pages}
     {/block:HasPages}
-    <li><a href="http://5ppi.tumblr.com/" title="Updated 2018-07-27">Theme</a></li>    
+    <li><a href="http://5ppi.tumblr.com/" title="Updated 2018-12-28">Theme</a></li>    
     </ul>
 	</nav>
-	
-<p class="desc">{Description}</p>
+	{/block:IndexPage}
 	
 </header>
-
-<main>
 
 <div class="post-list" id="post-list">
 
 {block:Posts}
 
-<article class="post-container" type="button">
+<div class="post--dummy">
 
-<header class="post-header">
+<article 
+    class="post--container post-{PostType}" 
+    {block:IndexPage}
+    tabindex="0"
+    {/block:IndexPage}>
+
+<header class="post--header">
 
     {block:IndexPage}
 
-    <h2 class="post-title">
-    <a href="{Permalink}" class="post-identifier">
-
+    <h2 class="post--identity">
+    <a href="{Permalink}" class="post--identifier" target="_blank">
+    {PostId}
     {block:Text}
-    Text Post{block:Title}: {Title}{/block:Title}
+    {block:Title}:: {Title}{/block:Title}
     {/block:Text}
-    
-    {block:Photo}
-    Photo Post
-    {/block:Photo}
-    
-    {block:Photoset}
-    Photoset Post
-    {/block:Photoset}
-    
-    {block:Quote}
-    Quote Post
-    {/block:Quote}
-    
-    {block:Link}
-    Link Post
-    {/block:Link}
-    
     {block:Chat}
-    Chat Post{block:Title}: {Title}{/block:Title}
+    {block:Title}:: {Title}{/block:Title}
     {/block:Chat}
-    
-    {block:Audio}
-    Audio Post
-    {/block:Audio}
-    
-    {block:Video}
-    Video Post
-    {/block:Video}
-    
     {block:Answer}
-    Answer Post: {Question}
+    :: {Question}
     {/block:Answer}
-    
     </a>
     </h2>
     
     {/block:IndexPage}
-
-    {block:Date}
-    
-    <div class="post-meta">
-    
-    <p class="post-info">
-    
-    <span class="datenotes">
-    <a href="{Permalink}">{Year}.{MonthNumberWithZero}.{DayOfMonthWithZero}</a>
-    {block:NoteCount}
-    <a href="{Permalink}">{NoteCountWithLabel}</a>
-    {/block:NoteCount}
-    </span>
-    
-    {block:RebloggedFrom}
-    <span class="reblog-source">
-    <a href="{ReblogRootURL}">Source</a>
-    </span>
-    {/block:RebloggedFrom}
-    
-    </p>
-    
-    {block:PermalinkPage}
-    {block:HasTags}
-    <p class="tags">
-    {block:Tags}
-    <span class="tag"><a href="{TagURL}">{Tag}</a></span>
-    {/block:Tags}
-    </p><!-- tags -->
-    {/block:HasTags}
-    {/block:PermalinkPage}
-    
-    </div>
-    
-    {/block:Date}
     
 </header>
 
-<div class="post-body post-{PostType} content">
+<div class="post--body post-{PostType} content">
  
     {block:Text}
 
     {block:PermalinkPage}
     {block:Title}
-    <h2 class="title">{Title}</h2>
+    <h2 class="post--title">{Title}</h2>
     {/block:Title}
     {/block:PermalinkPage}
     
@@ -517,57 +719,43 @@ hr {
  
     {block:Photo}
     
-    <div class="media make_lightbox" 
+    <div class="media media-photoset">
+    <div class="media media-photo" 
     data-width="{PhotoWidth-HighRes}" 
     data-height="{PhotoHeight-HighRes}" 
     data-lowres="{PhotoURL-500}" 
     data-highres="{PhotoURL-HighRes}">
-    <img src="{PhotoURL-HighRes}" alt="{PhotoAlt}"  class="photoset-img"/>
+    <img src="{PhotoURL-HighRes}" alt="{PhotoAlt}"  class="photoset--image"/>
     </div>
-    
-    {block:NotReblog}
-    {block:Caption}
-    <div class="caption">
-    {Caption}
     </div>
-    {/block:Caption}
-    {/block:NotReblog}
     
     {/block:Photo}
  
     {block:Photoset}
 
-    <div class="photoset" id="photoset_{PostID}" data-layout={PhotosetLayout}>
+    <div class="media media-photoset" id="photoset_{PostID}" data-layout={PhotosetLayout}>
 
     {block:Photos}
     
-    <div class="media make_lightbox" 
+    <div class="media media-photo" 
     data-width="{PhotoWidth-HighRes}" 
     data-height="{PhotoHeight-HighRes}" 
     data-lowres="{PhotoURL-500}" 
     data-highres="{PhotoURL-HighRes}">
-    <img src="{PhotoURL-HighRes}" alt="{PhotoAlt}"  class="photoset-img"/>
+    <img src="{PhotoURL-HighRes}" alt="{PhotoAlt}"  class="photoset--image"/>
     </div>
     
     {/block:Photos}
 
     </div><!-- photo-slidshow -->
 
-    {block:NotReblog}
-    {block:Caption}
-    <div class="caption">
-    {Caption}
-    </div>
-    {/block:Caption}
-    {/block:NotReblog}
-
     {/block:Photoset}
  
     {block:Quote}
      
-    <p class="quote {Length}">{Quote}</p>
+    <p class="quote quote-{Length}">{Quote}</p>
     {block:Source}
-    <div class="source small">{Source}</div>
+    <div class="source">{Source}</div>
     {/block:Source}
     
     {/block:Quote}
@@ -594,12 +782,11 @@ hr {
     
     {block:PermalinkPage}
     {block:Title}
-    <h2 class="title">{Title}</h2>
+    <h2 class="post--title">{Title}</h2>
     {/block:Title}
     {/block:PermalinkPage}
     
     <div class="chat"> 
-    <p>
     {block:Lines}
     <div class="{Alt} user_{UserNumber}">
     {block:Label}
@@ -607,40 +794,23 @@ hr {
     &nbsp;{Line}
     </div>
     {/block:Lines}
-    </p>
     </div><!-- chat -->
     
     {/block:Chat}
  
     {block:Video}
     
-    <div class="media video">{Video-700}</div>
-    
-    {block:NotReblog}
-    {block:Caption}
-    <div class="caption">
-    {Caption}
-    </div>
-    {/block:Caption}
-    {/block:NotReblog}
+    <div class="media media-video">{Video-700}</div>
     
     {/block:Video}
 
     {block:Audio}
     
-    <div class="media audio">
+    <div class="media media-audio">
     {block:AudioEmbed}
     {AudioEmbed color="white"}
     {/block:AudioEmbed}
     </div><!-- audio -->
-   
-    {block:NotReblog}
-    {block:Caption}
-    <div class="caption">
-    {Caption}
-    </div>
-    {/block:Caption}
-    {/block:NotReblog}
     
     {/block:Audio}
                
@@ -652,23 +822,31 @@ hr {
     <p class="answer">{Answer}</p>
     {/block:Answer}
     
+    {block:NotReblog}
+    {block:Caption}
+    <div class="post--caption post--caption-single">
+    {Caption}
+    </div>
+    {/block:Caption}
+    {/block:NotReblog}
+    
     {block:RebloggedFrom}
-    <div class="caption">
+    <div class="post--caption post--replogs">
         
         {block:Reblogs}
         
-        <div class="reblog-reply {block:isNotOriginalEntry}unoriginal{/block:isNotOriginalEntry} {block:isOriginalEntry}original{/block:isOriginalEntry}">
-        <p class="reply-header">
+        <div class="replog replog-{block:isNotOriginalEntry}unoriginal{/block:isNotOriginalEntry}{block:isOriginalEntry}original{/block:isOriginalEntry}">
+        <p class="replog--header">
         {block:IsActive}
-        <span class="name active"><img src="{PortraitURL-64}"/><a target="_blank" href="{Permalink}">{Username}</a></span>
+        <span class="replog--name replog--name-active"><a target="_blank" href="{Permalink}">{Username}</a></span>
         {/block:IsActive}
         
         {block:IsDeactivated}
-        <span class="name inactive">{Username}<em class="deactivated">deactivated</em></span>
+        <span class="replog--name replog--name-inactive">{Username}<em class="replog--deactivated">deactivated</em></span>
         {/block:IsDeactivated}
         </p>
         
-        <div class="reply-body">
+        <div class="replog--body">
         {Body}
         </div>
         
@@ -681,7 +859,63 @@ hr {
     
 </div>
 
+    {block:Date}
+    
+    <div class="post--meta">
+    
+    <p class="post--info">
+    
+    <span class="post--date">
+    {Year}.{MonthNumberWithZero}.{DayOfMonthWithZero}
+    </span>
+    
+    <span class="post--type">
+    {block:Photo}photo{/block:Photo}
+    {block:Photoset}photoset{/block:Photoset}
+    {block:Quote}quote{/block:Quote}
+    {block:Link}link{/block:Link}
+    {block:Audio}audio{/block:Audio}
+    {block:Video}video{/block:Video}
+    {block:Text}text{/block:Text}
+    {block:Chat}chat{/block:Chat}
+    {block:Answer}question{/block:Answer}
+    </span>
+    
+    {block:PermalinkPage}
+    
+    {block:NoteCount}
+    <span class="post--notes">
+    {NoteCountWithLabel}
+    </span>
+    {/block:NoteCount}
+    
+    {block:RebloggedFrom}
+    <span class="post--source">
+    <a href="{ReblogRootURL}">source</a>
+    </span>
+    {/block:RebloggedFrom}
+    
+    {/block:PermalinkPage}
+    
+    </p>
+    
+    {block:PermalinkPage}
+    {block:HasTags}
+    <p class="post--tags">
+    {block:Tags}
+    <span class="tag"><a href="{TagURL}">{Tag}</a></span>
+    {/block:Tags}
+    </p><!-- tags -->
+    {/block:HasTags}
+    {/block:PermalinkPage}
+    
+    </div>
+    
+    {/block:Date}
+
 </article>
+
+</div>
 
 {/block:Posts}
 
@@ -701,13 +935,17 @@ hr {
 
 {block:Pagination}
     <nav class="pagination">
+    
+    {block:IfInfiniteScroll}
+    <button class="infinite" type="button">All</button>
+    {/block:IfInfiniteScroll}
 
     {block:PreviousPage}
-    <a href="{PreviousPage}" class="back" id="back">Newer</a>
+    <a href="{PreviousPage}" class="pagination--back">Newer</a>
     {/block:PreviousPage}
 
     {block:NextPage}
-    <a href="{NextPage}" class="next" id="next">Older</a>
+    <a href="{NextPage}" class="pagination--next">Older</a>
     {/block:NextPage}
     
     </nav>
@@ -716,24 +954,18 @@ hr {
 {block:PermalinkPagination}
     <nav class="pagination">
     {block:PreviousPost}
-    <a href="{PreviousPost}" class="back">Previous Post</a>
+    <a href="{PreviousPost}" class="pagination--back">Older Post</a>
     {/block:PreviousPost}
 
     {block:NextPost}
-    <a href="{NextPost}" class="next">Next Post</a>
+    <a href="{NextPost}" class="pagination--next">Newer Post</a>
     {/block:NextPost}
     </nav>
 {/block:PermalinkPagination}
 
 </main>
-
-<footer class="page-footer">
-
-</footer>
     
 </div><!-- wrapper -->
-
-<script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
 
 {block:IfInfiniteScroll}
 {block:IndexPage}
@@ -742,152 +974,228 @@ hr {
 {/block:IfInfiniteScroll}
 
 <script>
-    
-function makePhotoset(photoset) {
-    var images = photoset.childNodes;
-    var layout = photoset.dataset.layout;
-    for (var i = 0; i < layout.length; i++) {
-        var cols = layout[i];
-        var row = document.createElement("div");
-        row.classList.add("photo-row-" + cols);
-        row.classList.add("photo-row");
+"use strict";
+
+const makeLightboxes = function(photoset) {
+    let image_containers = 
+        photoset.getElementsByClassName("media-photo");
         
-        for (var j = 0; j < parseInt(cols); j++) {
-            row.appendChild(images[0]);
-        }
-        
-        photoset.appendChild(row);
+    for (let i = 0, n = image_containers.length; i < n; i++) {
+        let image_container = image_containers[i];
+        image_container.addEventListener("click", 
+            function() {
+                let current = i + 1;
+                lightbox(image_containers, current);
+            });
     }
 }
 
-var photosets = document.getElementsByClassName("photoset");
-for (var i = 0; i < photosets.length; i++) {
-    makePhotoset(photosets[i]);
+const lightbox = function(image_containers, current) {
+    let lightboxes = [];
+    for (let i = 0, n = image_containers.length; i < n; i++) {
+        let image_container = image_containers[i];
+        let arrayContents = {
+            "width" : image_container.dataset.width,
+            "height" : image_container.dataset.height,
+            "low_res" : image_container.dataset.lowres,
+            "high_res" : image_container.dataset.highres,
+        };
+        lightboxes.push(arrayContents);
+    }
+    Tumblr.Lightbox.init(lightboxes, current);
 }
-    
-</script>
 
-<script>
-
-function makeLightbox(post_containers) {
-
-    for (var i = 0; i < post_containers.length; i++) {
-        pictures = post_containers[i].getElementsByClassName("make_lightbox");
-        
-        if (pictures) {
+const makePhotoset = function(photoset) {
+    let layout = photoset.dataset.layout;
+    if (layout) {
+        let images = photoset.getElementsByClassName("media-photo");
+        for (let i = 0, n = layout.length; i < n; i++) {
+            let cols = layout[i];
+            let row = document.createElement("div");
+            row.classList.add("photo-row-" + cols);
+            row.classList.add("photo-row");
             
-            for (var j = 0; j < pictures.length; j++) {
+            for (let j = 0, m = parseInt(cols); j < m; j++) {
+                row.appendChild(images[0]);
+            }
+            
+            photoset.appendChild(row);
+        }
+    }
+}
+
+const hidePosts = function() {
+    let post_containers = 
+        document.getElementsByClassName("post--container");
+    for (let i = 0, n = post_containers.length; i < n; i++) {
+        post_containers[i]
+        .getElementsByClassName("post--body")[0].style = "";
+    }
+}
+
+const addClickEvent = function(post_dummies) {
+    for (let i = 0, n = post_dummies.length; i < n; i++) {
+        
+        let post_identifier = 
+            post_dummies[i]
+            .getElementsByClassName("post--identifier")[0];
+            
+        post_identifier.addEventListener("click", 
+            function(event) {
                 
-                pictures[j].addEventListener("click", function() {
-                    var lbArray = [];
-                    var arrayContents = {
-                        "width" : this.dataset.width,
-                        "height" : this.dataset.height,
-                        "low_res" : this.dataset.lowres,
-                        "high_res" : this.dataset.highres,
+                let width = window.innerWidth
+                || document.documentElement.clientWidth
+                || document.body.clientWidth;
+                
+                if (width < 1000) {
+                    event.preventDefault();
+                    
+                    let post_body = 
+                        this.parentNode
+                            .parentNode
+                            .parentNode
+                            .getElementsByClassName("post--body")[0];
+                            
+                    if (post_body.style.display === "block") {
+                        post_body.style.display = "none";
+                    } else {
+                        post_body.style.display = "block";
                     }
-                    lbArray.push(arrayContents);
-                    Tumblr.Lightbox.init(lbArray,1);
-                    document.body.classList.toggle('tumblr_lightbox_active');
-                }, false);
-                
-            }
-            
-        }
-        
-    }   
+                }
     
-}
-
-</script>
-
-<script src="https://cdnjs.cloudflare.com/ajax/libs/fitvids/1.2.0/jquery.fitvids.js"></script>
-
-
-
-
-<script>
-
-window.addEventListener("load", startup, false);
-
-function startup() {
-
-    var post_containers = document.getElementsByClassName("post-container");
-    addClickEvent(post_containers);
-    makeLightbox(post_containers);
-
-    decodeLinks();
-    
-   // infScroll.loadNextPage();
-
-}
-
-function hidePosts() {
-    var post_containers = document.getElementsByClassName("post-container");
-    for (var i = 0; i < post_containers.length; i++) {
-            var post_body = post_containers[i].getElementsByClassName("post-body")[0];
-            post_body.style.display = "none";
-    }
-}
-
-function addClickEvent(post_containers) {
-    for (var i = 0; i < post_containers.length; i++) {
-        post_identifier = post_containers[i].getElementsByClassName("post-identifier")[0];
-        post_identifier.addEventListener("click", function(event) {
-            event.preventDefault();
-            post_body = this.parentNode.parentNode.parentNode.getElementsByClassName("post-body")[0];
-            if (post_body.style.display !== "block") {
-                hidePosts();
-                post_body.style.display = "block";
-            } else {
-                post_body.style.display = "none";
-            }
-
-        }, false);
+            }, false);
         
     }
 }
 
-function decodeLinks() {
-    var links = document.getElementsByTagName("a");
-    var linkspans = document.getElementsByClassName("encoded-link");
-    var redirectString = "redirect?z=";
+const decodeLinks = function() {
+    let links = document.getElementsByTagName("a");
+    let linkspans = document.getElementsByClassName("encoded-link");
+    let redirectString = "redirect?z=";
     
-    for (var i = 0; i < links.length; i++) {
-        var link = links[i];
+    for (let i = 0; i < links.length; i++) {
+        let link = links[i];
         if (link.href.indexOf("t.umblr.com/redirect") != -1) {
-            var startIndex = link.href.indexOf(redirectString) + redirectString.length;
-            var encoded = link.href.substring(startIndex, link.href.indexOf("&"));
-            var decoded = decodeURIComponent(encoded);
+            let startIndex = link.href.indexOf(redirectString) + redirectString.length;
+            let encoded = link.href.substring(startIndex, link.href.indexOf("&"));
+            let decoded = decodeURIComponent(encoded);
             link.href = decoded;
         }   
     }
 }
+   
+
+const startup = function() {
+
+    {block:IndexPage}
+    let post_containers = 
+        document.getElementsByClassName("post--container");
+        
+    addClickEvent(post_containers);
+    {/block:IndexPage}
     
-{block:IfInfiniteScroll}
-{block:IndexPage}
+    let photosets = 
+        document.getElementsByClassName("media-photoset");
+        
+    for (let i = 0, n = photosets.length; i < n; i++) {
+        let photoset = photosets[i];
+        makePhotoset(photoset);
+        makeLightboxes(photoset);
+    }
 
-var big_container = document.querySelector('#post-list');
+    decodeLinks();
+    
+    {block:IfInfiniteScroll}
+    {block:IndexPage}
 
-var infScroll = new InfiniteScroll( big_container, {
-    path: '#next',
-    append: '.post-container',
-    itemSelector: '.post-container',
-    history: false,
-});
+    let big_container = document.querySelector('.post-list');
+    let button = document.querySelector('.infinite');
+    
+    let infScroll = new InfiniteScroll( big_container, {
+        path: '.pagination--next',
+        append: '.post--dummy',
+        itemSelector: '.post--dummy',
+        history: false,
+        button: '.infinite',
+        loadOnScroll: false,
+    });
+    
+    button.addEventListener("click",
+        function() {
+            infScroll.loadNextPage();
+            infScroll.option({ loadOnScroll: true});
+            document.querySelector('.pagination').style.display = "none";
+        });
 
-infScroll.on('append', function(response, path, items) {
-    addClickEvent(items);
-    makeLightbox(items);
-//    this.loadNextPage();
-});
+    infScroll.on('append', function(response, path, items) {
+        addClickEvent(items);
+        for (let i = 0, n = items.length; i < n; i++) {
+            let photoset = items[i].querySelector('.media-photoset');
+            if (photoset) {
+                makePhotoset(photoset);
+                makeLightboxes(photoset);
+            }
+        }
 
-infScroll.on('load', function(response, path) {
+    });
 
-});
+    {/block:IndexPage}
+    {/block:IfInfiniteScroll}
 
-{/block:IndexPage}
-{/block:IfInfiniteScroll}
+}
+
+window.addEventListener("load", startup, false);
+
+window.addEventListener("resize", 
+    function() {
+        
+        let width = window.innerWidth
+        || document.documentElement.clientWidth
+        || document.body.clientWidth;
+        
+        if (width > 1000) {
+            hidePosts();
+        }
+        
+    }, false);
+
+window.addEventListener("mousemove",
+    function(event) {
+        
+        let width = window.innerWidth
+        || document.documentElement.clientWidth
+        || document.body.clientWidth;
+        
+        let height = window.innerHeight
+        || document.documentElement.clientHeight
+        || document.body.clientHeight;
+        
+        let mouseX = Math.round(event.screenX / width * 100);
+        let mouseY = Math.round(event.screenY / height * 100);
+        
+        let background = 
+            'radial-gradient(                                     \
+                circle farthest-side at ' 
+                    + ((mouseX + 50) / 2 + 30)   
+                    + '% ' + ((mouseY + 50) / 2 - 30) + '%,       \
+                rgba({RGBcolor:Gradient Light}, 0.8),             \
+                transparent),                                     \
+            radial-gradient(                                      \
+                circle farthest-side at ' 
+                    + (100 - (mouseX + 50) / 2 + 20)   
+                    + '% ' + (100 - (mouseY + 50) / 2 - 40) + '%, \
+                rgba({RGBcolor:Gradient Light}, 0.8),             \
+                transparent)';
+                
+        document.body.style.backgroundImage = background;
+        
+        let posts = document.querySelectorAll(".post--body");
+        for (let i = 0, n = posts.length; i < n; i++) {
+            posts[i].style.backgroundImage = background;
+        }
+        
+    }, false);
+
 
 </script>
     
