@@ -56,6 +56,7 @@ body {
     background:white;
     padding:0;
     margin:0;
+    word-wrap:break-word;
     line-height:1.6;
 }
 
@@ -88,9 +89,13 @@ ol {
     margin-bottom:0;
 }
 
-img:not(.lightbox-image) {
+img {
     max-width:100%;
     height:auto;
+}
+
+.lightbox-image {
+    max-width:none;
 }
 
 .media iframe,
@@ -98,12 +103,6 @@ img:not(.lightbox-image) {
 #submit_form {
     max-width:100%;
     display:block;
-}
-
-.media img {
-    cursor:pointer;
-    display:block;
-    width:100%;
 }
 
 /* wrappers */
@@ -134,6 +133,43 @@ img:not(.lightbox-image) {
 
 .links li:not(:last-child) {
 	padding-right:5px;
+}
+
+.photo-row {
+    padding:0.1em 0;
+    display:flex;
+}
+
+.media--image--container {
+    cursor:pointer;
+    padding:0 0.1em;
+    flex-grow:1;
+}
+
+.media--image--container:first-child {
+    padding-left:0;
+}
+
+.media--image--container:last-child {
+    padding-right:0;
+}
+
+.media--image {
+	width:100%;
+	height:100%;
+	object-fit:cover;
+	cursor:pointer;
+}
+
+.tumblr_video_container {
+    width:initial !important;
+    height:initial !important;
+    position:static;
+}
+
+.video--container iframe {
+    width:100% !important;
+    min-width:0 !important;
 }
 
 /* post */
@@ -255,7 +291,7 @@ ol.notes {
     {block:SubmissionsEnabled}
     <li><a href="/submit">Submit</a></li>
     {/block:SubmissionsEnabled}
-    <li><a href="http://5ppi.tumblr.com/" title="Updated 2018-06-22">Theme</a></li>
+    <li><a href="http://5ppi.tumblr.com/" title="Updated 2020-06-07">Theme</a></li>
     </ul>
 </nav>
 
@@ -300,12 +336,22 @@ ol.notes {
  
     {block:Photo}
     
-    <div class="make_lightbox media" 
-    data-width="{PhotoWidth-HighRes}" 
-    data-height="{PhotoHeight-HighRes}" 
-    data-lowres="{PhotoURL-500}" data-highres="{PhotoURL-HighRes}">
-    <img src="{PhotoURL-HighRes}" alt="{PhotoAlt}"  class="photoset-img"/>
-    </div>
+    <div class="media media-photoset" data-layout="1">
+    <div 
+        class="media--image--container"    
+        data-width="{PhotoWidth-HighRes}" 
+        data-height="{PhotoHeight-HighRes}" 
+        data-lowres="{PhotoURL-500}" 
+        data-highres="{PhotoURL-HighRes}"
+    >
+    <img src="{PhotoURL-HighRes}" 
+        srcset="{PhotoURL-250} 250w,
+                {PhotoURL-400} 400w,
+                {PhotoURL-500} 500w,
+                {PhotoURL-HighRes} 1280w"
+        sizes="80vw" alt="{PhotoAlt}"  class="media--image"/>
+    </div><!-- media--image--container -->
+    </div><!-- media-photoset -->
     
     {block:Caption}
     <div class="caption">{Caption}</div>
@@ -316,40 +362,28 @@ ol.notes {
     {block:Photoset}
      
 
-    <div class="photo-slideshow" id="photoset_{PostID}" data-layout="{PhotosetLayout}">
+    <div class="media media-photoset" data-layout="{PhotosetLayout}">
 
     {block:Photos}
     
-    <div class="media photo-data">
-    
-    <div class="pxu-photo">
-    <img alt="{PhotoAlt}" 
-    src="{PhotoURL-500}" 
-    width="{PhotoWidth-500}" 
-    height="{PhotoHeight-500}" 
-    data-highres="{PhotoURL-HighRes}" 
-    data-width="{PhotoWidth-HighRes}" 
-    data-height="{PhotoHeight-HighRes}" 
-    class="{block:Exif}exif-yes{/block:Exif} {block:Caption}caption-yes{/block:Caption}"{block:Exif}
-    data-camera="{block:Camera}{Camera}{/block:Camera}" 
-    data-iso="{block:ISO}{ISO}{/block:ISO}" 
-    data-aperture="{block:Aperture}{Aperture}{/block:Aperture}" 
-    data-exposure="{block:Exposure}{Exposure}{/block:Exposure}" 
-    data-focal="{block:FocalLength}{FocalLength}{/block:FocalLength}"{/block:Exif} {block:Caption}
-    data-caption="{Caption}"{/block:Caption} />
-    </div><!-- pxu-photo -->
-    
-    <div class="icons">
-    <a class="tumblr-box" rel="post-{PostID}" href="{PhotoURL-HighRes}">
-    <span class="zoom"></span>
-    </a>
-    </div><!-- icons -->
-     
-    </div><!-- photo-data -->
+    <div 
+        class="media--image--container"    
+        data-width="{PhotoWidth-HighRes}" 
+        data-height="{PhotoHeight-HighRes}" 
+        data-lowres="{PhotoURL-500}" 
+        data-highres="{PhotoURL-HighRes}"
+    >
+    <img src="{PhotoURL-HighRes}" 
+        srcset="{PhotoURL-250} 250w,
+                {PhotoURL-400} 400w,
+                {PhotoURL-500} 500w,
+                {PhotoURL-HighRes} 1280w"
+        sizes="80vw" alt="{PhotoAlt}"  class="media--image"/>
+    </div><!-- media--image--container -->
     
     {/block:Photos}
 
-    </div><!-- photo-slidshow -->
+    </div><!-- media-photoset -->
 
     {block:Caption}
     <div class="caption">{Caption}</div>
@@ -395,7 +429,11 @@ ol.notes {
  
     {block:Video}
     
-    <div class="media video">{Video-500}</div>
+    <div class="media media-video">
+    <div class="video--container">
+    {Video-700}
+    </div>
+    </div>
     {block:Caption}
     <div class="caption">{Caption}</div>
     {/block:Caption}
@@ -403,7 +441,7 @@ ol.notes {
     {/block:Video}
 
     {block:Audio}
-    <div class="media audio">
+    <div class="media media-audio">
     {block:AudioEmbed}{AudioEmbed color="white"}{/block:AudioEmbed}
     </div>
     {block:Caption}
@@ -476,42 +514,64 @@ ol.notes {
 
 </div><!-- wrapper -->
 
-<script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
+<script>
 
-<script type="text/javascript" src="http://static.tumblr.com/cqfswrg/1xXo902k0/jquery_photoset.js"></script>
+"use strict";
 
-<script type="text/javascript">
+window.addEventListener('load', startup, false);
 
-    $(document).ready(function() {
-        $('.photo-slideshow').pxuPhotoset({
-            'gutter' : '10px',
-            'rounded' : 'false',
-        }, function() {
-        // callback
+function startup() {
+    let photosets = document.getElementsByClassName("media-photoset");
+    for (let i = 0, n = photosets.length; i < n; i++) {
+        let photoset = photosets[i];
+        makePhotoset(photoset);
+        makeLightboxes(photoset);
+    }
+}
+
+function makeLightboxes(photoset) {
+    let image_containers = photoset.getElementsByClassName("media--image--container");
+    for (let i = 0, n = image_containers.length; i < n; i++) {
+        let image_container = image_containers[i];
+        image_container.addEventListener("click", function() {
+            let current = i + 1;
+            lightbox(image_containers, current);
         });
-    });
-    
-</script>
+    }
+}
 
-<script type="text/javascript">
-    
-    $(function(){
-        $('.make_lightbox').each(function(){ 
-            $(this).on('click',function(){  
-                var lbArray = [];
-                var arrayContents = {
-                    "width":$(this).data('width'), 
-                    "height":$(this).data('height'), 
-                    "low_res":$(this).data("lowres"), 
-                    "high_res":$(this).data('highres')
-                }; 
-                lbArray.push(arrayContents); 
-                Tumblr.Lightbox.init(lbArray,1); 
-                $('body').toggleClass('tumblr_lightbox_active'); 
-            });
-        });
-    });       
-    
-</script>
+function lightbox(image_containers, current) {
+    let lightboxes = [];
+    for (let i = 0, n = image_containers.length; i < n; i++) {
+        let image_container = image_containers[i]
+        let arrayContents = {
+            "width" : image_container.dataset.width,
+            "height" : image_container.dataset.height,
+            "low_res" : image_container.dataset.lowres,
+            "high_res" : image_container.dataset.highres,
+        }
+        lightboxes.push(arrayContents);
+    }
+    Tumblr.Lightbox.init(lightboxes, current);
 
+}
+
+function makePhotoset(photoset) {
+    var images = photoset.getElementsByClassName("media--image--container");
+    var layout = photoset.dataset.layout;
+    for (var i = 0; i < layout.length; i++) {
+        var cols = layout[i];
+        var row = document.createElement("div");
+        row.classList.add("photo-row-" + cols);
+        row.classList.add("photo-row");
+        
+        for (var j = 0; j < parseInt(cols); j++) {
+            row.appendChild(images[0]);
+        }
+        
+        photoset.appendChild(row);
+    }
+}
+
+</script>
 </body>
